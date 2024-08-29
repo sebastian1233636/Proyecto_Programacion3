@@ -27,4 +27,10 @@ public class Data {
         return clientes;
     }
 
+    public List<Factura> getFacturas() {
+        return facturas;
+    }
+    public List<Producto> getProductos() {
+        return productos;
+    }
 }
