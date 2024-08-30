@@ -35,7 +35,7 @@ public class Application {
         pos.presentation.Cajero.Model cajeroModel= new pos.presentation.Cajero.Model();
         pos.presentation.Cajero.View cajeroView = new pos.presentation.Cajero.View();
         cajeroController = new pos.presentation.Cajero.Controller(cajeroView,cajeroModel);
-        Icon cajeroIcon= new ImageIcon(Application.class.getResource("/pos/presentation/icons/client.png"));
+        Icon cajeroIcon= new ImageIcon(Application.class.getResource("/pos/presentation/icons/cajero.png"));
 
         tabbedPane.addTab("Clientes  ",clientesIcon, clientesView.getPanel());
         tabbedPane.addTab("Cajero  ",cajeroIcon, cajeroView.getPanel());
