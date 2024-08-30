@@ -8,9 +8,6 @@ public class Producto {
     private int existencias;
     private String categoria;
 
-
-
-
     public Producto(String cod,String des,String UniMe,double precio,int exis,String cat){
         this.codigo=cod;
         this.descripcion=des;
@@ -23,33 +20,43 @@ public class Producto {
     String getCodigo() {
         return codigo;
     }
+
     String getDescripcion() {
         return descripcion;
     }
+
     String getUnidadMedida() {
         return unidadMedida;
     }
+
     double getPrecioUnitario() {
         return precioUnitario;
     }
+
     int getExistencias() {
         return existencias;
     }
+
     String getCategoria() {
         return categoria;
     }
+
     void setCodigo(String codigo) {
         this.codigo = codigo;
     }
+
     void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+
     void setUnidadMedida(String unidadMedida) {
         this.unidadMedida = unidadMedida;
     }
+
     void setPrecioUnitario(double precioUnitario) {
         this.precioUnitario = precioUnitario;
     }
+
     void setExistencias(int existencias) {
         this.existencias = existencias;
     }
@@ -58,17 +65,14 @@ public class Producto {
         this.categoria = categoria;
     }
 
-
-
     public String toString() {
         return "Producto{" +
-                "codigo='" + codigo + '\'' +
-                ", descripcion='" + descripcion + '\'' +
-                ", unidadMedida='" + unidadMedida + '\'' +
-                ", precioUnitario=" + precioUnitario +
-                ", existencias=" + existencias +
-                ", categoria='" + categoria + '\'' +
+                "Codigo='" + codigo + '\'' +
+                ", Descripcion='" + descripcion + '\'' +
+                ", UnidadMedida='" + unidadMedida + '\'' +
+                ", PrecioUnitario=" + precioUnitario +
+                ", Existencias=" + existencias +
+                ", Categoria='" + categoria + '\'' +
                 '}';
     }
-
 }

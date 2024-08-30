@@ -8,7 +8,6 @@ package pos.data;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.Marshaller;
 import jakarta.xml.bind.Unmarshaller;
-
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
@@ -19,6 +18,7 @@ public class XmlPersister {
         if (theInstance==null) theInstance=new XmlPersister("pos.xml");
         return theInstance;
     }
+
     public XmlPersister(String p) {
        path=p;
     }  
@@ -30,6 +30,7 @@ public class XmlPersister {
         is.close();
         return result;        
     }
+
     public void store(Data d)throws Exception{
         JAXBContext jaxbContext = JAXBContext.newInstance(Data.class);  
         FileOutputStream os = new FileOutputStream(path);
