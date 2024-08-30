@@ -9,6 +9,10 @@ public class Cajero {
         this.Nombre = Nombre;
     }
 
+    public Cajero() {
+        this("","");
+    }
+
     public String getID() {
         return ID;
     }

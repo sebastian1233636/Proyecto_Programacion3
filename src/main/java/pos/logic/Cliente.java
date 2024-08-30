@@ -14,9 +14,7 @@ public class Cliente {
     String email;
     float descuento;
 
-    public Cliente() {
-        this("","","","",0);
-    }
+    public Cliente() {this("","","","",0);}
 
     public Cliente(String id, String nombre, String telefono, String email, float descuento) {
         this.id = id;
