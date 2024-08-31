@@ -211,8 +211,6 @@ public class View implements PropertyChangeListener {
                 searchNombre.setText(model.getFilter().getNombre());
                 break;
         }
-
         this.panel.revalidate();
     }
-
 }

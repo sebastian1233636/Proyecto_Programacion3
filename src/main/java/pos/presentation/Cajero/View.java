@@ -27,6 +27,7 @@ public class View implements PropertyChangeListener {
     private JButton save;
     private JButton delete;
     private JButton clear;
+    private JButton report;
 
     public JPanel getPanel() {
         return panel;
@@ -134,15 +135,15 @@ public class View implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         switch (evt.getPropertyName()) {
-            case pos.presentation.clientes.Model.LIST:
-                int[] cols = {pos.presentation.clientes.TableModel.ID, pos.presentation.clientes.TableModel.NOMBRE, pos.presentation.clientes.TableModel.TELEFONO, pos.presentation.clientes.TableModel.EMAIL, pos.presentation.clientes.TableModel.DESCUENTO};
+            case pos.presentation.Cajero.Model.LIST:
+                int[] cols = {pos.presentation.Cajero.TableModel.ID, pos.presentation.Cajero.TableModel.NOMBRE};
                 list.setModel(new TableModel(cols, model.getList()));
                 list.setRowHeight(30);
                 TableColumnModel columnModel = list.getColumnModel();
                 columnModel.getColumn(1).setPreferredWidth(150);
-                columnModel.getColumn(3).setPreferredWidth(150);
+                columnModel.getColumn(1).setPreferredWidth(150);
                 break;
-            case pos.presentation.clientes.Model.CURRENT:
+            case pos.presentation.Cajero.Model.CURRENT:
                 id.setText(model.getCurrent().getID());
                 nombre.setText(model.getCurrent().getNombre());
 
@@ -153,7 +154,6 @@ public class View implements PropertyChangeListener {
                     id.setEnabled(true);
                     delete.setEnabled(false);
                 }
-
                 idLbl.setBorder(null);
                 idLbl.setToolTipText(null);
                 nombreLbl.setBorder(null);
@@ -163,7 +163,6 @@ public class View implements PropertyChangeListener {
                 searchNombre.setText(model.getFilter().getNombre());
                 break;
         }
-
         this.panel.revalidate();
     }
 }
