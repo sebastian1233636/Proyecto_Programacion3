@@ -1,4 +1,4 @@
-package pos.presentation.clientes;
+package pos.presentation.Clientes;
 
 import pos.logic.Cliente;
 import pos.presentation.AbstractTableModel;

@@ -133,8 +133,8 @@ public class Service {
 
     public List<Producto> search(Producto e){
         return data.getProductos().stream()
-                .filter(i->i.getCodigo().contains(e.getCodigo()))
-                .sorted(Comparator.comparing(Producto::getCodigo))
+                .filter(i->i.getCategoria().contains(e.getCategoria()))
+                .sorted(Comparator.comparing(Producto::getCategoria))
                 .collect(Collectors.toList());
     }
 

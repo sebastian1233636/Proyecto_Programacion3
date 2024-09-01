@@ -1,12 +1,10 @@
-package pos.presentation.clientes;
+package pos.presentation.Productos;
 
 import pos.Application;
-import pos.logic.Cliente;
+import pos.logic.Producto;
 
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 import javax.swing.table.TableColumnModel;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -16,24 +14,24 @@ import java.beans.PropertyChangeListener;
 
 public class View implements PropertyChangeListener {
     private JPanel panel;
-    private JTextField searchNombre;
-    private JButton search;
-    private JButton save;
-    private JTable list;
-    private JButton delete;
-    private JLabel searchNombreLbl;
+    private JLabel searchCategoriaLbl;
+    private JTextField searchCategoria;
     private JButton report;
-    private JTextField id;
-    private JTextField nombre;
-    private JTextField email;
-    private JLabel idLbl;
-    private JLabel nombreLbl;
-    private JLabel emailLbl;
+    private JButton search;
+    private JTable list;
+    private JLabel codigoLbl;
+    private JTextField codigo;
+    private JLabel descripciónLbl;
+    private JTextField descripción;
+    private JLabel unidadLbl;
+    private JTextField unidad;
+    private JLabel preciobl;
+    private JTextField precio;
+    private JLabel categoriaLbl;
+    private JTextField categoria;
+    private JButton save;
+    private JButton delete;
     private JButton clear;
-    private JLabel telefonoLbl;
-    private JTextField telefono;
-    private JLabel descuentoLbl;
-    private JTextField descuento;
 
     public JPanel getPanel() {
         return panel;
@@ -44,8 +42,8 @@ public class View implements PropertyChangeListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    Cliente filter = new Cliente();
-                    filter.setNombre(searchNombre.getText());
+                    Producto filter = new Producto();
+                    filter.setCategoria(searchCategoria.getText());
                     controller.search(filter);
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(panel, ex.getMessage(), "Información", JOptionPane.INFORMATION_MESSAGE);
@@ -57,7 +55,7 @@ public class View implements PropertyChangeListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (validate()) {
-                    Cliente n = take();
+                    Producto n = take();
                     try {
                         controller.save(n);
                         JOptionPane.showMessageDialog(panel, "REGISTRO APLICADO", "", JOptionPane.INFORMATION_MESSAGE);
@@ -98,66 +96,67 @@ public class View implements PropertyChangeListener {
 
     private boolean validate() {
         boolean valid = true;
-        if (id.getText().isEmpty()) {
+        if (codigo.getText().isEmpty()) {
             valid = false;
-            idLbl.setBorder(Application.BORDER_ERROR);
-            idLbl.setToolTipText("Codigo requerido");
+            codigoLbl.setBorder(Application.BORDER_ERROR);
+            codigoLbl.setToolTipText("Codigo requerido");
         } else {
-            idLbl.setBorder(null);
-            idLbl.setToolTipText(null);
+            codigoLbl.setBorder(null);
+            codigoLbl.setToolTipText(null);
         }
 
-        if (nombre.getText().isEmpty()) {
+        if (descripción.getText().isEmpty()) {
             valid = false;
-            nombreLbl.setBorder(Application.BORDER_ERROR);
-            nombreLbl.setToolTipText("Nombre requerido");
+            descripciónLbl.setBorder(Application.BORDER_ERROR);
+            descripciónLbl.setToolTipText("Descripción requerida");
         } else {
-            nombreLbl.setBorder(null);
-            nombreLbl.setToolTipText(null);
+            descripciónLbl.setBorder(null);
+            descripciónLbl.setToolTipText(null);
         }
 
-        if (telefono.getText().isEmpty()) {
+        if (unidad.getText().isEmpty()) {
             valid = false;
-            telefonoLbl.setBorder(Application.BORDER_ERROR);
-            telefonoLbl.setToolTipText("Telefono requerido");
+            unidadLbl.setBorder(Application.BORDER_ERROR);
+            unidadLbl.setToolTipText("Unidad requerida");
         } else {
-            telefonoLbl.setBorder(null);
-            telefonoLbl.setToolTipText(null);
+            unidadLbl.setBorder(null);
+            unidadLbl.setToolTipText(null);
         }
 
-        if (email.getText().isEmpty()) {
+        if (precio.getText().isEmpty()) {
             valid = false;
-            emailLbl.setBorder(Application.BORDER_ERROR);
-            emailLbl.setToolTipText("Unidad requerida");
+            preciobl.setBorder(Application.BORDER_ERROR);
+            preciobl.setToolTipText("Precio requerido");
         } else {
-            emailLbl.setBorder(null);
-            emailLbl.setToolTipText(null);
+            preciobl.setBorder(null);
+            preciobl.setToolTipText(null);
         }
 
         try {
-            Float.parseFloat(descuento.getText());
-            descuentoLbl.setBorder(null);
-            descuentoLbl.setToolTipText(null);
+            if (categoria.getText().isEmpty()) {
+                throw new Exception("Categoría vacía");
+            }
+            categoriaLbl.setBorder(null);
+            categoriaLbl.setToolTipText(null);
         } catch (Exception e) {
             valid = false;
-            descuentoLbl.setBorder(Application.BORDER_ERROR);
-            descuentoLbl.setToolTipText("Descuento invalido");
+            categoriaLbl.setBorder(Application.BORDER_ERROR);
+            categoriaLbl.setToolTipText("Categoría inválida");
         }
-
         return valid;
     }
 
-    public Cliente take() {
-        Cliente e = new Cliente();
-        e.setId(id.getText());
-        e.setNombre(nombre.getText());
-        e.setTelefono(telefono.getText());
-        e.setEmail(email.getText());
-        e.setDescuento(Float.parseFloat(descuento.getText()));
-        return e;
+    public Producto take() {
+        Producto p = new Producto();
+        p.setCodigo(codigo.getText());
+        p.setDescripcion(descripción.getText());
+        p.setUnidadMedida(unidad.getText());
+        p.setPrecioUnitario(Double.parseDouble(precio.getText()));
+        p.setCategoria(categoria.getText());
+        return p;
     }
 
-// MVC
+    // MVC
     Model model;
     Controller controller;
 
@@ -170,45 +169,41 @@ public class View implements PropertyChangeListener {
         this.controller = controller;
     }
 
-    @Override
     public void propertyChange(PropertyChangeEvent evt) {
         switch (evt.getPropertyName()) {
             case Model.LIST:
-                int[] cols = {TableModel.ID, TableModel.NOMBRE, TableModel.TELEFONO, TableModel.EMAIL, TableModel.DESCUENTO};
+                int[] cols = {TableModel.CODIGO, TableModel.DESCRIPCION, TableModel.UNIDAD_MEDIDA, TableModel.PRECIO_UNITARIO, TableModel.CATEGORIA};
                 list.setModel(new TableModel(cols, model.getList()));
                 list.setRowHeight(30);
                 TableColumnModel columnModel = list.getColumnModel();
-                columnModel.getColumn(1).setPreferredWidth(150);
-                columnModel.getColumn(3).setPreferredWidth(150);
+                columnModel.getColumn(2).setPreferredWidth(100);
                 break;
-            case Model.CURRENT:
-                id.setText(model.getCurrent().getId());
-                nombre.setText(model.getCurrent().getNombre());
-                telefono.setText(model.getCurrent().getTelefono());
-                email.setText(model.getCurrent().getEmail());
-                descuento.setText("" + model.getCurrent().getDescuento());
-
+            case pos.presentation.Clientes.Model.CURRENT:
+                codigo.setText(model.getCurrent().getCodigo());
+                descripción.setText(model.getCurrent().getDescripcion());
+                unidad.setText(model.getCurrent().getUnidadMedida());
+                precio.setText("" + model.getCurrent().getPrecioUnitario());
+                categoria.setText(model.getCurrent().getCategoria());
                 if (model.getMode() == Application.MODE_EDIT) {
-                    id.setEnabled(false);
+                    codigo.setEnabled(false);
                     delete.setEnabled(true);
                 } else {
-                    id.setEnabled(true);
+                    codigo.setEnabled(true);
                     delete.setEnabled(false);
                 }
-
-                idLbl.setBorder(null);
-                idLbl.setToolTipText(null);
-                nombreLbl.setBorder(null);
-                nombreLbl.setToolTipText(null);
-                emailLbl.setBorder(null);
-                emailLbl.setToolTipText(null);
-                telefonoLbl.setBorder(null);
-                telefonoLbl.setToolTipText(null);
-                descuentoLbl.setBorder(null);
-                descuentoLbl.setToolTipText(null);
+                codigoLbl.setBorder(null);
+                codigoLbl.setToolTipText(null);
+                descripciónLbl.setBorder(null);
+                descripciónLbl.setToolTipText(null);
+                unidadLbl.setBorder(null);
+                unidadLbl.setToolTipText(null);
+                preciobl.setBorder(null);
+                preciobl.setToolTipText(null);
+                categoriaLbl.setBorder(null);
+                categoriaLbl.setToolTipText(null);
                 break;
             case Model.FILTER:
-                searchNombre.setText(model.getFilter().getNombre());
+                searchCategoria.setText(model.getFilter().getCategoria());
                 break;
         }
         this.panel.revalidate();

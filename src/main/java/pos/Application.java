@@ -27,9 +27,9 @@ public class Application {
             }
         });
 
-        pos.presentation.clientes.Model clientesModel= new pos.presentation.clientes.Model();
-        pos.presentation.clientes.View clientesView = new pos.presentation.clientes.View();
-        clientesController = new pos.presentation.clientes.Controller(clientesView,clientesModel);
+        pos.presentation.Clientes.Model clientesModel= new pos.presentation.Clientes.Model();
+        pos.presentation.Clientes.View clientesView = new pos.presentation.Clientes.View();
+        clientesController = new pos.presentation.Clientes.Controller(clientesView,clientesModel);
         Icon clientesIcon= new ImageIcon(Application.class.getResource("/pos/presentation/icons/client.png"));
 
         pos.presentation.Cajero.Model cajeroModel= new pos.presentation.Cajero.Model();
@@ -37,9 +37,14 @@ public class Application {
         cajeroController = new pos.presentation.Cajero.Controller(cajeroView,cajeroModel);
         Icon cajeroIcon= new ImageIcon(Application.class.getResource("/pos/presentation/icons/cajero.png"));
 
-        tabbedPane.addTab("Clientes  ",clientesIcon, clientesView.getPanel());
-        tabbedPane.addTab("Cajero  ",cajeroIcon, cajeroView.getPanel());
+        pos.presentation.Productos.Model productoModel= new pos.presentation.Productos.Model();
+        pos.presentation.Productos.View productoView = new pos.presentation.Productos.View();
+        productoController = new pos.presentation.Productos.Controller(productoView,productoModel);
+        Icon productoIcon= new ImageIcon(Application.class.getResource("/pos/presentation/icons/producto.png"));
 
+        tabbedPane.addTab("Clientes  ",clientesIcon, clientesView.getPanel());
+        tabbedPane.addTab("Cajeros  ",cajeroIcon, cajeroView.getPanel());
+        tabbedPane.addTab("Productos  ",productoIcon, productoView.getPanel());
 
         window.setSize(750,450);
         window.setResizable(false);
@@ -49,8 +54,9 @@ public class Application {
         window.setVisible(true);
     }
 
-    public static pos.presentation.clientes.Controller clientesController;
+    public static pos.presentation.Clientes.Controller clientesController;
     public static pos.presentation.Cajero.Controller cajeroController;
+    public static pos.presentation.Productos.Controller productoController;
 
     public static JFrame window;
 

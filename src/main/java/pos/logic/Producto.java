@@ -17,47 +17,47 @@ public class Producto {
         this.categoria=cat;
     }
 
-    String getCodigo() {
+    public Producto() {this("","","",0,0,"");}
+
+    public String getCodigo() {
         return codigo;
     }
 
-    String getDescripcion() {
+    public String getDescripcion() {
         return descripcion;
     }
 
-    String getUnidadMedida() {
+    public String getUnidadMedida() {
         return unidadMedida;
     }
 
-    double getPrecioUnitario() {
+    public double getPrecioUnitario() {
         return precioUnitario;
     }
 
-    int getExistencias() {
+    public int getExistencias() {
         return existencias;
     }
 
-    String getCategoria() {
+    public String getCategoria() {
         return categoria;
     }
 
-    void setCodigo(String codigo) {
+    public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 
-    void setDescripcion(String descripcion) {
+    public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
-    void setUnidadMedida(String unidadMedida) {
+    public void setUnidadMedida(String unidadMedida) {
         this.unidadMedida = unidadMedida;
     }
 
-    void setPrecioUnitario(double precioUnitario) {
-        this.precioUnitario = precioUnitario;
-    }
+    public void setPrecioUnitario(double precioUnitario) { this.precioUnitario = precioUnitario; }
 
-    void setExistencias(int existencias) {
+    public void setExistencias(int existencias) {
         this.existencias = existencias;
     }
 
