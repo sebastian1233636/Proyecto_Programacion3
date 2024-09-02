@@ -60,7 +60,14 @@ public class Factura {
                 "ID='" + ID + '\'' +
                 ", Fecha='" + fecha + '\'' +
                 ", Codigo=" + codigo +
-                ", Carrito=" + carrito +
                 '}';
+    }
+
+    public void stringFractura(){
+        toString();
+        for(Linea linea : carrito){
+            System.out.println(linea.toString());
+        }
+        System.out.println("Total: " +totalFactura());
     }
 }

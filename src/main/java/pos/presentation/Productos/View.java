@@ -14,8 +14,8 @@ import java.beans.PropertyChangeListener;
 
 public class View implements PropertyChangeListener {
     private JPanel panel;
-    private JLabel searchCategoriaLbl;
-    private JTextField searchCategoria;
+    private JLabel searchProductoLbl;
+    private JTextField searchProducto;
     private JButton report;
     private JButton search;
     private JTable list;
@@ -43,7 +43,8 @@ public class View implements PropertyChangeListener {
             public void actionPerformed(ActionEvent e) {
                 try {
                     Producto filter = new Producto();
-                    filter.setCategoria(searchCategoria.getText());
+                    filter.setCodigo(searchProducto.getText());
+                    filter.setDescripcion(searchProducto.getText());
                     controller.search(filter);
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(panel, ex.getMessage(), "Información", JOptionPane.INFORMATION_MESSAGE);
@@ -203,7 +204,7 @@ public class View implements PropertyChangeListener {
                 categoriaLbl.setToolTipText(null);
                 break;
             case Model.FILTER:
-                searchCategoria.setText(model.getFilter().getCategoria());
+                searchProducto.setText(model.getFilter().getCodigo());
                 break;
         }
         this.panel.revalidate();

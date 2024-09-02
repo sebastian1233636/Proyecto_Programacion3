@@ -44,4 +44,10 @@ public class Linea {
         double neto = producto.getPrecioUnitario() * getDescuento();
         return cantidad * neto;
     }
+
+    public String toString() {
+        return producto.getCodigo() + " " + producto.getDescripcion() + " " + cantidad + " " +
+                producto.getPrecioUnitario() + " " + sacarImporte();
+    }
+
 }

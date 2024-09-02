@@ -24,21 +24,23 @@
             <properties/>
             <border type="bevel-raised" title="Búsqueda " title-position="2"/>
             <children>
-              <component id="c9db1" class="javax.swing.JLabel" binding="searchCategoriaLbl">
+              <component id="c9db1" class="javax.swing.JLabel" binding="searchProductoLbl">
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <text value="Categoria"/>
+                  <text value="Descripción o Codigo"/>
                 </properties>
               </component>
-              <component id="e1943" class="javax.swing.JTextField" binding="searchCategoria">
+              <component id="e1943" class="javax.swing.JTextField" binding="searchProducto">
                 <constraints>
                   <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="9" fill="0" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>
                   </grid>
                 </constraints>
-                <properties/>
+                <properties>
+                  <text value=""/>
+                </properties>
               </component>
               <component id="44e74" class="javax.swing.JButton" binding="report">
                 <constraints>
