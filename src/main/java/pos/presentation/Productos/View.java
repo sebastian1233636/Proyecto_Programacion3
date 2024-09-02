@@ -1,6 +1,7 @@
 package pos.presentation.Productos;
 
 import pos.Application;
+import pos.logic.Categoria;
 import pos.logic.Producto;
 
 import javax.swing.*;
@@ -153,7 +154,7 @@ public class View implements PropertyChangeListener {
         p.setDescripcion(descripción.getText());
         p.setUnidadMedida(unidad.getText());
         p.setPrecioUnitario(Double.parseDouble(precio.getText()));
-        p.setCategoria(categoria.getText());
+        p.setNomCat(categoria.getText());
         return p;
     }
 
@@ -179,12 +180,12 @@ public class View implements PropertyChangeListener {
                 TableColumnModel columnModel = list.getColumnModel();
                 columnModel.getColumn(2).setPreferredWidth(100);
                 break;
-            case pos.presentation.Clientes.Model.CURRENT:
+            case Model.CURRENT:
                 codigo.setText(model.getCurrent().getCodigo());
                 descripción.setText(model.getCurrent().getDescripcion());
                 unidad.setText(model.getCurrent().getUnidadMedida());
                 precio.setText("" + model.getCurrent().getPrecioUnitario());
-                categoria.setText(model.getCurrent().getCategoria());
+                categoria.setText(model.getCurrent().getNomCat());
                 if (model.getMode() == Application.MODE_EDIT) {
                     codigo.setEnabled(false);
                     delete.setEnabled(true);

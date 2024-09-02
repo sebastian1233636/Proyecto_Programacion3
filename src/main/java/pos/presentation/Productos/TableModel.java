@@ -21,7 +21,7 @@ public class TableModel extends AbstractTableModel<Producto> implements javax.sw
             case DESCRIPCION: return e.getDescripcion();
             case UNIDAD_MEDIDA: return e.getUnidadMedida();
             case PRECIO_UNITARIO: return e.getPrecioUnitario();
-            case CATEGORIA: return e.getCategoria();
+            case CATEGORIA: return e.getCategoria().getNombre();
             default: return "";
         }
     }

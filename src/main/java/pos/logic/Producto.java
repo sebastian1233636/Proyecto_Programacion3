@@ -6,15 +6,17 @@ public class Producto {
     private String unidadMedida;
     private double precioUnitario;
     private int existencias;
-    private String categoria;
+    private String nomCat;
+    private Categoria categoria;
 
-    public Producto(String cod,String des,String UniMe,double precio,int exis,String cat){
+    public Producto(String cod,String des,String UniMe,double precio,int exis,String nomC){
         this.codigo=cod;
         this.descripcion=des;
         this.unidadMedida=UniMe;
         this.precioUnitario=precio;
         this.existencias=exis;
-        this.categoria=cat;
+        this.nomCat=nomC;
+        this.categoria = new Categoria(nomC);
     }
 
     public Producto() {this("","","",0,0,"");}
@@ -39,8 +41,12 @@ public class Producto {
         return existencias;
     }
 
-    public String getCategoria() {
+    public Categoria getCategoria() {
         return categoria;
+    }
+
+    public String getNomCat(){
+        return nomCat;
     }
 
     public void setCodigo(String codigo) {
@@ -61,8 +67,13 @@ public class Producto {
         this.existencias = existencias;
     }
 
-    public void setCategoria(String categoria) {
+    public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
+    }
+
+
+    public void setNomCat(String nom){
+        this.nomCat = nom;
     }
 
     public String toString() {
