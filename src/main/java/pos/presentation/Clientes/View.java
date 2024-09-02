@@ -176,7 +176,6 @@ public class View implements PropertyChangeListener {
                 list.setModel(new TableModel(cols, model.getList()));
                 list.setRowHeight(30);
                 TableColumnModel columnModel = list.getColumnModel();
-                columnModel.getColumn(1).setPreferredWidth(150);
                 columnModel.getColumn(3).setPreferredWidth(150);
                 break;
             case Model.CURRENT:
@@ -193,7 +192,6 @@ public class View implements PropertyChangeListener {
                     id.setEnabled(true);
                     delete.setEnabled(false);
                 }
-
                 idLbl.setBorder(null);
                 idLbl.setToolTipText(null);
                 nombreLbl.setBorder(null);
