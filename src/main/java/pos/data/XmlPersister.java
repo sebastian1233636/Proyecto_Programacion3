@@ -23,12 +23,17 @@ public class XmlPersister {
        path=p;
     }  
     public Data load() throws Exception{
-        JAXBContext jaxbContext = JAXBContext.newInstance(Data.class);
-        FileInputStream is = new FileInputStream(path);
-        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-        Data result = (Data) unmarshaller.unmarshal(is);
-        is.close();
-        return result;        
+        try {
+            JAXBContext jaxbContext = JAXBContext.newInstance(Data.class);
+            FileInputStream is = new FileInputStream(path);
+            Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+            Data result = (Data) unmarshaller.unmarshal(is);
+            is.close();
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e; // Para que también puedas manejar la excepción fuera de este método
+        }
     }
 
     public void store(Data d)throws Exception{

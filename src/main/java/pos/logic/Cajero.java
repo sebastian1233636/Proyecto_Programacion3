@@ -1,6 +1,12 @@
 package pos.logic;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlID;
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Cajero {
+    @XmlID
     private String ID;
     private String Nombre;
 
