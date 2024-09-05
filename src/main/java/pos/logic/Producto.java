@@ -75,7 +75,6 @@ public class Producto {
         this.categoria = categoria;
     }
 
-
     public void setNomCat(String nom){
         this.nomCat = nom;
     }
