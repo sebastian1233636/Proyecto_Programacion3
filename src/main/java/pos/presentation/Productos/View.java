@@ -145,6 +145,15 @@ public class View implements PropertyChangeListener {
             categoriaLbl.setBorder(Application.BORDER_ERROR);
             categoriaLbl.setToolTipText("Categoría inválida");
         }
+        try {
+            Integer.parseInt(precio.getText()); // Intentar convertir a entero
+            preciobl.setBorder(null);
+            preciobl.setToolTipText(null);
+        } catch (NumberFormatException e) {
+            valid = false;
+            preciobl.setBorder(Application.BORDER_ERROR);
+            JOptionPane.showMessageDialog(panel, "Coloque un tipo de variable correcto", "Error", JOptionPane.ERROR_MESSAGE);
+        }
         return valid;
     }
 
