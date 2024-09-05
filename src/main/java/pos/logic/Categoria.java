@@ -4,7 +4,7 @@ public class Categoria {
     private String nombre;
 
 
-
+    public Categoria(){nombre = " ";}
 
     public Categoria(String nom){
         this.nombre = nom;
