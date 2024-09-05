@@ -64,7 +64,7 @@ public class Application {
     public static pos.presentation.Clientes.Controller clientesController;
     public static pos.presentation.Cajero.Controller cajeroController;
     public static pos.presentation.Productos.Controller productoController;
-
+    public static pos.presentation.Historico.Controller HistoricoController;
     public static JFrame window;
 
     public final static int MODE_CREATE=1;

@@ -148,7 +148,7 @@ public class Service {
     public Factura read(Factura e) throws Exception{
         Factura result = data.getFacturas().stream().filter(i->i.getCodigo().equals(e.getCodigo())).findFirst().orElse(null);
         if (result!=null) return result;
-        else throw new Exception("No existe ninguna factura asociada a este codigo");
+        else throw new Exception("No existe ninguna factura asociada a este ID");
     }
 
     public void update(Factura e) throws Exception{
@@ -158,7 +158,7 @@ public class Service {
             data.getFacturas().remove(result);
             data.getFacturas().add(e);
         }catch (Exception ex) {
-            throw new Exception("No existe ninguna factura asociada a este codigo");
+            throw new Exception("No existe ninguna factura asociada a este ID");
         }
     }
 
