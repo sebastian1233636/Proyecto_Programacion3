@@ -1,0 +1,40 @@
+package pos.presentation.Historico;
+
+import pos.logic.Cajero;
+import pos.logic.Factura;
+import pos.presentation.AbstractTableModel;
+
+import java.util.List;
+
+public class TableModel extends AbstractTableModel<Factura> implements javax.swing.table.TableModel {
+
+    public TableModel(int[] cols, List<Factura> rows) {
+        super(cols, rows);
+    }
+    public static final int ID=0;
+    public static final int FECHA=1;
+    public static final int CODIGO=2;
+    public static final int TOTAL=3;
+
+    @Override
+    protected Object getPropetyAt(Factura e, int col) {
+        switch (cols[col]){
+            case ID: return e.getID();
+            case FECHA: return e.getFecha();
+            case CODIGO: return e.getCodigo();
+            case TOTAL: return e.totalFactura();
+            default: return "";
+        }
+    }
+
+    @Override
+    protected void initColNames(){
+        colNames = new String[5];
+        colNames[ID]= "Id";
+        colNames[FECHA]= "Nombre";
+        colNames[CODIGO]= "Codigo";
+        colNames[TOTAL]= "Total";
+    }
+
+
+}

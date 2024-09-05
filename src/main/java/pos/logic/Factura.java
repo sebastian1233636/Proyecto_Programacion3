@@ -9,6 +9,11 @@ public class Factura {
     private String codigo;
     private final List<Linea> carrito;
 
+    public Factura() {
+        carrito = new ArrayList<>();
+
+    }
+
     public Factura(String ID, String fecha, String codigo) {
         this.ID = ID;
         this.fecha = fecha;
