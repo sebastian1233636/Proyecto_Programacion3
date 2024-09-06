@@ -10,7 +10,7 @@ public class Factura {
     private final List<Linea> carrito;
 
     public Factura() {
-        carrito = new ArrayList<>();
+       carrito = new ArrayList<>();
         ID = " ";
         fecha = " ";
         codigo = " ";

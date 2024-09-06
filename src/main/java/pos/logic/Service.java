@@ -141,12 +141,12 @@ public class Service {
 
     //================= Facturas ============
     public void create(Factura e) throws Exception{
-        Factura result = data.getFacturas().stream().filter(i->i.getCodigo().equals(e.getCodigo())).findFirst().orElse(null);;
+        Factura result = data.getFacturas().stream().filter(i->i.getID().equals(e.getID())).findFirst().orElse(null);;
         if (result==null) data.getFacturas().add(e);
         else throw new Exception("Este numero de factura ya fue utilizado");
     }
     public Factura read(Factura e) throws Exception{
-        Factura result = data.getFacturas().stream().filter(i->i.getCodigo().equals(e.getCodigo())).findFirst().orElse(null);
+        Factura result = data.getFacturas().stream().filter(i->i.getID().equals(e.getID())).findFirst().orElse(null);
         if (result!=null) return result;
         else throw new Exception("No existe ninguna factura asociada a este ID");
     }
