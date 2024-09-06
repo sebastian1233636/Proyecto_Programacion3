@@ -6,6 +6,14 @@ public class Linea {
     private double descuento;
     private double importe;
 
+    public Linea (){
+        producto = new Producto();
+        cantidad = 0;
+        descuento = 0;
+        importe = 0;
+        
+    }
+
     public Linea(Producto producto, int cantidad, double descuento) {
         this.producto = producto;
         this.cantidad = cantidad;
