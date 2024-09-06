@@ -57,5 +57,4 @@ public class Linea {
         return producto.getCodigo() + " " + producto.getDescripcion() + " " + cantidad + " " +
                 producto.getPrecioUnitario() + " " + sacarImporte();
     }
-
 }
