@@ -13,6 +13,7 @@ public class TableModel extends AbstractTableModel<Producto> implements javax.sw
     public static final int UNIDAD_MEDIDA = 2;
     public static final int PRECIO_UNITARIO = 3;
     public static final int CATEGORIA = 4;
+    public static final int EXISTENCIAS = 5;
 
     @Override
     protected Object getPropetyAt(Producto e, int col) {
@@ -22,6 +23,7 @@ public class TableModel extends AbstractTableModel<Producto> implements javax.sw
             case UNIDAD_MEDIDA: return e.getUnidadMedida();
             case PRECIO_UNITARIO: return e.getPrecioUnitario();
             case CATEGORIA: return e.getCategoria().getNombre();
+            case EXISTENCIAS: return e.getExistencias();
             default: return "";
         }
     }
@@ -34,5 +36,6 @@ public class TableModel extends AbstractTableModel<Producto> implements javax.sw
         colNames[UNIDAD_MEDIDA]= " Unidad de Medida ";
         colNames[PRECIO_UNITARIO]= " Precio Unitario ";
         colNames[CATEGORIA]= " Categoría ";
+        colNames[EXISTENCIAS]= " Existencias ";
     }
 }

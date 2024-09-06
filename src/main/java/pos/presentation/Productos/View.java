@@ -29,16 +29,26 @@ public class View implements PropertyChangeListener {
     private JLabel preciobl;
     private JTextField precio;
     private JLabel categoriaLbl;
-    private JTextField categoria;
+    private JComboBox categoria;
     private JButton save;
     private JButton delete;
     private JButton clear;
+    private JTextField existencias;
+    private JLabel existenciasLbl;
 
     public JPanel getPanel() {
         return panel;
     }
 
+    private void Categories() {
+        categoria.addItem("CAT-001-Dulces");
+        categoria.addItem("CAT-002-Vinos");
+        categoria.addItem("CAT-003-Basico");
+        categoria.addItem("CAT-004-Hogar");
+    }
+
     public View() {
+        Categories();
         search.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -52,6 +62,7 @@ public class View implements PropertyChangeListener {
                 }
             }
         });
+
 
         save.addActionListener(new ActionListener() {
             @Override
@@ -101,7 +112,7 @@ public class View implements PropertyChangeListener {
         if (codigo.getText().isEmpty()) {
             valid = false;
             codigoLbl.setBorder(Application.BORDER_ERROR);
-            codigoLbl.setToolTipText("Codigo requerido");
+            JOptionPane.showMessageDialog(panel, "Codigo requerido", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             codigoLbl.setBorder(null);
             codigoLbl.setToolTipText(null);
@@ -110,7 +121,7 @@ public class View implements PropertyChangeListener {
         if (descripción.getText().isEmpty()) {
             valid = false;
             descripciónLbl.setBorder(Application.BORDER_ERROR);
-            descripciónLbl.setToolTipText("Descripción requerida");
+            JOptionPane.showMessageDialog(panel, "Descripción requerida", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             descripciónLbl.setBorder(null);
             descripciónLbl.setToolTipText(null);
@@ -119,40 +130,30 @@ public class View implements PropertyChangeListener {
         if (unidad.getText().isEmpty()) {
             valid = false;
             unidadLbl.setBorder(Application.BORDER_ERROR);
-            unidadLbl.setToolTipText("Unidad requerida");
+            JOptionPane.showMessageDialog(panel, "Unidad requerida", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             unidadLbl.setBorder(null);
             unidadLbl.setToolTipText(null);
         }
 
-        if (precio.getText().isEmpty()) {
-            valid = false;
-            preciobl.setBorder(Application.BORDER_ERROR);
-            preciobl.setToolTipText("Precio requerido");
-        } else {
+        try {
+            Float.parseFloat(precio.getText());
             preciobl.setBorder(null);
             preciobl.setToolTipText(null);
+        } catch (Exception e) {
+            valid = false;
+            preciobl.setBorder(Application.BORDER_ERROR);
+            JOptionPane.showMessageDialog(panel, "Coloque un valor válido para precio", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
         try {
-            if (categoria.getText().isEmpty()) {
-                throw new Exception("Categoría vacía");
-            }
-            categoriaLbl.setBorder(null);
-            categoriaLbl.setToolTipText(null);
+            Integer.parseInt(existencias.getText());
+            existenciasLbl.setBorder(null);
+            existenciasLbl.setToolTipText(null);
         } catch (Exception e) {
             valid = false;
-            categoriaLbl.setBorder(Application.BORDER_ERROR);
-            categoriaLbl.setToolTipText("Categoría inválida");
-        }
-        try {
-            Integer.parseInt(precio.getText()); // Intentar convertir a entero
-            preciobl.setBorder(null);
-            preciobl.setToolTipText(null);
-        } catch (NumberFormatException e) {
-            valid = false;
-            preciobl.setBorder(Application.BORDER_ERROR);
-            JOptionPane.showMessageDialog(panel, "Coloque un tipo de variable correcto", "Error", JOptionPane.ERROR_MESSAGE);
+            existenciasLbl.setBorder(Application.BORDER_ERROR);
+            JOptionPane.showMessageDialog(panel, "Coloque un valor válido para existencias", "Error", JOptionPane.ERROR_MESSAGE);
         }
         return valid;
     }
@@ -163,7 +164,8 @@ public class View implements PropertyChangeListener {
         p.setDescripcion(descripción.getText());
         p.setUnidadMedida(unidad.getText());
         p.setPrecioUnitario(Double.parseDouble(precio.getText()));
-        p.setNomCat(categoria.getText());
+        p.setCategoria(new Categoria((String) categoria.getSelectedItem()));
+        p.setExistencias(Integer.parseInt(existencias.getText()));
         return p;
     }
 
@@ -183,18 +185,19 @@ public class View implements PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent evt) {
         switch (evt.getPropertyName()) {
             case Model.LIST:
-                int[] cols = {TableModel.CODIGO, TableModel.DESCRIPCION, TableModel.UNIDAD_MEDIDA, TableModel.PRECIO_UNITARIO, TableModel.CATEGORIA};
+                int[] cols = {TableModel.CODIGO, TableModel.DESCRIPCION, TableModel.UNIDAD_MEDIDA, TableModel.PRECIO_UNITARIO, TableModel.CATEGORIA, TableModel.EXISTENCIAS};
                 list.setModel(new TableModel(cols, model.getList()));
                 list.setRowHeight(30);
                 TableColumnModel columnModel = list.getColumnModel();
                 columnModel.getColumn(2).setPreferredWidth(100);
+                columnModel.getColumn(4).setPreferredWidth(100);
                 break;
             case Model.CURRENT:
                 codigo.setText(model.getCurrent().getCodigo());
                 descripción.setText(model.getCurrent().getDescripcion());
                 unidad.setText(model.getCurrent().getUnidadMedida());
                 precio.setText("" + model.getCurrent().getPrecioUnitario());
-                categoria.setText(model.getCurrent().getNomCat());
+                Categoria categoriaObj = model.getCurrent().getCategoria();                existencias.setText("" + model.getCurrent().getExistencias()); // Actualizar existencias
                 if (model.getMode() == Application.MODE_EDIT) {
                     codigo.setEnabled(false);
                     delete.setEnabled(true);
@@ -212,6 +215,8 @@ public class View implements PropertyChangeListener {
                 preciobl.setToolTipText(null);
                 categoriaLbl.setBorder(null);
                 categoriaLbl.setToolTipText(null);
+                existenciasLbl.setBorder(null);
+                existenciasLbl.setToolTipText(null);
                 break;
             case Model.FILTER:
                 searchProducto.setText(model.getFilter().getCodigo());

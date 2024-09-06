@@ -50,7 +50,6 @@ public class View implements PropertyChangeListener {
                 }
             }
         });
-
         save.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -58,14 +57,13 @@ public class View implements PropertyChangeListener {
                     Cliente n = take();
                     try {
                         controller.save(n);
-                        JOptionPane.showMessageDialog(panel, "REGISTRO APLICADO", "", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(panel, "Registro Aplicado", "", JOptionPane.INFORMATION_MESSAGE);
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(panel, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
         });
-
         list.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -73,7 +71,6 @@ public class View implements PropertyChangeListener {
                 controller.edit(row);
             }
         });
-
         delete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -85,7 +82,6 @@ public class View implements PropertyChangeListener {
                 }
             }
         });
-
         clear.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -99,7 +95,7 @@ public class View implements PropertyChangeListener {
         if (id.getText().isEmpty()) {
             valid = false;
             idLbl.setBorder(Application.BORDER_ERROR);
-            idLbl.setToolTipText("Codigo requerido");
+            JOptionPane.showMessageDialog(panel, "ID requerido", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             idLbl.setBorder(null);
             idLbl.setToolTipText(null);
@@ -108,7 +104,7 @@ public class View implements PropertyChangeListener {
         if (nombre.getText().isEmpty()) {
             valid = false;
             nombreLbl.setBorder(Application.BORDER_ERROR);
-            nombreLbl.setToolTipText("Nombre requerido");
+            JOptionPane.showMessageDialog(panel, "Nombre requerido", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             nombreLbl.setBorder(null);
             nombreLbl.setToolTipText(null);
@@ -117,7 +113,7 @@ public class View implements PropertyChangeListener {
         if (telefono.getText().isEmpty()) {
             valid = false;
             telefonoLbl.setBorder(Application.BORDER_ERROR);
-            telefonoLbl.setToolTipText("Telefono requerido");
+            JOptionPane.showMessageDialog(panel, "Telefono requerido", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             telefonoLbl.setBorder(null);
             telefonoLbl.setToolTipText(null);
@@ -126,7 +122,7 @@ public class View implements PropertyChangeListener {
         if (email.getText().isEmpty()) {
             valid = false;
             emailLbl.setBorder(Application.BORDER_ERROR);
-            emailLbl.setToolTipText("Unidad requerida");
+            JOptionPane.showMessageDialog(panel, "Unidad requerida", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             emailLbl.setBorder(null);
             emailLbl.setToolTipText(null);
@@ -139,9 +135,8 @@ public class View implements PropertyChangeListener {
         } catch (Exception e) {
             valid = false;
             descuentoLbl.setBorder(Application.BORDER_ERROR);
-            descuentoLbl.setToolTipText("Descuento invalido");
+            JOptionPane.showMessageDialog(panel, "Descuento invalido", "Error", JOptionPane.ERROR_MESSAGE);
         }
-
         return valid;
     }
 

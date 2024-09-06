@@ -95,7 +95,7 @@ public class View implements PropertyChangeListener {
         if (id.getText().isEmpty()) {
             valid = false;
             idLbl.setBorder(Application.BORDER_ERROR);
-            idLbl.setToolTipText("Codigo requerido");
+            JOptionPane.showMessageDialog(panel, "ID requerido", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             idLbl.setBorder(null);
             idLbl.setToolTipText(null);
@@ -104,7 +104,7 @@ public class View implements PropertyChangeListener {
         if (nombre.getText().isEmpty()) {
             valid = false;
             nombreLbl.setBorder(Application.BORDER_ERROR);
-            nombreLbl.setToolTipText("Nombre requerido");
+            JOptionPane.showMessageDialog(panel, "Nombre requerido", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             nombreLbl.setBorder(null);
             nombreLbl.setToolTipText(null);

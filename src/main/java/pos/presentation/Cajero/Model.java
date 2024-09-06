@@ -21,8 +21,7 @@ public class Model extends AbstractModel {
         firePropertyChange(FILTER);
     }
 
-    public Model() {
-    }
+    public Model() {}
 
     public void init(List<Cajero> list){
         this.list = list;
@@ -69,5 +68,4 @@ public class Model extends AbstractModel {
     public static final String LIST="list";
     public static final String CURRENT="current";
     public static final String FILTER="filter";
-
 }
