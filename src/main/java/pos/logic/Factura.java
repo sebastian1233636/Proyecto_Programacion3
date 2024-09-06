@@ -11,7 +11,9 @@ public class Factura {
 
     public Factura() {
         carrito = new ArrayList<>();
-
+        ID = " ";
+        fecha = " ";
+        codigo = " ";
     }
 
     public Factura(String ID, String fecha, String codigo) {

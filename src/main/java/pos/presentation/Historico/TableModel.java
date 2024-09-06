@@ -1,6 +1,6 @@
 package pos.presentation.Historico;
 
-import pos.logic.Cajero;
+import pos.logic.Cliente;
 import pos.logic.Factura;
 import pos.presentation.AbstractTableModel;
 
@@ -11,6 +11,7 @@ public class TableModel extends AbstractTableModel<Factura> implements javax.swi
     public TableModel(int[] cols, List<Factura> rows) {
         super(cols, rows);
     }
+
     public static final int ID=0;
     public static final int FECHA=1;
     public static final int CODIGO=2;
@@ -29,12 +30,12 @@ public class TableModel extends AbstractTableModel<Factura> implements javax.swi
 
     @Override
     protected void initColNames(){
-        colNames = new String[5];
+        colNames = new String[4];
         colNames[ID]= "Id";
-        colNames[FECHA]= "Nombre";
+        colNames[FECHA]= "Fecha";
         colNames[CODIGO]= "Codigo";
         colNames[TOTAL]= "Total";
-    }
 
+    }
 
 }
