@@ -25,7 +25,7 @@ public class view implements PropertyChangeListener {
         return panelHistorico;
     }
 
-    public void View() {
+    public view() {
         buscarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
