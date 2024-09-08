@@ -3,6 +3,9 @@ package pos.presentation.Facturar;
 import pos.Application;
 import pos.logic.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Controller {
     view view;
     Model model;
@@ -11,8 +14,6 @@ public class Controller {
         model.init(Service.instance().search(new Cliente()),Service.instance().search(new Cajero()),Service.instance().search(new Linea()));
         this.view = view;
         this.model = model;
-        //view.setController(this);
-        //view.setModel(model);
     }
 
     public void Guardar(Factura e) throws  Exception{
@@ -51,6 +52,20 @@ public class Controller {
         Service.instance().delete(model.getCurrent());
     }
 
+    private void cargarDatos() {
+        List<Cliente> clientes = model.getClientes();
+        List<String> nombresClientes = new ArrayList<>();
+        for (Cliente cliente : clientes) {
+            nombresClientes.add(cliente.getNombre());
+        }
+        view.actualizarComboBox(view.getComboBox1(), nombresClientes);
 
+        List<Cajero> cajeros = model.getCajeros();
+        List<String> nombresCajeros = new ArrayList<>();
+        for (Cajero cajero : cajeros) {
+            nombresCajeros.add(cajero.getNombre());
+        }
+        view.actualizarComboBox(view.getComboBox2(), nombresCajeros);
+    }
 
 }

@@ -26,6 +26,10 @@ public class Application {
                 Service.instance().stop();
             }
         });
+        pos.presentation.Facturar.Model facturarModel= new pos.presentation.Facturar.Model();
+        pos.presentation.Facturar.view facturarView = new pos.presentation.Facturar.view();
+        facturarController = new pos.presentation.Facturar.Controller(facturarView,facturarModel);
+        Icon facturarIcon= new ImageIcon(Application.class.getResource("/pos/presentation/icons/factura.png"));
 
         pos.presentation.Clientes.Model clientesModel= new pos.presentation.Clientes.Model();
         pos.presentation.Clientes.View clientesView = new pos.presentation.Clientes.View();
@@ -47,20 +51,21 @@ public class Application {
         historicoController = new pos.presentation.Historico.Controller(viewHistorico,historicoModel);
         Icon historicoIcon = new ImageIcon(Application.class.getResource("/pos/presentation/icons/Historico.png"));
 
-
+        tabbedPane.addTab("Facturar  ",facturarIcon, facturarView.getPanel());
         tabbedPane.addTab("Clientes  ",clientesIcon, clientesView.getPanel());
         tabbedPane.addTab("Cajeros  ",cajeroIcon, cajeroView.getPanel());
         tabbedPane.addTab("Productos  ",productoIcon, productoView.getPanel());
         tabbedPane.addTab("Histórico ",historicoIcon, viewHistorico.getPanel());
 
         window.setSize(750,450);
-        window.setResizable(false);
+        window.setResizable(true);
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         window.setIconImage((new ImageIcon(Application.class.getResource("presentation/icons/icon.png"))).getImage());
         window.setTitle("POS: Point Of Sale");
         window.setVisible(true);
     }
 
+    public static pos.presentation.Facturar.Controller facturarController;
     public static pos.presentation.Clientes.Controller clientesController;
     public static pos.presentation.Cajero.Controller cajeroController;
     public static pos.presentation.Productos.Controller productoController;

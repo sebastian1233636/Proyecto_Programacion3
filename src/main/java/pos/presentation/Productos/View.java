@@ -197,7 +197,8 @@ public class View implements PropertyChangeListener {
                 descripción.setText(model.getCurrent().getDescripcion());
                 unidad.setText(model.getCurrent().getUnidadMedida());
                 precio.setText("" + model.getCurrent().getPrecioUnitario());
-                Categoria categoriaObj = model.getCurrent().getCategoria();                existencias.setText("" + model.getCurrent().getExistencias()); // Actualizar existencias
+                Categoria categoriaObj = model.getCurrent().getCategoria();
+                existencias.setText("" + model.getCurrent().getExistencias());
                 if (model.getMode() == Application.MODE_EDIT) {
                     codigo.setEnabled(false);
                     delete.setEnabled(true);
