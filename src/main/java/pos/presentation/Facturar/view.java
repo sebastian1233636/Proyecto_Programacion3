@@ -1,6 +1,19 @@
 package pos.presentation.Facturar;
 
+import pos.Application;
+import pos.logic.Cliente;
+import pos.logic.Service;
+
 import javax.swing.*;
+import javax.swing.table.TableColumnModel;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
 
 public class view {
     private JPanel JpanelCliente;
@@ -26,4 +39,13 @@ public class view {
     private JLabel textArea3;
     private JLabel textArea4;
     private JTable table1;
+    private JPanel panel;
+
+    public JPanel getPanel() {
+        return panel;
+    }
+
+    private void Clientes(){
+
+    }
 }

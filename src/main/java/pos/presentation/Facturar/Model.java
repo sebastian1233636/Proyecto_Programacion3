@@ -11,11 +11,12 @@ import java.beans.PropertyChangeListener;
 import java.util.List;
 
 public class Model extends AbstractModel {
+    private Producto filter;
     private List<Cliente> clientes;
     private List<Cajero> cajeros;
     private List<Linea> lineas;
-    private Linea Current;
-    private Producto filter;
+    private Linea current;
+    int mode;
 
 
     @Override
@@ -24,18 +25,19 @@ public class Model extends AbstractModel {
         firePropertyChange(LISTCLIENTES);
         firePropertyChange(LISTCAJEROS);
         firePropertyChange(LISTLINEAS);
+        firePropertyChange(CURRENT);
         firePropertyChange(FILTER);
     }
 
-    public Model() {
-    }
+    public Model() {}
 
     public void init(List<Cliente> list, List<Cajero> list2,List<Linea> list3){
        this.clientes = list;
        this.cajeros = list2;
        this.lineas = list3;
+       this.current = new Linea();
        this.filter = new Producto();
-
+       this.mode= Application.MODE_CREATE;
     }
 
     public List<Cliente> getClientes() {
@@ -48,9 +50,15 @@ public class Model extends AbstractModel {
     public Producto getFilter() {
         return filter;
     }
-
     public Linea getCurrent() {
-        return Current;
+        return current;
+    }
+    public int getMode() {
+        return mode;
+    }
+
+    public void setCurrent(Linea Current) {
+        this.current = Current;
     }
 
     public void setClietes(List<Cliente> list){
@@ -70,14 +78,14 @@ public class Model extends AbstractModel {
         this.filter = filter;
         firePropertyChange(FILTER);
     }
-    public void setCurrent(Linea Current) {
-        this.Current = Current;
+
+    public void setMode(int mode) {
+        this.mode = mode;
     }
-
-
 
     public static final String LISTCLIENTES="listCli";
     public static final String LISTLINEAS="listLi";
     public static final String LISTCAJEROS="listCa";
+    public static final String CURRENT="current";
     public static final String FILTER="filter";
 }

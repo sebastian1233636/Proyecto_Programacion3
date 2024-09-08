@@ -53,5 +53,4 @@ public class Controller {
         model.setMode(Application.MODE_CREATE);
         model.setCurrent(new Cliente());
     }
-
 }

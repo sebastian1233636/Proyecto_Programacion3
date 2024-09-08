@@ -19,8 +19,6 @@ public class TableModel extends AbstractTableModel<Linea> implements javax.swing
     public static final int NETO=6;
     public static final int IMPORTE=7;
 
-
-
     @Override
     protected Object getPropetyAt(Linea e, int col) {
         switch (cols[col]){
@@ -47,7 +45,5 @@ public class TableModel extends AbstractTableModel<Linea> implements javax.swing
         colNames[DESCUENTO]= "Descuento";
         colNames[NETO]= "PrecioUnitario";
         colNames[IMPORTE]= "Importe";
-
     }
-
 }

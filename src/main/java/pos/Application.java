@@ -32,10 +32,10 @@ public class Application {
         clientesController = new pos.presentation.Clientes.Controller(clientesView,clientesModel);
         Icon clientesIcon= new ImageIcon(Application.class.getResource("/pos/presentation/icons/client.png"));
 
-        pos.presentation.Cajero.Model cajeroModel= new pos.presentation.Cajero.Model();
+        pos.presentation.Cajero.Model cajeroModel = new pos.presentation.Cajero.Model();
         pos.presentation.Cajero.View cajeroView = new pos.presentation.Cajero.View();
         cajeroController = new pos.presentation.Cajero.Controller(cajeroView,cajeroModel);
-        Icon cajeroIcon= new ImageIcon(Application.class.getResource("/pos/presentation/icons/cajero.png"));
+        Icon cajeroIcon = new ImageIcon(Application.class.getResource("/pos/presentation/icons/cajero.png"));
 
         pos.presentation.Productos.Model productoModel= new pos.presentation.Productos.Model();
         pos.presentation.Productos.View productoView = new pos.presentation.Productos.View();
