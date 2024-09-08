@@ -172,4 +172,65 @@ public class Service {
                 .sorted(Comparator.comparing(Factura::getID))
                 .collect(Collectors.toList());
     }
+
+    //-------------------------LINEAS--------------------------------------
+
+    public void create(Linea e) throws Exception{
+        Linea result = data.getLineas().stream().filter(i->i.getProducto().getCodigo().equals(e.getProducto().getCodigo())).findFirst().orElse(null);;
+        if (result==null) data.getLineas().add(e);
+        else throw new Exception("Este codigo ya fue utilizado");
+    }
+    public Linea read(Linea e) throws Exception{
+        Linea result = data.getLineas().stream().filter(i->i.getProducto().getCodigo().equals(e.getProducto().getCodigo())).findFirst().orElse(null);
+        if (result!=null) return result;
+        else throw new Exception("No existe ninguna factura asociada a este ID");
+    }
+
+    public void update(Linea e) throws Exception{
+        Linea result;
+        try{
+            result = this.read(e);
+            data.getLineas().remove(result);
+            data.getLineas().add(e);
+        }catch (Exception ex) {
+            throw new Exception("No existe ninguna Linea asociada a este codigo");
+        }
+    }
+
+    public void delete(Linea e) throws Exception{
+        data.getLineas().remove(e);
+    }
+
+    public List<Linea> search(Linea e){
+        return data.getLineas().stream()
+                .filter(i -> i.getProducto().getCodigo().contains(e.getProducto().getCodigo()))
+                .sorted(Comparator.comparing(i -> i.getProducto().getCodigo()))
+                .collect(Collectors.toList());
+    }
+
+    public double PagoTotal(List<Linea> lineas) {
+        double total = 0;
+        for (Linea linea : lineas) {
+            total += linea.sacarImporte();
+        }
+        return total;
+    }
+
+
  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

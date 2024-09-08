@@ -7,13 +7,14 @@ import pos.logic.Linea;
 import pos.logic.Producto;
 import pos.presentation.AbstractModel;
 import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class Model extends AbstractModel {
     private List<Cliente> clientes;
     private List<Cajero> cajeros;
     private List<Linea> lineas;
+    private Linea Current;
     private Producto filter;
 
 
@@ -48,6 +49,10 @@ public class Model extends AbstractModel {
         return filter;
     }
 
+    public Linea getCurrent() {
+        return Current;
+    }
+
     public void setClietes(List<Cliente> list){
         this.clientes = list;
         firePropertyChange(LISTCLIENTES);
@@ -64,6 +69,9 @@ public class Model extends AbstractModel {
     public void setFilter(Producto filter) {
         this.filter = filter;
         firePropertyChange(FILTER);
+    }
+    public void setCurrent(Linea Current) {
+        this.Current = Current;
     }
 
 

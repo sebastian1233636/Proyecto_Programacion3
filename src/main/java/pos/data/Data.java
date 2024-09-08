@@ -26,11 +26,17 @@ public class Data {
     @XmlElement(name = "cajero")
     private List<Cajero> cajeros;
 
+
+    @XmlElementWrapper(name = "lineas")
+    @XmlElement(name = "lineas")
+    private List<Linea> lineas;
+
     public Data() {
         clientes = new ArrayList<>();
         productos = new ArrayList<>();
         facturas = new ArrayList<>();
         cajeros = new ArrayList<>();
+        lineas = new ArrayList<>();
     }
 
     public List<Cliente> getClientes() {return clientes;}
@@ -44,4 +50,6 @@ public class Data {
     }
 
     public List<Cajero> getCajeros() {return cajeros;}
+
+    public List<Linea> getLineas() {return lineas;}
 }
