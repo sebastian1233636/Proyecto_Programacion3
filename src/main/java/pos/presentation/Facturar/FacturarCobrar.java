@@ -12,50 +12,69 @@ public class FacturarCobrar extends JDialog {
     private JLabel importe;
     private JButton okButton;
     private JButton cancelarButton;
+    private JPanel panel;
 
     Model model;
     Controller controller;
 
+    public JPanel getPanel() {
+        return panel;
+    }
+
     public FacturarCobrar() {
+        setContentPane(panel);
+        setModal(true);
+        pack();
+
         okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                double efectivo = Double.parseDouble(textEfectivo.getText());
-                double tarjeta = Double.parseDouble(textTarjeta.getText());
-                double cheque = Double.parseDouble(textCheque.getText());
-                double simpe = Double.parseDouble(textSimpe.getText());
-                double importeValue = Double.parseDouble(importe.getText());
-                if(efectivo > importeValue){
-                    JOptionPane.showMessageDialog(null, "El pago se ha efectuado correctamente.", "Pago Exitoso", JOptionPane.INFORMATION_MESSAGE);
-                }else{
-                    JOptionPane.showMessageDialog(null, "El efectivo no es suficiente para cubrir el importe.", "Error de Pago", JOptionPane.WARNING_MESSAGE);
-                }
+                try {
+                    double efectivo = Double.parseDouble(textEfectivo.getText());
+                    double tarjeta = Double.parseDouble(textTarjeta.getText());
+                    double cheque = Double.parseDouble(textCheque.getText());
+                    double simpe = Double.parseDouble(textSimpe.getText());
+                    double importeValue = Double.parseDouble(importe.getText());
 
-                if(tarjeta > importeValue){
-                    JOptionPane.showMessageDialog(null, "El pago se ha efectuado correctamente.", "Pago Exitoso", JOptionPane.INFORMATION_MESSAGE);
-                }else{
-                    JOptionPane.showMessageDialog(null, "La tarjeta no es suficiente para cubrir el importe.", "Error de Pago", JOptionPane.WARNING_MESSAGE);
-                }
+                    boolean pagoExitoso = false;
 
-                if(cheque > importeValue){
-                    JOptionPane.showMessageDialog(null, "El pago se ha efectuado correctamente.", "Pago Exitoso", JOptionPane.INFORMATION_MESSAGE);
-                }else{
-                    JOptionPane.showMessageDialog(null, "El cheque no es suficiente para cubrir el importe.", "Error de Pago", JOptionPane.WARNING_MESSAGE);
+                    if (efectivo >= importeValue) {
+                        JOptionPane.showMessageDialog(null, "El pago con efectivo se ha efectuado correctamente.", "Pago Exitoso", JOptionPane.INFORMATION_MESSAGE);
+                        pagoExitoso = true;
+                    } else if (tarjeta >= importeValue) {
+                        JOptionPane.showMessageDialog(null, "El pago con tarjeta se ha efectuado correctamente.", "Pago Exitoso", JOptionPane.INFORMATION_MESSAGE);
+                        pagoExitoso = true;
+                    } else if (cheque >= importeValue) {
+                        JOptionPane.showMessageDialog(null, "El pago con cheque se ha efectuado correctamente.", "Pago Exitoso", JOptionPane.INFORMATION_MESSAGE);
+                        pagoExitoso = true;
+                    } else if (simpe >= importeValue) {
+                        JOptionPane.showMessageDialog(null, "El pago con Sinpe se ha efectuado correctamente.", "Pago Exitoso", JOptionPane.INFORMATION_MESSAGE);
+                        pagoExitoso = true;
+                    } else {
+                        JOptionPane.showMessageDialog(null, "El medio de pago seleccionado no es suficiente para cubrir el importe.", "Error de Pago", JOptionPane.WARNING_MESSAGE);
+                    }
+                    if (pagoExitoso) {dispose();}
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, "Por favor ingrese valores numéricos válidos.", "Error de Entrada", JOptionPane.ERROR_MESSAGE);
                 }
-                if(simpe > importeValue){
-                    JOptionPane.showMessageDialog(null, "El pago se ha efectuado correctamente.", "Pago Exitoso", JOptionPane.INFORMATION_MESSAGE);
-                }else{
-                    JOptionPane.showMessageDialog(null, "El sinpe no es suficiente para cubrir el importe.", "Error de Pago", JOptionPane.WARNING_MESSAGE);
-                }
+            }
+        });
+
+        cancelarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose(); // Cerrar la ventana si se cancela
             }
         });
     }
 
-    public void setImporte(){
+    public void setImporte() {
         double pagoTotal = controller.calcularPagoTotal();
         String pagoTotalStr = String.valueOf(pagoTotal);
         importe.setText(pagoTotalStr);
     }
 
+    public void setModel(Model model) {this.model = model;}
 
+    public void setController(Controller controller) {this.controller = controller;}
 }

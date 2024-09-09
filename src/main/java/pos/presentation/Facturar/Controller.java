@@ -23,11 +23,9 @@ public class Controller {
         model.getLineas().add(nuevo);
     }
 
-
     public void BorrarLinea() throws Exception {
         Service.instance().delete(model.getCurrent());
     }
-
 
     public double calcularPagoTotal(){
         return Service.instance().PagoTotal(model.getLineas());
@@ -36,6 +34,7 @@ public class Controller {
     public Producto BuscarProducto(Producto e) throws Exception {
         return Service.instance().read(e);
     }
+
     public void establecerCantidad(int cant){
         model.getCurrent().setCantidad(cant);
     }
@@ -45,9 +44,8 @@ public class Controller {
 
     public void cancelar(){
         model.setFilter(new Producto());
-        model.setLineas(Service.instance().search(new Linea()));
+        model.setLineas(new ArrayList<>());
     }
-
 
     public void edit(int row){
         Linea e = model.getLineas().get(row);
@@ -56,12 +54,10 @@ public class Controller {
         } catch (Exception ex) {}
     }
 
-    public void loadClientes(){
-        model.setClietes(Service.instance().getData().getClientes());
-    }
-    public void loadCajeros(){
-        model.setCajeros(Service.instance().getData().getCajeros());
-    }
+    public void loadClientes() {model.setClietes(Service.instance().getData().getClientes());}
+
+    public void loadCajeros() {model.setCajeros(Service.instance().getData().getCajeros());}
+
 
 
 
