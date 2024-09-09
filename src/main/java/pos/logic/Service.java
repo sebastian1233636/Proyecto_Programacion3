@@ -33,6 +33,9 @@ public class Service {
         }
     }
 
+    public Data getData(){
+        return data;
+    }
 //================= CLIENTES ============
     public void create(Cliente e) throws Exception{
         Cliente result = data.getClientes().stream().filter(i->i.getId().equals(e.getId())).findFirst().orElse(null);

@@ -16,18 +16,6 @@ public class Controller {
         this.model = model;
     }
 
-    public void Guardar(Factura e) throws  Exception{
-        switch (model.getMode()) {
-            case Application.MODE_CREATE:
-                Service.instance().create(e);
-                break;
-            case Application.MODE_EDIT:
-                Service.instance().update(e);
-                break;
-        }
-        model.setFilter(new Producto());
-    }
-
     public void AgregarLinea(Producto filter) throws  Exception{
         Linea nuevo = new Linea();
         model.setFilter(filter);
@@ -36,36 +24,65 @@ public class Controller {
     }
 
 
-    public void BorrarLinea() throws Exception {Service.instance().delete(model.getCurrent());}
-
-    public void clear() {
-        model.setMode(Application.MODE_CREATE);
-        model.setCurrent(new Linea());
+    public void BorrarLinea() throws Exception {
+        Service.instance().delete(model.getCurrent());
     }
+
 
     public double calcularPagoTotal(){
         return Service.instance().PagoTotal(model.getLineas());
     }
 
-
-    public void delete() throws Exception {
-        Service.instance().delete(model.getCurrent());
+    public Producto BuscarProducto(Producto e) throws Exception {
+        return Service.instance().read(e);
+    }
+    public void establecerCantidad(int cant){
+        model.getCurrent().setCantidad(cant);
+    }
+    public void establecerDescuento(double des){
+        model.getCurrent().setDescuento(des);
     }
 
-    private void cargarDatos() {
-        List<Cliente> clientes = model.getClientes();
-        List<String> nombresClientes = new ArrayList<>();
-        for (Cliente cliente : clientes) {
-            nombresClientes.add(cliente.getNombre());
-        }
-        view.actualizarComboBox(view.getComboBox1(), nombresClientes);
-
-        List<Cajero> cajeros = model.getCajeros();
-        List<String> nombresCajeros = new ArrayList<>();
-        for (Cajero cajero : cajeros) {
-            nombresCajeros.add(cajero.getNombre());
-        }
-        view.actualizarComboBox(view.getComboBox2(), nombresCajeros);
+    public void cancelar(){
+        model.setFilter(new Producto());
+        model.setLineas(Service.instance().search(new Linea()));
     }
+
+
+    public void edit(int row){
+        Linea e = model.getLineas().get(row);
+        try {
+            model.setCurrent(Service.instance().read(e));
+        } catch (Exception ex) {}
+    }
+
+    public void loadClientes(){
+        model.setClietes(Service.instance().getData().getClientes());
+    }
+    public void loadCajeros(){
+        model.setCajeros(Service.instance().getData().getCajeros());
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
