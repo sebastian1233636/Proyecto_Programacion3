@@ -1,7 +1,9 @@
 package pos.presentation.Historico;
 
 import pos.Application;
+import pos.logic.Cliente;
 import pos.logic.Factura;
+import pos.logic.Linea;
 import pos.presentation.AbstractModel;
 
 import java.beans.PropertyChangeListener;
@@ -10,6 +12,7 @@ import java.util.List;
 public class Model extends AbstractModel {
     Factura filter;
     List<Factura> list;
+    List<Linea> listalineas;
     Factura current;
     int mode;
 
@@ -28,6 +31,7 @@ public class Model extends AbstractModel {
         this.list = list;
         this.current = new Factura();
         this.filter = new Factura();
+        this.listalineas = this.current.getCarrito();
         this.mode= Application.MODE_CREATE;
     }
 
@@ -38,6 +42,13 @@ public class Model extends AbstractModel {
     public void setList(List<Factura> list){
         this.list = list;
         firePropertyChange(LIST);
+    }
+
+    public List<Linea> getListalineas() {
+        return listalineas;
+    }
+    public void setListalineas(List<Linea> listalineas){
+        this.listalineas = listalineas;
     }
 
     public Factura getCurrent() {

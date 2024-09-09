@@ -1,6 +1,7 @@
 package pos.presentation.Historico;
 
 import pos.Application;
+import pos.logic.Cliente;
 import pos.logic.Factura;
 import pos.logic.Service;
 

@@ -82,6 +82,13 @@ public class view implements PropertyChangeListener {
                 TablaFacturas.setRowHeight(30);
                 TableColumnModel columnModel = TablaFacturas.getColumnModel();
                 columnModel.getColumn(3).setPreferredWidth(150);
+                //Segunda tabla
+                int[] cols2 = {TableModel2.CODIGO,TableModel2.ARTICULO,TableModel2.CATEGORIA,TableModel2.CANTIDAD,TableModel2.PRECIO,TableModel2.DESCUENTO,TableModel2.NETO,TableModel2.IMPORTE};
+                TablaLineas.setModel(new TableModel2(cols2,model.getListalineas()));
+                TablaLineas.setRowHeight(30);
+                TableColumnModel columnModel2 = TablaLineas.getColumnModel();
+                columnModel2.getColumn(3).setPreferredWidth(150);
+
                 break;
             case pos.presentation.Historico.Model.CURRENT:
                 search_txt.setText(model.getCurrent().getID());
