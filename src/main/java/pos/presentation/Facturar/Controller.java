@@ -5,6 +5,7 @@ import pos.logic.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Filter;
 
 public class Controller {
     view view;
@@ -18,9 +19,10 @@ public class Controller {
 
     public void AgregarLinea(Producto filter) throws  Exception{
         Linea nuevo = new Linea();
-        model.setFilter(filter);
-        nuevo.setProducto(Service.instance().read(filter));
-        model.getLineas().add(nuevo);
+        nuevo.setProducto(filter);
+        Service.instance().getData().getLineas().add(nuevo);
+        model.setLineas(Service.instance().getData().getLineas());
+
     }
 
     public void BorrarLinea() throws Exception {
@@ -32,7 +34,8 @@ public class Controller {
     }
 
     public Producto BuscarProducto(Producto e) throws Exception {
-        return Service.instance().read(e);
+        model.setFilter(e);
+        return Service.instance().read(model.getFilter());
     }
 
     public void establecerCantidad(int cant){
@@ -54,9 +57,19 @@ public class Controller {
         } catch (Exception ex) {}
     }
 
-    public void loadClientes() {model.setClietes(Service.instance().getData().getClientes());}
+    public  List<Cliente> loadClientes() {
+        List<Cliente> clientes = Service.instance().getData().getClientes();
+        model.setClietes(clientes);
+        return clientes;
+    }
 
-    public void loadCajeros() {model.setCajeros(Service.instance().getData().getCajeros());}
+    public  List<Cajero> loadCajeros() {
+        return Service.instance().getData().getCajeros();
+    }
+
+    public List<Linea> iniciarLineas(){
+        return Service.instance().search(new Linea());
+    }
 
 
 
