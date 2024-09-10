@@ -3,6 +3,7 @@ package pos.presentation.Facturar;
 import pos.Application;
 import pos.logic.*;
 
+import java.beans.PropertyChangeEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Filter;
@@ -15,13 +16,16 @@ public class Controller {
         model.init(Service.instance().search(new Cliente()),Service.instance().search(new Cajero()),Service.instance().search(new Linea()));
         this.view = view;
         this.model = model;
+        view.setController(this);
+        view.setModel(model);
     }
 
     public void AgregarLinea(Producto filter) throws  Exception{
         Linea nuevo = new Linea();
         nuevo.setProducto(filter);
         Service.instance().create(nuevo);
-        model.setLineas(Service.instance().search(nuevo));
+        model.setLineas(Service.instance().getData().getLineas());
+
 
     }
 
@@ -64,11 +68,15 @@ public class Controller {
     }
 
     public  List<Cajero> loadCajeros() {
-        return Service.instance().getData().getCajeros();
+        List<Cajero> cajeros = Service.instance().getData().getCajeros();
+        model.setCajeros(cajeros);
+        return cajeros;
     }
 
     public List<Linea> iniciarLineas(){
-        return Service.instance().search(new Linea());
+        List<Linea> lineas = Service.instance().search(new Linea());
+        model.setLineas(lineas);
+        return lineas;
     }
 
 

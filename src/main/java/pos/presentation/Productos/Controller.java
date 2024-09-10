@@ -4,6 +4,8 @@ import pos.Application;
 import pos.logic.Producto;
 import pos.logic.Service;
 
+import java.beans.PropertyChangeEvent;
+
 public class Controller {
     View view;
     Model model;

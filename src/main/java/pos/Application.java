@@ -29,8 +29,6 @@ public class Application {
         pos.presentation.Facturar.Model facturarModel= new pos.presentation.Facturar.Model();
         pos.presentation.Facturar.view facturarView = new pos.presentation.Facturar.view();
         facturarController = new pos.presentation.Facturar.Controller(facturarView,facturarModel);
-        facturarView.setController(facturarController);
-        facturarView.setModel(facturarModel);
         Icon facturarIcon= new ImageIcon(Application.class.getResource("/pos/presentation/icons/factura.png"));
 
         pos.presentation.Clientes.Model clientesModel= new pos.presentation.Clientes.Model();

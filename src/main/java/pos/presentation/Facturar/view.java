@@ -181,9 +181,6 @@ public class view implements PropertyChangeListener {
 
     public void setModel(Model model) {
         this.model = model;
-        if (controller != null) {
-            model.init(controller.loadClientes(), controller.loadCajeros(), controller.iniciarLineas());
-        }
         model.addPropertyChangeListener(this);
     }
 
@@ -195,7 +192,8 @@ public class view implements PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent evt) {
         switch (evt.getPropertyName()) {
             case pos.presentation.Facturar.Model.LISTLINEAS:
-                int[] cols = {TableModel.CODIGO, TableModel.ARTICULO, TableModel.CATEGORIA, TableModel.CANTIDAD, TableModel.PRECIO, TableModel.DESCUENTO, TableModel.NETO, TableModel.IMPORTE};
+                list.setModel(new DefaultTableModel(new Object[]{"Código", "Articulo", "Categoria", "Cantidad","Precio","Descuento","Neto", "Importe"}, 0));
+                int[] cols = {pos.presentation.Facturar.TableModel.CODIGO, pos.presentation.Facturar.TableModel.ARTICULO, pos.presentation.Facturar.TableModel.CATEGORIA, pos.presentation.Facturar.TableModel.CANTIDAD, pos.presentation.Facturar.TableModel.PRECIO, pos.presentation.Facturar.TableModel.DESCUENTO, pos.presentation.Facturar.TableModel.NETO, pos.presentation.Facturar.TableModel.IMPORTE};
                 list.setModel(new pos.presentation.Facturar.TableModel(cols, model.getLineas()));
                 list.setRowHeight(30);
                 TableColumnModel columnModel = list.getColumnModel();
