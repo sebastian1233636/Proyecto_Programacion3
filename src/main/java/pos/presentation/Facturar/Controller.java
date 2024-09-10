@@ -20,8 +20,8 @@ public class Controller {
     public void AgregarLinea(Producto filter) throws  Exception{
         Linea nuevo = new Linea();
         nuevo.setProducto(filter);
-        Service.instance().getData().getLineas().add(nuevo);
-        model.setLineas(Service.instance().getData().getLineas());
+        Service.instance().create(nuevo);
+        model.setLineas(Service.instance().search(nuevo));
 
     }
 

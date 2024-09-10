@@ -28,7 +28,7 @@ public class TableModel extends AbstractTableModel<Linea> implements javax.swing
             case CANTIDAD: return e.getCantidad();
             case PRECIO: return e.getProducto().getPrecioUnitario();
             case DESCUENTO: return e.getDescuento();
-            case NETO: return e.getProducto().getPrecioUnitario();
+            case NETO: return e.getProducto().getPrecioUnitario() - e.getDescuento();
             case IMPORTE: return e.getImporte();
             default: return "";
         }
@@ -36,7 +36,7 @@ public class TableModel extends AbstractTableModel<Linea> implements javax.swing
 
     @Override
     protected void initColNames(){
-        colNames = new String[5];
+        colNames = new String[8];
         colNames[CODIGO]= "Codigo";
         colNames[ARTICULO]= "Articulo";
         colNames[CATEGORIA]= "Categoria";

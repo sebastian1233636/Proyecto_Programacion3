@@ -67,8 +67,6 @@ public class view implements PropertyChangeListener {
     public view() {
         iniciarComboBoxClientes();
         iniciarComboBoxCajeros();
-        list.setModel(new DefaultTableModel(new Object[]{"Código", "Descripción", "Precio", "Existencias"}, 0));
-
         buttonAgregar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -198,9 +196,10 @@ public class view implements PropertyChangeListener {
         switch (evt.getPropertyName()) {
             case pos.presentation.Facturar.Model.LISTLINEAS:
                 int[] cols = {TableModel.CODIGO, TableModel.ARTICULO, TableModel.CATEGORIA, TableModel.CANTIDAD, TableModel.PRECIO, TableModel.DESCUENTO, TableModel.NETO, TableModel.IMPORTE};
-                list.setModel(new TableModel(cols, model.getLineas()));
+                list.setModel(new pos.presentation.Facturar.TableModel(cols, model.getLineas()));
                 list.setRowHeight(30);
                 TableColumnModel columnModel = list.getColumnModel();
+                columnModel.getColumn(1).setPreferredWidth(150);
                 columnModel.getColumn(1).setPreferredWidth(150);
                 break;
 

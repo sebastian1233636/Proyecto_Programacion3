@@ -5,6 +5,7 @@ import pos.logic.Cajero;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -136,6 +137,7 @@ public class View implements PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent evt) {
         switch (evt.getPropertyName()) {
             case pos.presentation.Cajero.Model.LIST:
+                list.setModel(new DefaultTableModel(new Object[]{"Código", "Descripción", "Precio", "Existencias"}, 0));
                 int[] cols = {pos.presentation.Cajero.TableModel.ID, pos.presentation.Cajero.TableModel.NOMBRE};
                 list.setModel(new TableModel(cols, model.getList()));
                 list.setRowHeight(30);
