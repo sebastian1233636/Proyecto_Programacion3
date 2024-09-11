@@ -13,10 +13,10 @@ import java.beans.PropertyChangeListener;
 public class view implements PropertyChangeListener {
 
     private JPanel panelHistorico;
+    private JButton reporte_Button;
     private JButton limpiarButton;
-    private JButton reporteButton;
     private JButton buscarButton;
-    private JTextArea search_txt;
+    private JTextField search_txt;
     private JLabel cliente_lbl;
     private JTable TablaFacturas;
     private JTable TablaLineas;
@@ -87,7 +87,7 @@ public class view implements PropertyChangeListener {
                 TablaLineas.setModel(new TableModel2(cols2,model.getListalineas()));
                 TablaLineas.setRowHeight(30);
                 TableColumnModel columnModel2 = TablaLineas.getColumnModel();
-                columnModel2.getColumn(3).setPreferredWidth(150);
+                columnModel2.getColumn(6).setPreferredWidth(100);
 
                 break;
             case pos.presentation.Historico.Model.CURRENT:
@@ -107,7 +107,4 @@ public class view implements PropertyChangeListener {
         }
         this.panelHistorico.revalidate();
     }
-
-
-
 }
