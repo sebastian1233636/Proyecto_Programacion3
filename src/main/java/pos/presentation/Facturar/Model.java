@@ -100,6 +100,7 @@ public class Model extends AbstractModel {
 
 
 
+
     public static final String LISTCLIENTES="listClientes";
     public static final String LISTLINEAS="listLineas";
     public static final String LISTCAJEROS="listCajeros";

@@ -25,12 +25,11 @@ public class Controller {
         nuevo.setProducto(filter);
         Service.instance().create(nuevo);
         model.setLineas(Service.instance().getData().getLineas());
-
-
     }
 
     public void BorrarLinea() throws Exception {
         Service.instance().delete(model.getCurrent());
+        model.setLineas(Service.instance().getData().getLineas());
     }
 
     public double calcularPagoTotal(){

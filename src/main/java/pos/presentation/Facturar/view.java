@@ -1,11 +1,9 @@
 package pos.presentation.Facturar;
 
-import pos.Application;
 import pos.logic.Cajero;
 import pos.logic.Cliente;
 import pos.logic.Producto;
 import pos.logic.Service;
-import pos.presentation.Facturar.TableModel;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -19,30 +17,26 @@ import java.beans.PropertyChangeListener;
 import java.util.List;
 
 public class view implements PropertyChangeListener {
-    private JPanel JpanelCliente;
-    private JPanel JpanelCajero;
-    private JPanel JpanelComboBoxes;
     private JComboBox<String> comboBoxClientes;
     private JComboBox<String> comboBoxCajeros;
-    private JPanel PanelListado;
     private JTextField search;
     private JButton buttonAgregar;
-    private JPanel PanelBotones;
     private JButton buttonCobrar;
     private JButton buttonBuscar;
     private JButton buttonCantidad;
     private JButton buttonQuitar;
     private JButton buttonDescuento;
     private JButton buttonCancelar;
-    private JLabel LabelArticulos;
-    private JLabel SubtotalLabel;
-    private JLabel LabelDescuento;
-    private JLabel textArea1;
-    private JLabel dLabel;
-    private JLabel textArea3;
-    private JLabel textArea4;
     private JTable list;
     private JPanel panel;
+    private JLabel articulosLabel;
+    private JTextArea articulo;
+    private JLabel subtotalLabel;
+    private JTextArea subtotal;
+    private JLabel descuentoLabel;
+    private JLabel totalLabel;
+    private JTextArea descuento;
+    private JTextArea total;
 
     public JPanel getPanel() {
         return panel;
