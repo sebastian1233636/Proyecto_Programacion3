@@ -22,6 +22,8 @@ public class Controller {
 
     public void AgregarLinea(Producto filter) throws  Exception{
         Linea nuevo = new Linea();
+        nuevo.setCantidad(1);
+        filter.setExistencias(filter.getExistencias()-1);
         nuevo.setProducto(filter);
         Service.instance().create(nuevo);
         model.setLineas(Service.instance().getData().getLineas());
@@ -72,10 +74,10 @@ public class Controller {
         return cajeros;
     }
 
-    public List<Linea> iniciarLineas(){
-        List<Linea> lineas = Service.instance().search(new Linea());
+    public void iniciarLineas(){
+        List<Linea> lineas = Service.instance().getData().getLineas();
         model.setLineas(lineas);
-        return lineas;
+
     }
 
 

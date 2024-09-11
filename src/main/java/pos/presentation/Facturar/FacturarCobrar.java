@@ -9,7 +9,7 @@ public class FacturarCobrar extends JDialog {
     private JTextField textTarjeta;
     private JTextField textCheque;
     private JTextField textSimpe;
-    private JLabel importe;
+    private JTextArea importe;
     private JButton okButton;
     private JButton cancelarButton;
     private JPanel panel;
@@ -21,21 +21,22 @@ public class FacturarCobrar extends JDialog {
         return panel;
     }
 
-    public FacturarCobrar() {
+    public FacturarCobrar(Controller controller) {
         setContentPane(panel);
         setModal(true);
         pack();
-
+        this.controller = controller;
+        setImporte(controller);
         okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
+
                     double efectivo = Double.parseDouble(textEfectivo.getText());
                     double tarjeta = Double.parseDouble(textTarjeta.getText());
                     double cheque = Double.parseDouble(textCheque.getText());
                     double simpe = Double.parseDouble(textSimpe.getText());
                     double importeValue = Double.parseDouble(importe.getText());
-
                     boolean pagoExitoso = false;
 
                     if (efectivo >= importeValue) {
@@ -68,13 +69,15 @@ public class FacturarCobrar extends JDialog {
         });
     }
 
-    public void setImporte() {
-        double pagoTotal = controller.calcularPagoTotal();
+
+
+    public void setModel(Model model) {this.model = model;}
+
+    public void setImporte(Controller contro) {
+        double pagoTotal = contro.calcularPagoTotal();
         String pagoTotalStr = String.valueOf(pagoTotal);
         importe.setText(pagoTotalStr);
     }
 
-    public void setModel(Model model) {this.model = model;}
 
-    public void setController(Controller controller) {this.controller = controller;}
 }

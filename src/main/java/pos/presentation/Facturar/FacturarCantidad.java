@@ -10,8 +10,8 @@ public class FacturarCantidad extends JDialog {
     private JButton okButton;
     private JButton cancelarButton;
 
-    Model model;
-    Controller controller;
+    pos.presentation.Facturar.Model model;
+    pos.presentation.Facturar.Controller controller;
 
     public FacturarCantidad() {
         setContentPane(panel);
@@ -26,7 +26,19 @@ public class FacturarCantidad extends JDialog {
                     if (cantidad < 0) {
                         JOptionPane.showMessageDialog(panel, "La cantidad no puede ser negativa.", "Error", JOptionPane.ERROR_MESSAGE);
                         return;
+                    }else{
+                        if(cantidad < model.getCurrent().getProducto().getExistencias()) {
+                            model.getCurrent().setCantidad(cantidad);
+                            model.getCurrent().getProducto().setExistencias(model.getCurrent().getProducto().getExistencias()-cantidad);
+                            controller.iniciarLineas();
+                            JOptionPane.showMessageDialog(null, "Cantidad aplicada.", "Cantidad Aplicada", JOptionPane.INFORMATION_MESSAGE);
+                            dispose();
+                        }else{
+                            JOptionPane.showMessageDialog(panel, "No hay existencias", "Error", JOptionPane.ERROR_MESSAGE);
+                        }
                     }
+
+
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(panel, "Ingrese un número válido.", "Error", JOptionPane.ERROR_MESSAGE);
                 }

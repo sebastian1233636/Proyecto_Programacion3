@@ -88,8 +88,9 @@ public class view implements PropertyChangeListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (model != null) {
-                    FacturarCobrar subventana = new FacturarCobrar();
+                    FacturarCobrar subventana = new FacturarCobrar(controller);
                     subventana.setModel(model);
+
                     subventana.setVisible(true);
                     subventana.setModal(true);
                     subventana.pack();
@@ -112,6 +113,7 @@ public class view implements PropertyChangeListener {
                 if (model != null) {
                     FacturarCantidad subventanaCant = new FacturarCantidad();
                     subventanaCant.setModel(model);
+                    subventanaCant.setController(controller);
                     subventanaCant.setVisible(true);
                     subventanaCant.setModal(true);
                     subventanaCant.pack();
@@ -151,6 +153,7 @@ public class view implements PropertyChangeListener {
                 if (model != null) {
                     FacturarDescuento facDes = new FacturarDescuento();
                     facDes.setModel(model);
+                    facDes.setController(controller);
                     facDes.setVisible(true);
                     facDes.setModal(true);
                     facDes.pack();
@@ -166,6 +169,12 @@ public class view implements PropertyChangeListener {
                 } else {
                     JOptionPane.showMessageDialog(panel, "Controlador no está inicializado", "Error", JOptionPane.ERROR_MESSAGE);
                 }
+            }
+        });
+        buttonCancelar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
             }
         });
     }
@@ -191,8 +200,7 @@ public class view implements PropertyChangeListener {
                 list.setModel(new pos.presentation.Facturar.TableModel(cols, model.getLineas()));
                 list.setRowHeight(30);
                 TableColumnModel columnModel = list.getColumnModel();
-                columnModel.getColumn(1).setPreferredWidth(150);
-                columnModel.getColumn(1).setPreferredWidth(150);
+                columnModel.getColumn(6).setPreferredWidth(100);
                 break;
 
             case Model.LISTCLIENTES:

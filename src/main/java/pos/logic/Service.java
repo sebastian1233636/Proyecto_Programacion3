@@ -142,6 +142,15 @@ public class Service {
                 .collect(Collectors.toList());
     }
 
+
+    public List<Producto> searchDescripcion(Producto e) {
+        return data.getProductos().stream()
+                .filter(i -> i.getDescripcion().equalsIgnoreCase(e.getDescripcion()))
+                .sorted(Comparator.comparing(Producto::getDescripcion))
+                .collect(Collectors.toList());
+    }
+
+
     //================= Facturas ============
     public void create(Factura e) throws Exception{
         Factura result = data.getFacturas().stream().filter(i->i.getID().equals(e.getID())).findFirst().orElse(null);;

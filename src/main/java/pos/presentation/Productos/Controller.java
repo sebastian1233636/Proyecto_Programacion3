@@ -18,6 +18,12 @@ public class Controller {
         view.setModel(model);
     }
 
+    public void ActualizarLista(){
+        model.setList(Service.instance().getData().getProductos());
+    }
+
+
+
     public void search(Producto filter) throws Exception {
         model.setFilter(filter);
         model.setMode(Application.MODE_CREATE);

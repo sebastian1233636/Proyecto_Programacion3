@@ -35,6 +35,7 @@ public class FacturarDescuento extends JDialog {
                         JOptionPane.showMessageDialog(null, "El descuento no puede ser negativo.", "Error de Descuento", JOptionPane.ERROR_MESSAGE);
                     } else {
                         model.getCurrent().setDescuento(descuento);
+                        controller.iniciarLineas();
                         JOptionPane.showMessageDialog(null, "Descuento aplicado correctamente.", "Descuento Aplicado", JOptionPane.INFORMATION_MESSAGE);
                         dispose();
                     }

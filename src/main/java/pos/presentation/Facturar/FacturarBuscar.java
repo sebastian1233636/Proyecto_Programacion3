@@ -25,6 +25,7 @@ public class FacturarBuscar extends JDialog {
         buscarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 buscarProductos();
             }
         });
@@ -33,23 +34,48 @@ public class FacturarBuscar extends JDialog {
     }
 
     private void buscarProductos() {
+
         String descripcion = textField1.getText();
         Producto filtro = new Producto();
 
+
         if (descripcion != null && !descripcion.isEmpty()) {
             filtro.setDescripcion(descripcion);
+        } else {
+
+            JOptionPane.showMessageDialog(null, "La descripción no puede estar vacía.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
 
-        List<Producto> productos = service.search(filtro);
-        DefaultTableModel model = (DefaultTableModel) table1.getModel();
+        try {
 
-        for (Producto producto : productos) {
-            model.addRow(new Object[]{
-                    producto.getCodigo(),
-                    producto.getDescripcion(),
-                    producto.getPrecioUnitario(),
-                    producto.getExistencias()
-            });
+            List<Producto> productos = service.searchDescripcion(filtro);
+
+
+            if (productos.isEmpty()) {
+                throw new Exception("No se encontraron productos con la descripción: " + descripcion);
+            }
+
+            DefaultTableModel model = (DefaultTableModel) table1.getModel();
+
+
+            model.setRowCount(0);
+
+
+            for (Producto producto : productos) {
+                model.addRow(new Object[]{
+                        producto.getCodigo(),
+                        producto.getDescripcion(),
+                        producto.getPrecioUnitario(),
+                        producto.getExistencias()
+                });
+            }
+
+
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, "Error al buscar productos: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
+
     }
 }
