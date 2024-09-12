@@ -40,16 +40,15 @@ public class view implements PropertyChangeListener {
         return panel;
     }
 
-    public void iniciarComboBoxClientes(){
-        comboBoxClientes.removeAllItems();
-        for (Cliente cliente :Service.instance().getData().getClientes()) {
+    public void iniciarComboBoxClientes(List<Cliente> clientes){
+        for (Cliente cliente :clientes) {
             comboBoxClientes.addItem(cliente.getNombre());
         }
     }
 
-    public void iniciarComboBoxCajeros(){
+    public void iniciarComboBoxCajeros(List<Cajero> cajeros){
         comboBoxCajeros.removeAllItems();
-        for (Cajero cajero :Service.instance().getData().getCajeros()) {
+        for (Cajero cajero :cajeros) {
             comboBoxCajeros.addItem(cajero.getNombre());
         }
     }
@@ -187,6 +186,21 @@ public class view implements PropertyChangeListener {
             }
         });
 
+
+        comboBoxClientes.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                model.setClietes(Service.instance().getData().getClientes());
+            }
+        });
+        comboBoxCajeros.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                model.setCajeros(Service.instance().getData().getCajeros());
+            }
+        });
     }
 
     Model model;
@@ -214,11 +228,12 @@ public class view implements PropertyChangeListener {
                 break;
 
             case Model.LISTCLIENTES:
-
+                comboBoxClientes.removeAllItems();
+                iniciarComboBoxClientes(model.getClientes());
                 break;
 
             case Model.LISTCAJEROS:
-                iniciarComboBoxCajeros();
+                iniciarComboBoxCajeros(model.getCajeros());
                 break;
 
             case Model.FILTER:
