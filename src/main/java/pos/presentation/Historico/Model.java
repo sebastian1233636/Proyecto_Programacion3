@@ -49,6 +49,7 @@ public class Model extends AbstractModel {
     }
     public void setListalineas(List<Linea> listalineas){
         this.listalineas = listalineas;
+        firePropertyChange(LIST);
     }
 
     public Factura getCurrent() {
