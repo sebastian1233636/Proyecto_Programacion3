@@ -97,7 +97,7 @@ public class Controller {
         body.setHorizontalAlignment(HorizontalAlignment.CENTER);
         body.addCell(getCell(new Paragraph("Código").setBackgroundColor(bkg).setFontColor(frg),TextAlignment.CENTER,true));
         body.addCell(getCell(new Paragraph("Fecha").setBackgroundColor(bkg).setFontColor(frg),TextAlignment.CENTER,true));
-        body.addCell(getCell(new Paragraph("ID-Cliente").setBackgroundColor(bkg).setFontColor(frg),TextAlignment.CENTER,true));
+        body.addCell(getCell(new Paragraph("Nombre-Cliente").setBackgroundColor(bkg).setFontColor(frg),TextAlignment.CENTER,true));
         body.addCell(getCell(new Paragraph("TOTAL").setBackgroundColor(bkg).setFontColor(frg),TextAlignment.CENTER,true));
 
         for(Factura e: model.getList()){

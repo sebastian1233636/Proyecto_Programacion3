@@ -151,7 +151,7 @@ public class Service {
 
     //================= Facturas ============
     public void create(Factura e) throws Exception{
-        Factura result = data.getFacturas().stream().filter(i->i.getID().equals(e.getID())).findFirst().orElse(null);;
+        Factura result = data.getFacturas().stream().filter(i->i.getCodigo().equals(e.getCodigo())).findFirst().orElse(null);;
         if (result==null) data.getFacturas().add(e);
         else throw new Exception("Este numero de factura ya fue utilizado");
     }

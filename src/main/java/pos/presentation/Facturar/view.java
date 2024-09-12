@@ -38,9 +38,11 @@ public class view implements PropertyChangeListener {
     }
 
     public void iniciarComboBoxClientes(List<Cliente> clientes){
+        comboBoxClientes.removeAllItems();
         for (Cliente cliente :clientes) {
             comboBoxClientes.addItem(cliente.getNombre());
         }
+        comboBoxClientes.setSelectedIndex(-1);
     }
 
     public void iniciarComboBoxCajeros(List<Cajero> cajeros){
@@ -48,10 +50,10 @@ public class view implements PropertyChangeListener {
         for (Cajero cajero :cajeros) {
             comboBoxCajeros.addItem(cajero.getNombre());
         }
+        comboBoxCajeros.setSelectedIndex(-1);
     }
 
     public view() {
-
         buttonAgregar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -92,6 +94,8 @@ public class view implements PropertyChangeListener {
                             Service.instance().create(factura);
                             System.out.println("FACTURAS"+Service.instance().getData().getFacturas());
                             controller.cancelar();
+                            comboBoxClientes.setSelectedIndex(-1);
+                            comboBoxCajeros.setSelectedIndex(-1);
                             model.setCurrent(new Linea());
                             JOptionPane.showMessageDialog(panel, "Pago realizado con éxito. La factura ha sido guardada y las líneas limpiadas.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                         } catch (Exception ex) {
@@ -190,9 +194,7 @@ public class view implements PropertyChangeListener {
             }
         });
 
-
-        panel.addMouseListener(new MouseAdapter() {
-        });
+        panel.addMouseListener(new MouseAdapter() { });
         panel.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentShown(ComponentEvent e) {
@@ -258,7 +260,6 @@ public class view implements PropertyChangeListener {
                 break;
 
             case Model.LISTCLIENTES:
-                comboBoxClientes.removeAllItems();
                 iniciarComboBoxClientes(model.getClientes());
                 break;
 

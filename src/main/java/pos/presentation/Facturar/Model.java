@@ -8,6 +8,7 @@ import pos.logic.Producto;
 import pos.presentation.AbstractModel;
 import java.beans.PropertyChangeListener;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class Model extends AbstractModel {
@@ -20,7 +21,7 @@ public class Model extends AbstractModel {
     private double subtotal;
     private double descuentos;
     private double total;
-
+    private DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
 
 
     @Override
@@ -66,7 +67,7 @@ public class Model extends AbstractModel {
     }
     public int getArticulos() { return articulos; }
     public double getSubtotal() { return subtotal; }
-    public double getDescuentos() { return descuentos; }
+    public double getDescuentos() { return descuentos;}
     public double getTotal() { return total; }
 
     public void setCurrent(Linea Current) {

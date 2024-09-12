@@ -26,6 +26,7 @@ public class Application {
                 Service.instance().stop();
             }
         });
+
         pos.presentation.Facturar.Model facturarModel= new pos.presentation.Facturar.Model();
         pos.presentation.Facturar.view facturarView = new pos.presentation.Facturar.view();
         facturarController = new pos.presentation.Facturar.Controller(facturarView,facturarModel);
@@ -51,7 +52,7 @@ public class Application {
         historicoController = new pos.presentation.Historico.Controller(viewHistorico,historicoModel);
         Icon historicoIcon = new ImageIcon(Application.class.getResource("/pos/presentation/icons/Historico.png"));
 
-        tabbedPane.addTab("Facturar  ",facturarView.getPanel());
+        tabbedPane.addTab("Facturar  ",facturarIcon, facturarView.getPanel());
         tabbedPane.addTab("Clientes  ",clientesIcon, clientesView.getPanel());
         tabbedPane.addTab("Cajeros  ",cajeroIcon, cajeroView.getPanel());
         tabbedPane.addTab("Productos  ",productoIcon, productoView.getPanel());
