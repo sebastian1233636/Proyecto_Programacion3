@@ -11,10 +11,9 @@ public class TableModel extends AbstractTableModel<Factura> implements javax.swi
     public TableModel(int[] cols, List<Factura> rows) {
         super(cols, rows);
     }
-
-    public static final int ID=0;
+    public static final int CODIGO=0;
     public static final int FECHA=1;
-    public static final int CODIGO=2;
+    public static final int ID=2;
     public static final int TOTAL=3;
 
     @Override

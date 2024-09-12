@@ -87,7 +87,7 @@ public class Controller {
         String fecha = java.time.LocalDate.now().toString();
         String numCodigo = Integer.toString(numero);
         String nombreFactura = "FC0"+ numCodigo;
-        Factura factura = new Factura(nombreFactura, nombreCli, nombreCaje, model.getLineas());
+        Factura factura = new Factura(nombreCli,fecha,nombreFactura, model.getLineas());
         return factura;
     }
 

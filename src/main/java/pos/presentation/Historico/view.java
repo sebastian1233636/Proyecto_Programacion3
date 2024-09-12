@@ -1,12 +1,15 @@
 package pos.presentation.Historico;
 
 import pos.Application;
+import pos.logic.Cajero;
 import pos.logic.Factura;
 import javax.swing.*;
 import javax.swing.table.TableColumnModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -20,6 +23,7 @@ public class view implements PropertyChangeListener {
     private JLabel cliente_lbl;
     private JTable TablaFacturas;
     private JTable TablaLineas;
+    private JButton eliminarButton;
 
     public JPanel getPanel() {
         return panelHistorico;
@@ -59,6 +63,27 @@ public class view implements PropertyChangeListener {
             }
         });
 
+
+        TablaFacturas.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int row = TablaFacturas.getSelectedRow();
+                controller.edit(row);
+            }
+        });
+
+        eliminarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    controller.delete();
+                    JOptionPane.showMessageDialog(panelHistorico, "REGISTRO BORRADO", "", JOptionPane.INFORMATION_MESSAGE);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(panelHistorico, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+
     }
 
     private boolean validate() {
@@ -74,6 +99,11 @@ public class view implements PropertyChangeListener {
         return valid;
     }
 
+    public Factura take() {
+        Factura f = new Factura();
+        f.setID(search_txt.getText());
+        return f;
+    }
     // MVC
     pos.presentation.Historico.Model model;
     pos.presentation.Historico.Controller controller;
@@ -92,7 +122,7 @@ public class view implements PropertyChangeListener {
         switch (evt.getPropertyName()) {
             case pos.presentation.Historico.Model.LIST:
 
-                int[] cols = {TableModel.ID, TableModel.FECHA, TableModel.CODIGO, TableModel.TOTAL};
+                int[] cols = {TableModel.CODIGO, TableModel.FECHA, TableModel.ID, TableModel.TOTAL};
                 TablaFacturas.setModel(new TableModel(cols, model.getList()));
                 TablaFacturas.setRowHeight(30);
                 TableColumnModel columnModel = TablaFacturas.getColumnModel();
