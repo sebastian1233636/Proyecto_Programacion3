@@ -25,9 +25,7 @@ public class Linea {
     public int getCantidad() {
         return cantidad;
     }
-    public double getDescuento() {
-        return descuento;
-    }
+    public double getDescuento() {return descuento;}
     public double getImporte() {return sacarImporte();}
 
     public void setProducto(Producto producto) {

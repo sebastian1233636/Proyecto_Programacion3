@@ -28,13 +28,13 @@ public class view implements PropertyChangeListener {
     private JTable list;
     private JPanel panel;
     private JLabel articulosLabel;
-    private JTextArea articulo;
+    private JLabel articulo;
     private JLabel subtotalLabel;
-    private JTextArea subtotal;
+    private JLabel subtotal;
     private JLabel descuentoLabel;
     private JLabel totalLabel;
-    private JTextArea descuento;
-    private JTextArea total;
+    private JLabel descuento;
+    private JLabel total;
 
     public JPanel getPanel() {
         return panel;
@@ -81,13 +81,12 @@ public class view implements PropertyChangeListener {
         buttonCobrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (model != null) {
+                if (!model.getLineas().isEmpty()) {
                     FacturarCobrar subventana = new FacturarCobrar(controller);
                     subventana.setModel(model);
                     subventana.setVisible(true);
                     subventana.setModal(true);
                     subventana.pack();
-
                     if (subventana.getPagoExitoso()) {
                         try {
                             String itemCliente = (String) comboBoxClientes.getSelectedItem();
@@ -96,13 +95,13 @@ public class view implements PropertyChangeListener {
                             Service.instance().create(factura);
                             System.out.println("FACTURAS"+Service.instance().getData().getFacturas());
                             controller.cancelar();
+                            model.setCurrent(new Linea());
                             JOptionPane.showMessageDialog(panel, "Pago realizado con éxito. La factura ha sido guardada y las líneas limpiadas.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                         } catch (Exception ex) {
-                            // Manejar errores durante la creación de la factura
                             JOptionPane.showMessageDialog(panel, "Ocurrió un error al procesar la factura: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                         }
                     }
-                }
+                }else{JOptionPane.showMessageDialog(panel, "El carrito esta vacío", "Error", JOptionPane.ERROR_MESSAGE);}
             }
         });
 
@@ -118,14 +117,16 @@ public class view implements PropertyChangeListener {
         buttonCantidad.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (model != null) {
+                if (model != null && !model.getCurrent().getProducto().getCodigo().isEmpty()) {
                     FacturarCantidad subventanaCant = new FacturarCantidad();
                     subventanaCant.setModel(model);
                     subventanaCant.setController(controller);
                     subventanaCant.setVisible(true);
                     subventanaCant.setModal(true);
                     subventanaCant.pack();
+                    model.setCurrent(new Linea());
                 }
+                else {JOptionPane.showMessageDialog(panel, "Producto no seleccionado", "Error", JOptionPane.ERROR_MESSAGE);}
             }
         });
 
@@ -134,8 +135,12 @@ public class view implements PropertyChangeListener {
             public void actionPerformed(ActionEvent e) {
                 if (controller != null) {
                     try {
-                        controller.BorrarLinea();
-                        JOptionPane.showMessageDialog(panel, "REGISTRO BORRADO", "", JOptionPane.INFORMATION_MESSAGE);
+                        if(!model.getCurrent().getProducto().getCodigo().isEmpty()) {
+                            controller.BorrarLinea(model.getCurrent());
+                            model.setCurrent(new Linea());
+                            JOptionPane.showMessageDialog(panel, "Producto Eliminado", "", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                        else {JOptionPane.showMessageDialog(panel, "No ha seleccionado un producto", "Error", JOptionPane.ERROR_MESSAGE);}
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(panel, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                     }
@@ -158,34 +163,35 @@ public class view implements PropertyChangeListener {
         buttonDescuento.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (model != null) {
+                if (model != null && !model.getCurrent().getProducto().getCodigo().isEmpty()) {
                     FacturarDescuento facDes = new FacturarDescuento();
                     facDes.setModel(model);
                     facDes.setController(controller);
                     facDes.setVisible(true);
                     facDes.setModal(true);
                     facDes.pack();
+                    model.setCurrent(new Linea());
                 }
+                else {JOptionPane.showMessageDialog(panel, "Producto no seleccionado", "Error", JOptionPane.ERROR_MESSAGE);}
             }
         });
 
         buttonCancelar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (controller != null) {
-                    controller.cancelar();
-                } else {
-                    JOptionPane.showMessageDialog(panel, "Controlador no está inicializado", "Error", JOptionPane.ERROR_MESSAGE);
-                }
+                if(!model.getLineas().isEmpty()) {
+                    if (controller != null) {
+                        try {
+                            controller.cancelar();
+                        } catch (Exception ex) {
+                            JOptionPane.showMessageDialog(panel, "Ocurrió un error al procesar la cancelación de la factura: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(panel, "Controlador no está inicializado", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }else{JOptionPane.showMessageDialog(panel, "El carrito esta vacío", "Error", JOptionPane.ERROR_MESSAGE);}
             }
         });
-        buttonCancelar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-
 
         comboBoxClientes.addMouseListener(new MouseAdapter() {
             @Override
@@ -215,6 +221,35 @@ public class view implements PropertyChangeListener {
         this.controller = controller;
     }
 
+    private void mostrarValoresFactura() {
+        pos.presentation.Facturar.TableModel tableModel = (pos.presentation.Facturar.TableModel) list.getModel();
+        int rowCount = tableModel.getRowCount();
+
+        int cantidadArticulos = 0;
+        double subtotalFactura = 0;
+        double descuentoFactura = 0;
+        double totalFactura = 0;
+
+        for (int i = 0; i < rowCount; i++) {
+            int cantidad = (int) tableModel.getValueAt(i, pos.presentation.Facturar.TableModel.CANTIDAD);
+            double precio = (double) tableModel.getValueAt(i, pos.presentation.Facturar.TableModel.PRECIO);
+            double descuento = (double) tableModel.getValueAt(i, pos.presentation.Facturar.TableModel.DESCUENTO);
+            double neto = (double) tableModel.getValueAt(i, pos.presentation.Facturar.TableModel.NETO);
+
+            cantidadArticulos += cantidad;
+            subtotalFactura += precio;
+            descuentoFactura += descuento;
+        }
+
+        totalFactura = subtotalFactura - descuentoFactura;
+
+        articulo.setText(String.valueOf(cantidadArticulos));
+        subtotal.setText(String.format("%.2f", subtotalFactura));
+        descuento.setText(String.format("%.2f", descuentoFactura));
+        total.setText(String.format("%.2f", totalFactura));
+    }
+
+
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         switch (evt.getPropertyName()) {
@@ -225,6 +260,7 @@ public class view implements PropertyChangeListener {
                 list.setRowHeight(30);
                 TableColumnModel columnModel = list.getColumnModel();
                 columnModel.getColumn(6).setPreferredWidth(100);
+                mostrarValoresFactura();
                 break;
 
             case Model.LISTCLIENTES:

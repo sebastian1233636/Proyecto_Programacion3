@@ -29,10 +29,14 @@ public class Controller {
         model.setLineas(Service.instance().getData().getLineas());
     }
 
-    public void BorrarLinea() throws Exception {
-        Service.instance().delete(model.getCurrent());
+    public void BorrarLinea(Linea linea) throws Exception {
+        Producto producto = linea.getProducto();
+        producto.setExistencias(producto.getExistencias() + linea.getCantidad());
+        Service.instance().update(producto);
+        Service.instance().delete(linea);
         model.setLineas(Service.instance().getData().getLineas());
     }
+
 
     public double calcularPagoTotal(){
         return Service.instance().PagoTotal(model.getLineas());
@@ -43,11 +47,15 @@ public class Controller {
         return Service.instance().read(model.getFilter());
     }
 
-
-    public void cancelar(){
-        model.setFilter(new Producto());
+    public void cancelar() throws Exception {
+        for (Linea linea : Service.instance().getData().getLineas()) {
+            Producto producto = linea.getProducto();
+            producto.setExistencias(producto.getExistencias() + linea.getCantidad());
+            Service.instance().update(producto);
+        }
         Service.instance().getData().getLineas().clear();
         model.setLineas(Service.instance().getData().getLineas());
+        model.setFilter(new Producto());
     }
 
     public void edit(int row){
