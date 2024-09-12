@@ -5,10 +5,7 @@ import pos.logic.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.List;
@@ -193,18 +190,15 @@ public class view implements PropertyChangeListener {
             }
         });
 
-        comboBoxClientes.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                model.setClietes(Service.instance().getData().getClientes());
-            }
+
+        panel.addMouseListener(new MouseAdapter() {
         });
-        comboBoxCajeros.addMouseListener(new MouseAdapter() {
+        panel.addComponentListener(new ComponentAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                model.setCajeros(Service.instance().getData().getCajeros());
+            public void componentShown(ComponentEvent e) {
+                super.componentShown(e);
+                controller.loadClientes();
+                controller.loadCajeros();
             }
         });
     }
