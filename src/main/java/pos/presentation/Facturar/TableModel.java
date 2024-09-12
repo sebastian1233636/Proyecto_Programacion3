@@ -27,9 +27,9 @@ public class TableModel extends AbstractTableModel<Linea> implements javax.swing
             case CATEGORIA: return e.getProducto().getCategoria();
             case CANTIDAD: return e.getCantidad();
             case PRECIO: return e.getProducto().getPrecioUnitario();
-            case DESCUENTO: return e.getDescuento();
+            case DESCUENTO: return e.getDescuento() * e.getCantidad();
             case NETO: return e.getProducto().getPrecioUnitario() - e.getDescuento();
-            case IMPORTE: return e.getImporte();
+            case IMPORTE: return e.sacarImporte();
             default: return "";
         }
     }

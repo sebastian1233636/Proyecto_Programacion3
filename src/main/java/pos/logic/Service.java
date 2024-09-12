@@ -2,8 +2,6 @@ package pos.logic;
 
 import pos.data.Data;
 import pos.data.XmlPersister;
-
-import java.text.DecimalFormat;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,6 +34,7 @@ public class Service {
     public Data getData(){
         return data;
     }
+
 //================= CLIENTES ============
     public void create(Cliente e) throws Exception{
         Cliente result = data.getClientes().stream().filter(i->i.getId().equals(e.getId())).findFirst().orElse(null);
@@ -142,7 +141,6 @@ public class Service {
                 .collect(Collectors.toList());
     }
 
-
     public List<Producto> searchDescripcion(Producto e) {
         return data.getProductos().stream()
                 .filter(i -> i.getDescripcion().equalsIgnoreCase(e.getDescripcion()))
@@ -186,12 +184,12 @@ public class Service {
     }
 
     //-------------------------LINEAS--------------------------------------
-
     public void create(Linea e) throws Exception{
         Linea result = data.getLineas().stream().filter(i->i.getProducto().getCodigo().equals(e.getProducto().getCodigo())).findFirst().orElse(null);;
         if (result==null) data.getLineas().add(e);
         else throw new Exception("Este codigo ya fue utilizado");
     }
+
     public Linea read(Linea e) throws Exception{
         Linea result = data.getLineas().stream().filter(i->i.getProducto().getCodigo().equals(e.getProducto().getCodigo())).findFirst().orElse(null);
         if (result!=null) return result;
@@ -227,22 +225,4 @@ public class Service {
         }
         return total;
     }
-
-
  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

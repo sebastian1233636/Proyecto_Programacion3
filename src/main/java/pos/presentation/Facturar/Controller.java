@@ -43,12 +43,6 @@ public class Controller {
         return Service.instance().read(model.getFilter());
     }
 
-    public void establecerCantidad(int cant){
-        model.getCurrent().setCantidad(cant);
-    }
-    public void establecerDescuento(double des){
-        model.getCurrent().setDescuento(des);
-    }
 
     public void cancelar(){
         model.setFilter(new Producto());
@@ -77,30 +71,15 @@ public class Controller {
     public void iniciarLineas(){
         List<Linea> lineas = Service.instance().getData().getLineas();
         model.setLineas(lineas);
-
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public Factura crearFactura() {
+        String numero = "FC002";
+        String fecha = java.time.LocalDate.now().toString();
+        Cliente cliente = model.getClientes().get(model.getClientes().size() - 1);
+        Cajero cajero = model.getCajeros().get(model.getCajeros().size() - 1);
+        Factura factura = new Factura(numero, cliente.getNombre(), cajero.getNombre(), model.getLineas());
+        return factura;
+    }
 
 }

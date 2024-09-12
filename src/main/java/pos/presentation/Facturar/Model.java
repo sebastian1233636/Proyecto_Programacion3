@@ -49,7 +49,6 @@ public class Model extends AbstractModel {
        this.subtotal = 0;
        this.descuentos = 0;
        this.total = 0;
-
     }
 
     public List<Cliente> getClientes() {
@@ -70,7 +69,6 @@ public class Model extends AbstractModel {
     public double getDescuentos() { return descuentos; }
     public double getTotal() { return total; }
 
-
     public void setCurrent(Linea Current) {
         this.current = Current;
         firePropertyChange(CURRENT);
@@ -80,10 +78,12 @@ public class Model extends AbstractModel {
         this.clientes = list;
         firePropertyChange(LISTCLIENTES);
     }
+
     public void setCajeros(List<Cajero> list){
         this.cajeros = list;
         firePropertyChange(LISTCAJEROS);
     }
+
     public void setLineas(List<Linea> list){
         this.lineas = list;
         firePropertyChange(LISTLINEAS);
@@ -93,13 +93,11 @@ public class Model extends AbstractModel {
         this.filter = filter;
         firePropertyChange(FILTER);
     }
+
     public void setArticulos(int articulos) { this.articulos = articulos; }
     public void setSubtotal(double subtotal) { this.subtotal = subtotal; }
     public void setDescuentos(double descuentos){ this.descuentos = descuentos; }
     public void setTotal(double total) { this.total = total; }
-
-
-
 
     public static final String LISTCLIENTES="listClientes";
     public static final String LISTLINEAS="listLineas";
@@ -110,7 +108,4 @@ public class Model extends AbstractModel {
     public static final String SUBTOTAL="subtotal";
     public static final String DESCUENTOS="descuentos";
     public static final String TOTAL="total";
-
-
-
 }

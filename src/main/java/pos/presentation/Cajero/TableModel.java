@@ -2,7 +2,6 @@ package pos.presentation.Cajero;
 
 import pos.logic.Cajero;
 import pos.presentation.AbstractTableModel;
-
 import java.util.List;
 
 public class TableModel extends AbstractTableModel<Cajero> implements javax.swing.table.TableModel {

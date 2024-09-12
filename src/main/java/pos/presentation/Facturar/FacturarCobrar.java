@@ -13,6 +13,7 @@ public class FacturarCobrar extends JDialog {
     private JButton okButton;
     private JButton cancelarButton;
     private JPanel panel;
+    private boolean pagoExitoso = false;
 
     Model model;
     Controller controller;
@@ -41,7 +42,7 @@ public class FacturarCobrar extends JDialog {
                     double cheque = Double.parseDouble(textCheque.getText().trim());
                     double simpe = Double.parseDouble(textSimpe.getText().trim());
                     double importeValue = Double.parseDouble(importe.getText().trim());
-                    boolean pagoExitoso = false;
+
 
                     // Validar si el importe es cubierto por uno de los medios de pago
                     if (efectivo >= importeValue) {
@@ -88,5 +89,8 @@ public class FacturarCobrar extends JDialog {
         double pagoTotal = contro.calcularPagoTotal();
         String pagoTotalStr = String.valueOf(pagoTotal);
         importe.setText(pagoTotalStr);
+    }
+    public boolean getPagoExitoso() {
+        return pagoExitoso;
     }
 }

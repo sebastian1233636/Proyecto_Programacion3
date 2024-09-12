@@ -1,9 +1,6 @@
 package pos.presentation.Facturar;
 
-import pos.logic.Cajero;
-import pos.logic.Cliente;
-import pos.logic.Producto;
-import pos.logic.Service;
+import pos.logic.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -90,10 +87,21 @@ public class view implements PropertyChangeListener {
                 if (model != null) {
                     FacturarCobrar subventana = new FacturarCobrar(controller);
                     subventana.setModel(model);
-
                     subventana.setVisible(true);
                     subventana.setModal(true);
                     subventana.pack();
+
+                    if (subventana.getPagoExitoso()) {
+                        try {
+                            Factura factura = controller.crearFactura();
+                            Service.instance().create(factura);
+                            controller.cancelar();
+                            JOptionPane.showMessageDialog(panel, "Pago realizado con éxito. La factura ha sido guardada y las líneas limpiadas.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                        } catch (Exception ex) {
+                            // Manejar errores durante la creación de la factura
+                            JOptionPane.showMessageDialog(panel, "Ocurrió un error al procesar la factura: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
                 }
             }
         });

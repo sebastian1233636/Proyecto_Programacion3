@@ -4,7 +4,6 @@ import pos.Application;
 import pos.logic.Cajero;
 import pos.presentation.AbstractModel;
 import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Model extends AbstractModel {
@@ -33,14 +32,19 @@ public class Model extends AbstractModel {
     public List<Cajero> getList() {
         return list;
     }
+    public Cajero getCurrent() {
+        return current;
+    }
+    public Cajero getFilter() {
+        return filter;
+    }
+    public int getMode() {
+        return mode;
+    }
 
     public void setList(List<Cajero> list){
         this.list = list;
         firePropertyChange(LIST);
-    }
-
-    public Cajero getCurrent() {
-        return current;
     }
 
     public void setCurrent(Cajero current) {
@@ -48,17 +52,9 @@ public class Model extends AbstractModel {
         firePropertyChange(CURRENT);
     }
 
-    public Cajero getFilter() {
-        return filter;
-    }
-
     public void setFilter(Cajero filter) {
         this.filter = filter;
         firePropertyChange(FILTER);
-    }
-
-    public int getMode() {
-        return mode;
     }
 
     public void setMode(int mode) {

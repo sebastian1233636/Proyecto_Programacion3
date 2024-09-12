@@ -2,12 +2,9 @@ package pos.presentation.Cajero;
 
 import pos.Application;
 import pos.logic.Cajero;
-
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -101,7 +98,6 @@ public class View implements PropertyChangeListener {
             idLbl.setBorder(null);
             idLbl.setToolTipText(null);
         }
-
         if (nombre.getText().isEmpty()) {
             valid = false;
             nombreLbl.setBorder(Application.BORDER_ERROR);

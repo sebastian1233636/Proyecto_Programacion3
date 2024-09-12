@@ -11,7 +11,6 @@ public class Linea {
         cantidad = 0;
         descuento = 0;
         importe = 0;
-        
     }
 
     public Linea(Producto producto, int cantidad, double descuento) {
@@ -23,34 +22,25 @@ public class Linea {
     public Producto getProducto() {
         return producto;
     }
+    public int getCantidad() {
+        return cantidad;
+    }
+    public double getDescuento() {
+        return descuento;
+    }
+    public double getImporte() {return sacarImporte();}
 
     public void setProducto(Producto producto) {
         this.producto = producto;
     }
-
-    public int getCantidad() {
-        return cantidad;
-    }
-
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
-
-    public double getDescuento() {
-        return descuento;
-    }
-
-    public void setDescuento(double descuento) {
-        this.descuento = descuento;
-    }
-
-    public double getImporte() {
-        return importe;
-    }
+    public void setDescuento(double descuento) {this.descuento = (descuento/100) * producto.getPrecioUnitario() ;}
 
     public double sacarImporte(){
-        double neto = producto.getPrecioUnitario() * getDescuento();
-        return cantidad * neto;
+            double neto = producto.getPrecioUnitario() - getDescuento();
+            return cantidad * neto;
     }
 
     public String toString() {

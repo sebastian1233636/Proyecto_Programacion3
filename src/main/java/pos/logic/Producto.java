@@ -24,27 +24,17 @@ public class Producto {
     public Producto() {this("", "", "", 0, 0, new Categoria(""));}
 
     public String getCodigo() {return codigo;}
-
     public String getDescripcion() {return descripcion;}
-
     public String getUnidadMedida() {return unidadMedida;}
-
     public double getPrecioUnitario() {return precioUnitario;}
-
     public int getExistencias() {return existencias;}
-
     public Categoria getCategoria() {return categoria;}
 
     public void setCodigo(String codigo) {this.codigo = codigo;}
-
     public void setDescripcion(String descripcion) {this.descripcion = descripcion;}
-
     public void setUnidadMedida(String unidadMedida) {this.unidadMedida = unidadMedida;}
-
     public void setPrecioUnitario(double precioUnitario) {this.precioUnitario = precioUnitario;}
-
     public void setExistencias(int existencias) {this.existencias = existencias;}
-
     public void setCategoria(Categoria categoria) {this.categoria = categoria;}
 
     public String toString() {

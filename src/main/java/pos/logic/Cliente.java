@@ -3,7 +3,6 @@ package pos.logic;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlID;
-
 import java.util.Objects;
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -28,39 +27,29 @@ public class Cliente {
     public String getId() {
         return id;
     }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public String getNombre() {
         return nombre;
     }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
     public String getTelefono() {
         return telefono;
     }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
+    public String getEmail() { return email; }
     public float getDescuento() {
         return descuento;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
     public void setDescuento(float descuento) {
         this.descuento = descuento;
     }

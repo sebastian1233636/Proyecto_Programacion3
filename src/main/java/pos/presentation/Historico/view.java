@@ -92,7 +92,6 @@ public class view implements PropertyChangeListener {
                 break;
             case pos.presentation.Historico.Model.CURRENT:
                 search_txt.setText(model.getCurrent().getID());
-
                 if (model.getMode() == Application.MODE_EDIT) {
                     search_txt.setEnabled(false);
                 } else {

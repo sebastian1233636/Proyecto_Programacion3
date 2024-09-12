@@ -3,7 +3,6 @@ package pos.presentation.Cajero;
 import pos.Application;
 import pos.logic.Cajero;
 import pos.logic.Service;
-import java.util.List;
 
 public class Controller {
     View view;
