@@ -13,7 +13,7 @@ public class Controller {
     Model model;
 
     public Controller(view view, Model model) {
-        model.init(Service.instance().search(new Cliente()),Service.instance().search(new Cajero()),Service.instance().search(new Linea()));
+        model.init(Service.instance().getData().getClientes(),Service.instance().getData().getCajeros(),Service.instance().search(new Linea()));
         this.view = view;
         this.model = model;
         view.setController(this);
@@ -46,7 +46,8 @@ public class Controller {
 
     public void cancelar(){
         model.setFilter(new Producto());
-        model.setLineas(new ArrayList<>());
+        Service.instance().getData().getLineas().clear();
+        model.setLineas(Service.instance().getData().getLineas());
     }
 
     public void edit(int row){
@@ -73,12 +74,12 @@ public class Controller {
         model.setLineas(lineas);
     }
 
-    public Factura crearFactura() {
-        String numero = "FC002";
+    public Factura crearFactura(String nombreCli,String nombreCaje) {
+        int numero = Service.instance().getData().getFacturas().size()+1;
         String fecha = java.time.LocalDate.now().toString();
-        Cliente cliente = model.getClientes().get(model.getClientes().size() - 1);
-        Cajero cajero = model.getCajeros().get(model.getCajeros().size() - 1);
-        Factura factura = new Factura(numero, cliente.getNombre(), cajero.getNombre(), model.getLineas());
+        String numCodigo = Integer.toString(numero);
+        String nombreFactura = "FC0"+ numCodigo;
+        Factura factura = new Factura(nombreFactura, nombreCli, nombreCaje, model.getLineas());
         return factura;
     }
 

@@ -12,6 +12,7 @@ import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class view implements PropertyChangeListener {
     private JComboBox<String> comboBoxClientes;
@@ -41,23 +42,20 @@ public class view implements PropertyChangeListener {
 
     public void iniciarComboBoxClientes(){
         comboBoxClientes.removeAllItems();
-        List<Cliente> clientesC = Service.instance().getData().getClientes();
-        for (Cliente cliente : clientesC) {
+        for (Cliente cliente :Service.instance().getData().getClientes()) {
             comboBoxClientes.addItem(cliente.getNombre());
         }
     }
 
     public void iniciarComboBoxCajeros(){
         comboBoxCajeros.removeAllItems();
-        List<Cajero> cajerosC = Service.instance().getData().getCajeros();
-        for (Cajero cajero : cajerosC) {
+        for (Cajero cajero :Service.instance().getData().getCajeros()) {
             comboBoxCajeros.addItem(cajero.getNombre());
         }
     }
 
     public view() {
-        iniciarComboBoxClientes();
-        iniciarComboBoxCajeros();
+
         buttonAgregar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -93,8 +91,11 @@ public class view implements PropertyChangeListener {
 
                     if (subventana.getPagoExitoso()) {
                         try {
-                            Factura factura = controller.crearFactura();
+                            String itemCliente = (String) comboBoxClientes.getSelectedItem();
+                            String itemCajero = (String) comboBoxCajeros.getSelectedItem();
+                            Factura factura = controller.crearFactura(itemCliente,itemCajero);
                             Service.instance().create(factura);
+                            System.out.println("FACTURAS"+Service.instance().getData().getFacturas());
                             controller.cancelar();
                             JOptionPane.showMessageDialog(panel, "Pago realizado con éxito. La factura ha sido guardada y las líneas limpiadas.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                         } catch (Exception ex) {
@@ -185,6 +186,7 @@ public class view implements PropertyChangeListener {
 
             }
         });
+
     }
 
     Model model;
@@ -212,7 +214,11 @@ public class view implements PropertyChangeListener {
                 break;
 
             case Model.LISTCLIENTES:
-                iniciarComboBoxClientes();
+
+                break;
+
+            case Model.LISTCAJEROS:
+                iniciarComboBoxCajeros();
                 break;
 
             case Model.FILTER:

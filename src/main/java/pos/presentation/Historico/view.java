@@ -77,6 +77,7 @@ public class view implements PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent evt) {
         switch (evt.getPropertyName()) {
             case pos.presentation.Historico.Model.LIST:
+
                 int[] cols = {TableModel.ID, TableModel.FECHA, TableModel.CODIGO, TableModel.TOTAL};
                 TablaFacturas.setModel(new TableModel(cols, model.getList()));
                 TablaFacturas.setRowHeight(30);

@@ -10,7 +10,7 @@ public class Controller {
    Model model;
 
     public Controller(view view, Model model) {
-        model.init(Service.instance().search(new Factura()));
+        model.init(Service.instance().getData().getFacturas());
         this.View = view;
         this.model = model;
         view.setController(this);
@@ -54,5 +54,7 @@ public class Controller {
         model.setMode(Application.MODE_CREATE);
         model.setCurrent(new Factura());
     }
+
+
 
 }
