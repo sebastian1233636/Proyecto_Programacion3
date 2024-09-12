@@ -45,6 +45,20 @@ public class view implements PropertyChangeListener {
                 controller.clear();
             }
         });
+
+
+        reporte_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try{
+                    controller.print();
+                }catch(Exception ex){
+                    JOptionPane.showMessageDialog(panelHistorico, ex.getMessage(), "Información", JOptionPane.INFORMATION_MESSAGE);
+
+                }
+            }
+        });
+
     }
 
     private boolean validate() {
