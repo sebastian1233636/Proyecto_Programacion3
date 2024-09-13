@@ -30,27 +30,24 @@ public class Model extends AbstractModel {
     }
 
     public List<Producto> getList() { return list; }
+    public Producto getCurrent() { return current; }
+    public Producto getFilter() { return filter; }
+    public int getMode() { return mode; }
 
     public void setList(List<Producto> list){
         this.list = list;
         firePropertyChange(LIST);
     }
 
-    public Producto getCurrent() { return current; }
-
     public void setCurrent(Producto current) {
         this.current = current;
         firePropertyChange(CURRENT);
     }
 
-    public Producto getFilter() { return filter; }
-
     public void setFilter(Producto filter) {
         this.filter = filter;
         firePropertyChange(FILTER);
     }
-
-    public int getMode() { return mode; }
 
     public void setMode(int mode) { this.mode = mode; }
 

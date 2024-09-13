@@ -2,7 +2,6 @@ package pos.presentation.Cajero;
 
 import pos.Application;
 import pos.logic.Cajero;
-import pos.logic.Cliente;
 import pos.logic.Service;
 import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.font.PdfFontFactory;
@@ -70,14 +69,12 @@ public class Controller {
         model.setCurrent(new Cajero());
     }
 
-
     public void print()throws Exception{
         String dest="cajeros.pdf";
         PdfFont font = PdfFontFactory.createFont(StandardFonts.HELVETICA);
         PdfWriter writer = new PdfWriter(dest);
         PdfDocument pdf = new PdfDocument(writer);
 
-        //Document document = new Document(pdf, PageSize.A4.rotate());
         Document document = new Document(pdf);
         document.setMargins(20, 20, 20, 20);
 
@@ -85,7 +82,6 @@ public class Controller {
         header.setWidth(400);
         header.setHorizontalAlignment(HorizontalAlignment.CENTER);
         header.addCell(getCell(new Paragraph("Listado de Cajeros").setFont(font).setBold().setFontSize(20f), TextAlignment.CENTER,false));
-        //header.addCell(getCell(new Image(ImageDataFactory.create("logo.jpg")), HorizontalAlignment.CENTER,false));
         document.add(header);
 
         document.add(new Paragraph(""));document.add(new Paragraph(""));
@@ -121,6 +117,4 @@ public class Controller {
         if(!hasBorder) cell.setBorder(Border.NO_BORDER);
         return cell;
     }
-
-
 }

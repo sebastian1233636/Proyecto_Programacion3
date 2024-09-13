@@ -1,7 +1,5 @@
 package pos.presentation;
 
-import pos.logic.Cliente;
-
 import java.util.List;
 
 public abstract class AbstractTableModel<E> extends javax.swing.table.AbstractTableModel implements javax.swing.table.TableModel {
@@ -18,7 +16,6 @@ public abstract class AbstractTableModel<E> extends javax.swing.table.AbstractTa
     public int getColumnCount() {
         return cols.length;
     }
-
     public String getColumnName(int col){
         return colNames[cols[col]];
     }
@@ -28,7 +25,6 @@ public abstract class AbstractTableModel<E> extends javax.swing.table.AbstractTa
             default: return super.getColumnClass(col);
         }
     }
-
     public int getRowCount() {
         return rows.size();
     }
@@ -39,11 +35,8 @@ public abstract class AbstractTableModel<E> extends javax.swing.table.AbstractTa
     }
 
     protected abstract Object getPropetyAt(E e, int col);
-
     public E getRowAt(int row) {
         return rows.get(row);
     }
-
     protected abstract void initColNames();
-
 }

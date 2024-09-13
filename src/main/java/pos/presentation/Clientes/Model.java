@@ -20,8 +20,7 @@ public class Model extends AbstractModel {
         firePropertyChange(FILTER);
     }
 
-    public Model() {
-    }
+    public Model() {}
 
     public void init(List<Cliente> list){
         this.list = list;
@@ -33,14 +32,23 @@ public class Model extends AbstractModel {
     public List<Cliente> getList() {
         return list;
     }
+    public Cliente getCurrent() {
+        return current;
+    }
+    public Cliente getFilter() {
+        return filter;
+    }
+    public int getMode() {
+        return mode;
+    }
+
+    public void setMode(int mode) {
+        this.mode = mode;
+    }
 
     public void setList(List<Cliente> list){
         this.list = list;
         firePropertyChange(LIST);
-    }
-
-    public Cliente getCurrent() {
-        return current;
     }
 
     public void setCurrent(Cliente current) {
@@ -48,21 +56,9 @@ public class Model extends AbstractModel {
         firePropertyChange(CURRENT);
     }
 
-    public Cliente getFilter() {
-        return filter;
-    }
-
     public void setFilter(Cliente filter) {
         this.filter = filter;
         firePropertyChange(FILTER);
-    }
-
-    public int getMode() {
-        return mode;
-    }
-
-    public void setMode(int mode) {
-        this.mode = mode;
     }
 
     public static final String LIST="list";

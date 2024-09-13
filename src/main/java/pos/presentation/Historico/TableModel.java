@@ -1,13 +1,10 @@
 package pos.presentation.Historico;
 
-import pos.logic.Cliente;
 import pos.logic.Factura;
 import pos.presentation.AbstractTableModel;
-
 import java.util.List;
 
 public class TableModel extends AbstractTableModel<Factura> implements javax.swing.table.TableModel {
-
     public TableModel(int[] cols, List<Factura> rows) {
         super(cols, rows);
     }
@@ -32,16 +29,12 @@ public class TableModel extends AbstractTableModel<Factura> implements javax.swi
         return getPropetyAt(e, col);
     }
 
-
-
     @Override
     protected void initColNames(){
         colNames = new String[4];
-        colNames[ID]= "Id-Cliente";
+        colNames[ID]= "Nombre-Cliente";
         colNames[FECHA]= "Fecha";
         colNames[CODIGO]= "Codigo";
         colNames[TOTAL]= "Total";
-
     }
-
 }

@@ -3,7 +3,6 @@ package pos.presentation.Productos;
 import pos.Application;
 import pos.logic.Categoria;
 import pos.logic.Producto;
-
 import javax.swing.*;
 import javax.swing.table.TableColumnModel;
 import java.awt.event.ActionEvent;
@@ -41,10 +40,16 @@ public class View implements PropertyChangeListener {
     }
 
     private void Categories() {
-        categoria.addItem("CAT-001-Dulces");
-        categoria.addItem("CAT-002-Vinos");
-        categoria.addItem("CAT-003-Basico");
-        categoria.addItem("CAT-004-Hogar");
+        categoria.addItem("CAT-001-Frutas y Verduras");
+        categoria.addItem("CAT-002-Carnes y Pescados");
+        categoria.addItem("CAT-003-Lácteos y Huevos");
+        categoria.addItem("CAT-004-Panadería");
+        categoria.addItem("CAT-005-Bebidas");
+        categoria.addItem("CAT-006-Congelados");
+        categoria.addItem("CAT-007-Productos de Limpieza");
+        categoria.addItem("CAT-008-Cuidado Personal");
+        categoria.addItem("CAT-009-Alimentos en Conserva");
+        categoria.addItem("CAT-010-Cereales y Granos");
     }
 
     public View() {
@@ -69,7 +74,6 @@ public class View implements PropertyChangeListener {
                     controller.print();
                 }catch(Exception ex){
                     JOptionPane.showMessageDialog(panel, ex.getMessage(), "Información", JOptionPane.INFORMATION_MESSAGE);
-
                 }
             }
         });
@@ -81,7 +85,7 @@ public class View implements PropertyChangeListener {
                     Producto n = take();
                     try {
                         controller.save(n);
-                        JOptionPane.showMessageDialog(panel, "REGISTRO APLICADO", "", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(panel, "Registro Aplicado", "", JOptionPane.INFORMATION_MESSAGE);
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(panel, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                     }
@@ -102,7 +106,7 @@ public class View implements PropertyChangeListener {
             public void actionPerformed(ActionEvent e) {
                 try {
                     controller.delete();
-                    JOptionPane.showMessageDialog(panel, "REGISTRO BORRADO", "", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(panel, "Registro Borrado", "", JOptionPane.INFORMATION_MESSAGE);
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(panel, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }

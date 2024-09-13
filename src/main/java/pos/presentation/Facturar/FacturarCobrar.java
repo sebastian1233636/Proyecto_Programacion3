@@ -43,31 +43,20 @@ public class FacturarCobrar extends JDialog {
                     double simpe = Double.parseDouble(textSimpe.getText().trim());
                     double importeValue = Double.parseDouble(importe.getText().trim());
 
+                    double totalPagado = efectivo + tarjeta + cheque + simpe;
 
-                    // Validar si el importe es cubierto por uno de los medios de pago
-                    if (efectivo >= importeValue) {
-                        JOptionPane.showMessageDialog(null, "El pago con efectivo se ha efectuado correctamente.", "Pago Exitoso", JOptionPane.INFORMATION_MESSAGE);
-                        pagoExitoso = true;
-                    } else if (tarjeta >= importeValue) {
-                        JOptionPane.showMessageDialog(null, "El pago con tarjeta se ha efectuado correctamente.", "Pago Exitoso", JOptionPane.INFORMATION_MESSAGE);
-                        pagoExitoso = true;
-                    } else if (cheque >= importeValue) {
-                        JOptionPane.showMessageDialog(null, "El pago con cheque se ha efectuado correctamente.", "Pago Exitoso", JOptionPane.INFORMATION_MESSAGE);
-                        pagoExitoso = true;
-                    } else if (simpe >= importeValue) {
-                        JOptionPane.showMessageDialog(null, "El pago con Sinpe se ha efectuado correctamente.", "Pago Exitoso", JOptionPane.INFORMATION_MESSAGE);
+                    if (totalPagado >= importeValue) {
+                        JOptionPane.showMessageDialog(null, "El pago se ha efectuado correctamente.", "Pago Exitoso", JOptionPane.INFORMATION_MESSAGE);
                         pagoExitoso = true;
                     } else {
-                        JOptionPane.showMessageDialog(null, "El medio de pago seleccionado no es suficiente para cubrir el importe.", "Error de Pago", JOptionPane.WARNING_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "La suma de los medios de pago no es suficiente para cubrir el importe.", "Error de Pago", JOptionPane.WARNING_MESSAGE);
                     }
 
-                    // Si el pago fue exitoso, cerrar la ventana
                     if (pagoExitoso) {
                         dispose();
                     }
 
                 } catch (NumberFormatException ex) {
-                    // Si ocurre un error de formato numérico, mostrar un mensaje de error
                     JOptionPane.showMessageDialog(null, "Por favor ingrese valores numéricos válidos.", "Error de Entrada", JOptionPane.ERROR_MESSAGE);
                 }
             }

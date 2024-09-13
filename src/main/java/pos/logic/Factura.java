@@ -2,7 +2,6 @@ package pos.logic;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +34,6 @@ public class Factura {
     public void setID(String ID) {this.ID = ID;}
     public void setFecha(String fecha) {this.fecha = fecha;}
     public void setCodigo(String codigo) {this.codigo = codigo;}
-
 
     public void agregar(Linea obj) {carrito.add(obj);}
 

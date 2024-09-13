@@ -19,7 +19,6 @@ import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.element.Cell;
 import com.itextpdf.io.font.constants.StandardFonts;
 
-
 public class Controller {
     View view;
     Model model;
@@ -76,7 +75,6 @@ public class Controller {
         PdfWriter writer = new PdfWriter(dest);
         PdfDocument pdf = new PdfDocument(writer);
 
-        //Document document = new Document(pdf, PageSize.A4.rotate());
         Document document = new Document(pdf);
         document.setMargins(20, 20, 20, 20);
 
@@ -84,7 +82,6 @@ public class Controller {
         header.setWidth(400);
         header.setHorizontalAlignment(HorizontalAlignment.CENTER);
         header.addCell(getCell(new Paragraph("Listado de Clientes").setFont(font).setBold().setFontSize(20f), TextAlignment.CENTER,false));
-        //header.addCell(getCell(new Image(ImageDataFactory.create("logo.jpg")), HorizontalAlignment.CENTER,false));
         document.add(header);
 
         document.add(new Paragraph(""));document.add(new Paragraph(""));
@@ -98,7 +95,6 @@ public class Controller {
         body.addCell(getCell(new Paragraph("Nombre").setBackgroundColor(bkg).setFontColor(frg),TextAlignment.CENTER,true));
         body.addCell(getCell(new Paragraph("Email").setBackgroundColor(bkg).setFontColor(frg),TextAlignment.CENTER,true));
         body.addCell(getCell(new Paragraph("Telefono").setBackgroundColor(bkg).setFontColor(frg),TextAlignment.CENTER,true));
-
 
         for(Cliente e: model.getList()){
             body.addCell(getCell(new Paragraph(e.getId()),TextAlignment.CENTER,true));
@@ -125,5 +121,4 @@ public class Controller {
         if(!hasBorder) cell.setBorder(Border.NO_BORDER);
         return cell;
     }
-
 }

@@ -1,15 +1,10 @@
 package pos.presentation.Historico;
 
 import pos.Application;
-import pos.logic.Cajero;
 import pos.logic.Factura;
 import javax.swing.*;
 import javax.swing.table.TableColumnModel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -50,7 +45,6 @@ public class view implements PropertyChangeListener {
             }
         });
 
-
         reporte_Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -58,18 +52,15 @@ public class view implements PropertyChangeListener {
                     controller.print();
                 }catch(Exception ex){
                     JOptionPane.showMessageDialog(panelHistorico, ex.getMessage(), "Información", JOptionPane.INFORMATION_MESSAGE);
-
                 }
             }
         });
-
 
         TablaFacturas.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 int row = TablaFacturas.getSelectedRow();
                 controller.edit(row);
-
                 String codeFilter = (String) TablaFacturas.getValueAt(row,0);
                 Factura filter = new Factura();
                 filter.setCodigo(codeFilter);
@@ -78,7 +69,6 @@ public class view implements PropertyChangeListener {
                 } catch (Exception ex) {
                     throw new RuntimeException(ex);
                 }
-
             }
         });
 
@@ -94,6 +84,14 @@ public class view implements PropertyChangeListener {
             }
         });
 
+        panelHistorico.addMouseListener(new MouseAdapter() { });
+        panelHistorico.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentShown(ComponentEvent e) {
+                super.componentShown(e);
+                controller.loadFacturas();
+            }
+        });
     }
 
     private boolean validate() {
@@ -114,6 +112,7 @@ public class view implements PropertyChangeListener {
         f.setID(search_txt.getText());
         return f;
     }
+
     // MVC
     pos.presentation.Historico.Model model;
     pos.presentation.Historico.Controller controller;
@@ -131,7 +130,6 @@ public class view implements PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent evt) {
         switch (evt.getPropertyName()) {
             case pos.presentation.Historico.Model.LIST:
-
                 int[] cols = {TableModel.CODIGO, TableModel.FECHA, TableModel.ID, TableModel.TOTAL};
                 TablaFacturas.setModel(new TableModel(cols, model.getList()));
                 TablaFacturas.setRowHeight(30);
@@ -143,7 +141,6 @@ public class view implements PropertyChangeListener {
                 TablaLineas.setRowHeight(30);
                 TableColumnModel columnModel2 = TablaLineas.getColumnModel();
                 columnModel2.getColumn(6).setPreferredWidth(100);
-
                 break;
             case pos.presentation.Historico.Model.CURRENT:
                 search_txt.setText(model.getCurrent().getID());

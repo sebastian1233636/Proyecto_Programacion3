@@ -45,7 +45,6 @@ public class FacturarDescuento extends JDialog {
             }
         });
 
-
         cancelarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -54,7 +53,6 @@ public class FacturarDescuento extends JDialog {
             }
         });
     }
-
     public void setModel(Model model) {this.model = model;}
     public void setController(Controller controller) {this.controller = controller;}
 }

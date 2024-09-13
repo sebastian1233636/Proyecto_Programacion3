@@ -2,16 +2,12 @@ package pos.presentation.Facturar;
 
 import pos.logic.Linea;
 import pos.presentation.AbstractTableModel;
-
-import java.text.DecimalFormat;
 import java.util.List;
 
 public class TableModel extends AbstractTableModel<Linea> implements javax.swing.table.TableModel {
-    private DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
     public TableModel(int[] cols, List<Linea> rows) {
         super(cols, rows);
     }
-
     public static final int CODIGO=0;
     public static final int ARTICULO=1;
     public static final int CATEGORIA=2;

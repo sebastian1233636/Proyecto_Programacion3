@@ -5,7 +5,6 @@ import pos.presentation.AbstractTableModel;
 import java.util.List;
 
 public class TableModel2 extends AbstractTableModel<Linea> implements javax.swing.table.TableModel {
-
     public TableModel2(int[] cols, List<Linea> rows) {
         super(cols, rows);
     }

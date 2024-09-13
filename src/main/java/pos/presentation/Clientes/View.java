@@ -77,6 +77,7 @@ public class View implements PropertyChangeListener {
                 }
             }
         });
+
         list.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -84,17 +85,19 @@ public class View implements PropertyChangeListener {
                 controller.edit(row);
             }
         });
+
         delete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
                     controller.delete();
-                    JOptionPane.showMessageDialog(panel, "REGISTRO BORRADO", "", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(panel, "Registro Borrado", "", JOptionPane.INFORMATION_MESSAGE);
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(panel, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
+
         clear.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -163,7 +166,6 @@ public class View implements PropertyChangeListener {
         return e;
     }
 
-// MVC
     Model model;
     Controller controller;
 
@@ -192,7 +194,6 @@ public class View implements PropertyChangeListener {
                 telefono.setText(model.getCurrent().getTelefono());
                 email.setText(model.getCurrent().getEmail());
                 descuento.setText("" + model.getCurrent().getDescuento());
-
                 if (model.getMode() == Application.MODE_EDIT) {
                     id.setEnabled(false);
                     delete.setEnabled(true);

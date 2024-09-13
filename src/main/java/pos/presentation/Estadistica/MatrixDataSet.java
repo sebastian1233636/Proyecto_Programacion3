@@ -77,12 +77,10 @@ public class MatrixDataSet implements CategoryDataset {
 
     @Override
     public void addChangeListener(DatasetChangeListener datasetChangeListener) {
-
     }
 
     @Override
     public void removeChangeListener(DatasetChangeListener datasetChangeListener) {
-
     }
 
     @Override

@@ -37,8 +37,6 @@ public class FacturarCantidad extends JDialog {
                             JOptionPane.showMessageDialog(panel, "No hay existencias", "Error", JOptionPane.ERROR_MESSAGE);
                         }
                     }
-
-
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(panel, "Ingrese un número válido.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
@@ -48,12 +46,11 @@ public class FacturarCantidad extends JDialog {
         cancelarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose(); // Solo cerrar la ventana
+                dispose();
             }
         });
     }
 
     public void setModel(Model model) { this.model = model; }
-
     public void setController(Controller controller) { this.controller = controller; }
 }

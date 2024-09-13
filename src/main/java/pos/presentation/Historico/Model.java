@@ -1,7 +1,6 @@
 package pos.presentation.Historico;
 
 import pos.Application;
-import pos.logic.Cliente;
 import pos.logic.Factura;
 import pos.logic.Linea;
 import pos.presentation.AbstractModel;
@@ -24,8 +23,7 @@ public class Model extends AbstractModel {
         firePropertyChange(FILTER);
     }
 
-    public Model() {
-    }
+    public Model() {}
 
     public void init(List<Factura> list){
         this.list = list;
@@ -38,22 +36,27 @@ public class Model extends AbstractModel {
     public List<Factura> getList() {
         return list;
     }
+    public List<Linea> getListalineas() {
+        return listalineas;
+    }
+    public Factura getCurrent() {
+        return current;
+    }
+    public Factura getFilter() {
+        return filter;
+    }
+    public int getMode() {
+        return mode;
+    }
 
     public void setList(List<Factura> list){
         this.list = list;
         firePropertyChange(LIST);
     }
 
-    public List<Linea> getListalineas() {
-        return listalineas;
-    }
     public void setListalineas(List<Linea> listalineas){
         this.listalineas = listalineas;
         firePropertyChange(LIST);
-    }
-
-    public Factura getCurrent() {
-        return current;
     }
 
     public void setCurrent(Factura current) {
@@ -61,17 +64,9 @@ public class Model extends AbstractModel {
         firePropertyChange(CURRENT);
     }
 
-    public Factura getFilter() {
-        return filter;
-    }
-
     public void setFilter(Factura filter) {
         this.filter = filter;
         firePropertyChange(FILTER);
-    }
-
-    public int getMode() {
-        return mode;
     }
 
     public void setMode(int mode) {
@@ -81,5 +76,4 @@ public class Model extends AbstractModel {
     public static final String LIST="list";
     public static final String CURRENT="current";
     public static final String FILTER="filter";
-
 }

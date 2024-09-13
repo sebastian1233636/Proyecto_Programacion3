@@ -1,10 +1,7 @@
 package pos.presentation.Historico;
 
 import pos.Application;
-import pos.logic.Cliente;
 import pos.logic.Factura;
-import pos.logic.Producto;
-import pos.logic.Linea;
 import pos.logic.Service;
 import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.font.PdfFontFactory;
@@ -49,7 +46,6 @@ public class Controller {
         model.setListalineas(fact.getCarrito());}
     }
 
-
     public void save(Factura e) throws  Exception{
         switch (model.getMode()) {
             case Application.MODE_CREATE:
@@ -81,14 +77,12 @@ public class Controller {
         model.setCurrent(new Factura());
     }
 
-
     public void print()throws Exception{
         String dest="facturas.pdf";
         PdfFont font = PdfFontFactory.createFont(StandardFonts.HELVETICA);
         PdfWriter writer = new PdfWriter(dest);
         PdfDocument pdf = new PdfDocument(writer);
 
-        //Document document = new Document(pdf, PageSize.A4.rotate());
         Document document = new Document(pdf);
         document.setMargins(20, 20, 20, 20);
 
@@ -96,7 +90,6 @@ public class Controller {
         header.setWidth(400);
         header.setHorizontalAlignment(HorizontalAlignment.CENTER);
         header.addCell(getCell(new Paragraph("Listado de Facturas").setFont(font).setBold().setFontSize(20f), TextAlignment.CENTER,false));
-        //header.addCell(getCell(new Image(ImageDataFactory.create("logo.jpg")), HorizontalAlignment.CENTER,false));
         document.add(header);
 
         document.add(new Paragraph(""));document.add(new Paragraph(""));
@@ -138,4 +131,9 @@ public class Controller {
         return cell;
     }
 
+    public List<Factura> loadFacturas() {
+        List<Factura> facturas = Service.instance().getData().getFacturas();
+        model.setList(facturas);
+        return facturas;
+    }
 }

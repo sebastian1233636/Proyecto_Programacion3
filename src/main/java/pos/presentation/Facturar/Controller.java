@@ -1,12 +1,7 @@
 package pos.presentation.Facturar;
 
-import pos.Application;
 import pos.logic.*;
-
-import java.beans.PropertyChangeEvent;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Filter;
 
 public class Controller {
     view view;
@@ -20,12 +15,21 @@ public class Controller {
         view.setModel(model);
     }
 
-    public void AgregarLinea(Producto filter) throws  Exception{
+    public void AgregarLinea(Producto filter) throws Exception {
         Linea nuevo = new Linea();
         nuevo.setCantidad(1);
-        filter.setExistencias(filter.getExistencias()-1);
+        filter.setExistencias(filter.getExistencias() - 1);
         nuevo.setProducto(filter);
+
+        Cliente selectedCliente = view.getSelectedCliente();
+
+        double discount = 0;
+        if (selectedCliente != null) {discount = selectedCliente.getDescuento();}
+
+        nuevo.setDescuento(discount);
+
         Service.instance().create(nuevo);
+
         model.setLineas(Service.instance().getData().getLineas());
     }
 
@@ -37,10 +41,7 @@ public class Controller {
         model.setLineas(Service.instance().getData().getLineas());
     }
 
-
-    public double calcularPagoTotal(){
-        return Service.instance().PagoTotal(model.getLineas());
-    }
+    public double calcularPagoTotal(){return Service.instance().PagoTotal(model.getLineas());}
 
     public Producto BuscarProducto(Producto e) throws Exception {
         model.setFilter(e);
@@ -90,5 +91,4 @@ public class Controller {
         Factura factura = new Factura(nombreCli,fecha,nombreFactura, model.getLineas());
         return factura;
     }
-
 }

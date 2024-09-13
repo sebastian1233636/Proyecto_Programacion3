@@ -12,20 +12,22 @@ public class Rango {
         this.annoHasta = annoHasta;
         this.mesHasta = mesHasta;
     }
+
     public int getAnnoDesde() {
         return annoDesde;
-    }
-    public void setAnnoDesde(int annoDesde) {
-        this.annoDesde = annoDesde;
     }
     public int getMesDesde() {
         return mesDesde;
     }
-    public void setMesDesde(int mesDesde) {
-        this.mesDesde = mesDesde;
-    }
     public int getAnnoHasta() {
         return annoHasta;
+    }
+
+    public void setAnnoDesde(int annoDesde) {
+        this.annoDesde = annoDesde;
+    }
+    public void setMesDesde(int mesDesde) {
+        this.mesDesde = mesDesde;
     }
     public void setAnnoHasta(int annoHasta) {
         this.annoHasta = annoHasta;

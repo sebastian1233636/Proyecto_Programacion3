@@ -1,14 +1,11 @@
 package pos.presentation.Facturar;
 
-import pos.Application;
 import pos.logic.Cliente;
 import pos.logic.Cajero;
 import pos.logic.Linea;
 import pos.logic.Producto;
 import pos.presentation.AbstractModel;
 import java.beans.PropertyChangeListener;
-
-import java.text.DecimalFormat;
 import java.util.List;
 
 public class Model extends AbstractModel {
@@ -21,8 +18,6 @@ public class Model extends AbstractModel {
     private double subtotal;
     private double descuentos;
     private double total;
-    private DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
-
 
     @Override
     public void addPropertyChangeListener(PropertyChangeListener listener) {

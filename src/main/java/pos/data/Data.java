@@ -6,10 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @XmlRootElement
+
 @XmlAccessorType(XmlAccessType.FIELD)
-
 public class Data {
-
     @XmlElementWrapper(name = "clientes")
     @XmlElement(name = "cliente")
     private List<Cliente> clientes;
@@ -26,7 +25,6 @@ public class Data {
     @XmlElement(name = "cajero")
     private List<Cajero> cajeros;
 
-
     @XmlElementWrapper(name = "lineas")
     @XmlElement(name = "lineas")
     private List<Linea> lineas;
@@ -40,16 +38,10 @@ public class Data {
     }
 
     public List<Cliente> getClientes() {return clientes;}
-
-    public List<Factura> getFacturas() {
-        return facturas;
-    }
-
+    public List<Factura> getFacturas() { return facturas;}
     public List<Producto> getProductos() {
         return productos;
     }
-
     public List<Cajero> getCajeros() {return cajeros;}
-
     public List<Linea> getLineas() {return lineas;}
 }

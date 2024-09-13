@@ -59,9 +59,7 @@ public class Service {
         }
     }
 
-    public void delete(Cliente e) throws Exception{
-        data.getClientes().remove(e);
-    }
+    public void delete(Cliente e) throws Exception{ data.getClientes().remove(e); }
 
     public List<Cliente> search(Cliente e){
         return data.getClientes().stream()
@@ -94,9 +92,7 @@ public class Service {
         }
     }
 
-    public void delete(Cajero e) throws Exception{
-        data.getCajeros().remove(e);
-    }
+    public void delete(Cajero e) throws Exception{ data.getCajeros().remove(e); }
 
     public List<Cajero> search(Cajero e){
         return data.getCajeros().stream()
@@ -129,9 +125,7 @@ public class Service {
         }
     }
 
-    public void delete(Producto e) throws Exception{
-        data.getProductos().remove(e);
-    }
+    public void delete(Producto e) throws Exception{ data.getProductos().remove(e); }
 
     public List<Producto> search(Producto e){
         return data.getProductos().stream()
@@ -148,7 +142,6 @@ public class Service {
                 .collect(Collectors.toList());
     }
 
-
     //================= Facturas ============
     public void create(Factura e) throws Exception{
         Factura result = data.getFacturas().stream().filter(i->i.getCodigo().equals(e.getCodigo())).findFirst().orElse(null);;
@@ -158,7 +151,7 @@ public class Service {
     public Factura read(Factura e) throws Exception{
         Factura result = data.getFacturas().stream().filter(i->i.getID().equals(e.getID())).findFirst().orElse(null);
         if (result!=null) return result;
-        else throw new Exception("No existe ninguna factura asociada a este ID");
+        else throw new Exception("Este ID no tiene facturas asociadas");
     }
 
     public void update(Factura e) throws Exception{
@@ -168,13 +161,11 @@ public class Service {
             data.getFacturas().remove(result);
             data.getFacturas().add(e);
         }catch (Exception ex) {
-            throw new Exception("No existe ninguna factura asociada a este ID");
+            throw new Exception("Este ID no tiene facturas asociadas");
         }
     }
 
-    public void delete(Factura e) throws Exception{
-        data.getFacturas().remove(e);
-    }
+    public void delete(Factura e) throws Exception{data.getFacturas().remove(e);}
 
     public List<Factura> search(Factura e){
         return data.getFacturas().stream()
@@ -199,7 +190,7 @@ public class Service {
     public Linea read(Linea e) throws Exception{
         Linea result = data.getLineas().stream().filter(i->i.getProducto().getCodigo().equals(e.getProducto().getCodigo())).findFirst().orElse(null);
         if (result!=null) return result;
-        else throw new Exception("No existe ninguna factura asociada a este ID");
+        else throw new Exception("No existe ninguna factura asociada a este Codigo");
     }
 
     public void update(Linea e) throws Exception{

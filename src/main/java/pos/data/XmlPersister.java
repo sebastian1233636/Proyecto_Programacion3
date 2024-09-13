@@ -27,7 +27,7 @@ public class XmlPersister {
             return result;
         } catch (Exception e) {
             e.printStackTrace();
-            throw e; // Para que también puedas manejar la excepción fuera de este método
+            throw e;
         }
     }
 

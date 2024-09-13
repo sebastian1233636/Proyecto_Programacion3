@@ -1,7 +1,6 @@
 package pos.presentation.Productos;
 
 import pos.Application;
-import pos.logic.Cajero;
 import pos.logic.Producto;
 import pos.logic.Service;
 import com.itextpdf.kernel.font.PdfFont;
@@ -20,9 +19,6 @@ import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.properties.HorizontalAlignment;
 import com.itextpdf.layout.properties.TextAlignment;
 
-
-import java.beans.PropertyChangeEvent;
-
 public class Controller {
     View view;
     Model model;
@@ -38,8 +34,6 @@ public class Controller {
     public void ActualizarLista(){
         model.setList(Service.instance().getData().getProductos());
     }
-
-
 
     public void search(Producto filter) throws Exception {
         model.setFilter(filter);
@@ -79,14 +73,12 @@ public class Controller {
         model.setCurrent(new Producto());
     }
 
-
     public void print()throws Exception{
         String dest="productos.pdf";
         PdfFont font = PdfFontFactory.createFont(StandardFonts.HELVETICA);
         PdfWriter writer = new PdfWriter(dest);
         PdfDocument pdf = new PdfDocument(writer);
 
-        //Document document = new Document(pdf, PageSize.A4.rotate());
         Document document = new Document(pdf);
         document.setMargins(20, 20, 20, 20);
 
@@ -94,7 +86,6 @@ public class Controller {
         header.setWidth(400);
         header.setHorizontalAlignment(HorizontalAlignment.CENTER);
         header.addCell(getCell(new Paragraph("Listado de Productos").setFont(font).setBold().setFontSize(20f), TextAlignment.CENTER,false));
-        //header.addCell(getCell(new Image(ImageDataFactory.create("logo.jpg")), HorizontalAlignment.CENTER,false));
         document.add(header);
 
         document.add(new Paragraph(""));document.add(new Paragraph(""));
@@ -137,6 +128,4 @@ public class Controller {
         if(!hasBorder) cell.setBorder(Border.NO_BORDER);
         return cell;
     }
-
-
 }

@@ -52,7 +52,7 @@ public class View implements PropertyChangeListener {
                     Cajero n = take();
                     try {
                         controller.save(n);
-                        JOptionPane.showMessageDialog(panel, "REGISTRO APLICADO", "", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(panel, "Registro Aplicado", "", JOptionPane.INFORMATION_MESSAGE);
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(panel, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                     }
@@ -67,12 +67,9 @@ public class View implements PropertyChangeListener {
                     controller.print();
                 }catch(Exception ex){
                     JOptionPane.showMessageDialog(panel, ex.getMessage(), "Información", JOptionPane.INFORMATION_MESSAGE);
-
                 }
             }
         });
-
-
 
         list.addMouseListener(new MouseAdapter() {
             @Override
@@ -87,7 +84,7 @@ public class View implements PropertyChangeListener {
             public void actionPerformed(ActionEvent e) {
                 try {
                     controller.delete();
-                    JOptionPane.showMessageDialog(panel, "REGISTRO BORRADO", "", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(panel, "Registro Borrado", "", JOptionPane.INFORMATION_MESSAGE);
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(panel, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
@@ -112,6 +109,7 @@ public class View implements PropertyChangeListener {
             idLbl.setBorder(null);
             idLbl.setToolTipText(null);
         }
+
         if (nombre.getText().isEmpty()) {
             valid = false;
             nombreLbl.setBorder(Application.BORDER_ERROR);
@@ -130,7 +128,6 @@ public class View implements PropertyChangeListener {
         return e;
     }
 
-    // MVC
     Model model;
     Controller controller;
 

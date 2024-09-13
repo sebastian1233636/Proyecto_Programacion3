@@ -1,7 +1,6 @@
 package pos.presentation.Facturar;
 
 import pos.logic.*;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
@@ -9,7 +8,6 @@ import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class view implements PropertyChangeListener {
     private JComboBox<String> comboBoxClientes;
@@ -57,23 +55,22 @@ public class view implements PropertyChangeListener {
         buttonAgregar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (controller != null) {
-                    try {
-                        Producto filter = new Producto();
-                        filter.setCodigo(search.getText());
-                        Producto pro = controller.BuscarProducto(filter);
-                        if (pro != null) {
-                            controller.AgregarLinea(pro);
-
-                        } else {
-                            JOptionPane.showMessageDialog(panel, "Producto no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
+                if (comboBoxCajeros.getSelectedIndex() != -1 && comboBoxClientes.getSelectedIndex() != -1) {
+                    if (controller != null) {
+                        try {
+                            Producto filter = new Producto();
+                            filter.setCodigo(search.getText());
+                            Producto pro = controller.BuscarProducto(filter);
+                            if (pro != null) {
+                                controller.AgregarLinea(pro);
+                            } else {
+                                JOptionPane.showMessageDialog(panel, "Producto no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
+                            }
+                        } catch (Exception ex) {
+                            JOptionPane.showMessageDialog(panel, ex.getMessage(), "Información", JOptionPane.INFORMATION_MESSAGE);
                         }
-                    } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(panel, ex.getMessage(), "Información", JOptionPane.INFORMATION_MESSAGE);
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(panel, "Controlador no está inicializado", "Error", JOptionPane.ERROR_MESSAGE);
-                }
+                    } else {JOptionPane.showMessageDialog(panel, "Controlador no está inicializado", "Error", JOptionPane.ERROR_MESSAGE);}
+                }else{JOptionPane.showMessageDialog(panel, "Cliente y cajero no seleccionado", "Error", JOptionPane.ERROR_MESSAGE);}
             }
         });
 
@@ -203,10 +200,18 @@ public class view implements PropertyChangeListener {
                 controller.loadCajeros();
             }
         });
+
     }
 
     Model model;
     Controller controller;
+
+    private void actualizarEstadoComboBoxClientes() {
+        if (model != null) {
+            boolean vacio = model.getLineas().isEmpty();
+            comboBoxClientes.setEnabled(vacio);
+        }
+    }
 
     public void setModel(Model model) {
         this.model = model;
@@ -245,6 +250,17 @@ public class view implements PropertyChangeListener {
         total.setText(String.format("%.2f", totalFactura));
     }
 
+    public Cliente getSelectedCliente() {
+        String selectedClienteName = (String) comboBoxClientes.getSelectedItem();
+        if (selectedClienteName != null) {
+            for (Cliente cliente : model.getClientes()) {
+                if (cliente.getNombre().equals(selectedClienteName)) {
+                    return cliente;
+                }
+            }
+        }
+        return null;
+    }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
@@ -257,16 +273,14 @@ public class view implements PropertyChangeListener {
                 TableColumnModel columnModel = list.getColumnModel();
                 columnModel.getColumn(6).setPreferredWidth(100);
                 mostrarValoresFactura();
+                actualizarEstadoComboBoxClientes();
                 break;
-
             case Model.LISTCLIENTES:
                 iniciarComboBoxClientes(model.getClientes());
                 break;
-
             case Model.LISTCAJEROS:
                 iniciarComboBoxCajeros(model.getCajeros());
                 break;
-
             case Model.FILTER:
                 search.setText(model.getFilter().getCodigo());
                 break;
