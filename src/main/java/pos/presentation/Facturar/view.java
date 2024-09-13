@@ -107,7 +107,7 @@ public class view implements PropertyChangeListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Service service = Service.instance();
-                FacturarBuscar buscar = new FacturarBuscar(service);
+                FacturarBuscar buscar = new FacturarBuscar(controller);
                 buscar.setVisible(true);
             }
         });

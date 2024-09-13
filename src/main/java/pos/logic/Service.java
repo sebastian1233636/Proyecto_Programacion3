@@ -34,6 +34,14 @@ public class Service {
     public Data getData(){
         return data;
     }
+    public List<Producto> ListaProductos(){
+        return data.getProductos();
+    }
+
+
+
+
+
 
 //================= CLIENTES ============
     public void create(Cliente e) throws Exception{
@@ -222,4 +230,11 @@ public class Service {
         }
         return total;
     }
+
+
+
+
+
+
+
  }

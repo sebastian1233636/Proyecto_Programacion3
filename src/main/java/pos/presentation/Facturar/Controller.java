@@ -91,4 +91,12 @@ public class Controller {
         Factura factura = new Factura(nombreCli,fecha,nombreFactura, model.getLineas());
         return factura;
     }
+
+    public List<Producto> ListaPrincipalProductos(){
+        return Service.instance().ListaProductos();
+    }
+
+    public  List<Producto> buscarDescripcion(Producto e) throws Exception {
+        return Service.instance().searchDescripcion(e);
+    }
 }
