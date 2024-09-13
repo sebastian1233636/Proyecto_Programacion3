@@ -183,6 +183,12 @@ public class Service {
                 .collect(Collectors.toList());
     }
 
+    public Factura searchFactura(Factura e){
+        Factura resultado = data.getFacturas().stream().filter(i->i.getCodigo().equals(e.getCodigo())).findFirst().orElse(null);
+        if (resultado!=null) return resultado;
+        else return null;
+    }
+
     //-------------------------LINEAS--------------------------------------
     public void create(Linea e) throws Exception{
         Linea result = data.getLineas().stream().filter(i->i.getProducto().getCodigo().equals(e.getProducto().getCodigo())).findFirst().orElse(null);;

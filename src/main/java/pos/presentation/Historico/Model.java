@@ -7,7 +7,7 @@ import pos.logic.Linea;
 import pos.presentation.AbstractModel;
 
 import java.beans.PropertyChangeListener;
-import java.util.List;
+import java.util.*;
 
 public class Model extends AbstractModel {
     Factura filter;
@@ -31,7 +31,7 @@ public class Model extends AbstractModel {
         this.list = list;
         this.current = new Factura();
         this.filter = new Factura();
-        this.listalineas = this.current.getCarrito();
+        this.listalineas = current.getCarrito();
         this.mode= Application.MODE_CREATE;
     }
 
@@ -81,4 +81,5 @@ public class Model extends AbstractModel {
     public static final String LIST="list";
     public static final String CURRENT="current";
     public static final String FILTER="filter";
+
 }

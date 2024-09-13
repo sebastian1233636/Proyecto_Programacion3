@@ -69,6 +69,16 @@ public class view implements PropertyChangeListener {
             public void mouseClicked(MouseEvent e) {
                 int row = TablaFacturas.getSelectedRow();
                 controller.edit(row);
+
+                String codeFilter = (String) TablaFacturas.getValueAt(row,0);
+                Factura filter = new Factura();
+                filter.setCodigo(codeFilter);
+                try {
+                    controller.buscarFactura(filter);
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
+
             }
         });
 

@@ -4,6 +4,7 @@ import pos.Application;
 import pos.logic.Cliente;
 import pos.logic.Factura;
 import pos.logic.Producto;
+import pos.logic.Linea;
 import pos.logic.Service;
 import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.font.PdfFontFactory;
@@ -20,6 +21,8 @@ import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.properties.HorizontalAlignment;
 import com.itextpdf.layout.properties.TextAlignment;
+
+import java.util.List;
 
 public class Controller {
    view View;
@@ -39,6 +42,13 @@ public class Controller {
         model.setCurrent(new Factura());
         model.setList(Service.instance().search(model.getFilter()));
     }
+
+    public void buscarFactura(Factura filter) throws  Exception{
+        Factura  fact = Service.instance().searchFactura(filter);
+        if(fact!=null){
+        model.setListalineas(fact.getCarrito());}
+    }
+
 
     public void save(Factura e) throws  Exception{
         switch (model.getMode()) {
@@ -70,6 +80,7 @@ public class Controller {
         model.setMode(Application.MODE_CREATE);
         model.setCurrent(new Factura());
     }
+
 
     public void print()throws Exception{
         String dest="facturas.pdf";

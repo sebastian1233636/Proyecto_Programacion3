@@ -27,6 +27,13 @@ public class TableModel extends AbstractTableModel<Factura> implements javax.swi
         }
     }
 
+    public Object getValueAt(int row, int col) {
+        Factura e = rows.get(row);
+        return getPropetyAt(e, col);
+    }
+
+
+
     @Override
     protected void initColNames(){
         colNames = new String[4];
