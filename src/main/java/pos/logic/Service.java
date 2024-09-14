@@ -145,7 +145,7 @@ public class Service {
 
     public List<Producto> searchDescripcion(Producto e) {
         return data.getProductos().stream()
-                .filter(i -> i.getDescripcion().equalsIgnoreCase(e.getDescripcion()))
+                .filter(i->(i.getDescripcion().contains(e.getDescripcion())))
                 .sorted(Comparator.comparing(Producto::getDescripcion))
                 .collect(Collectors.toList());
     }
