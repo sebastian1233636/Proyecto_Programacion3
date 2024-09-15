@@ -188,6 +188,21 @@ public class Service {
         else return null;
     }
 
+    public List<String> obtenerAniosDeFacturas() {
+        return data.getFacturas().stream()
+                .map(factura -> factura.getFecha().substring(0, 4)) // Extrae el año de la fecha
+                .distinct()
+                .collect(Collectors.toList());
+    }
+
+    public List<String> obtenerMesesDeFacturas() {
+        return data.getFacturas().stream()
+                .map(factura -> factura.getFecha().substring(5, 7)) // Extrae el mes de la fecha
+                .distinct() // Elimina duplicados
+                .collect(Collectors.toList());
+    }
+
+
     //-------------------------LINEAS--------------------------------------
     public void create(Linea e) throws Exception{
         Linea result = data.getLineas().stream().filter(i->i.getProducto().getCodigo().equals(e.getProducto().getCodigo())).findFirst().orElse(null);;

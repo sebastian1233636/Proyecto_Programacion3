@@ -11,21 +11,34 @@ import java.util.List;
 public class Model extends AbstractModel {
     List<Categoria> categoriasAll;
     List<Categoria> categorias;
+    List<String> anniodesde;
+    List<String> annioHasta;
+    List<String> mesDesde;
+    List<String> mesHasta;
     String rango;
     String[] rows;
     String[] cols;
     float[][] data;
 
+
+    public Model(){}
+
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         super.addPropertyChangeListener(listener);
         firePropertyChange(CATEGORASALL);
         firePropertyChange(CATEGORIAS);
+        firePropertyChange(ANNIOD);
+        firePropertyChange(ANNIOH);
         firePropertyChange(RANGO);
+        firePropertyChange(MESDESDE);
+        firePropertyChange(MESHASTA);
 
     }
 
     public void Init(List<Categoria> all,List<Categoria> cats){
-
+        this.categoriasAll=all;
+        this.categorias=cats;
+        rango = "";
     }
 
     public int getRowCount(){
@@ -33,6 +46,18 @@ public class Model extends AbstractModel {
     }
     public int getColumnCount(){
         return cols.length+1;
+    }
+    public List<String> getAnniodesde(){
+        return anniodesde;
+    }
+    public List<String> getAnnioHasta(){
+        return annioHasta;
+    }
+    public List<String> getMesDesde(){
+        return mesDesde;
+    }
+    public List<String> getMesHasta(){
+        return mesHasta;
     }
 
     public Object getValueAt(int rowIndex, int columnIndex){
@@ -56,7 +81,28 @@ public class Model extends AbstractModel {
         firePropertyChange(CATEGORASALL);
     }
 
+    public void setAnniodesde(List<String> nuevo){
+        anniodesde = nuevo;
+        firePropertyChange(ANNIOD);
+    }
+    public void setAnnioHasta(List<String> nuevo){
+        annioHasta = nuevo;
+        firePropertyChange(ANNIOH);
+    }
+    public void setMesDesde(List<String> nuevo){
+        mesDesde = nuevo;
+        firePropertyChange(MESDESDE);
+    }
+    public void setMesHasta(List<String> nuevo){
+        mesHasta = nuevo;
+        firePropertyChange(MESHASTA);
+    }
+
     public static final String CATEGORASALL="CategoriasTodas";
     public static final String CATEGORIAS="Categorias";
     public static final String RANGO = "rango";
+    public static final String ANNIOD = "AnnioDesde";
+    public static final String ANNIOH = "AnnioHasta";
+    public static final String MESDESDE = "mesdesde";
+    public static final String MESHASTA = "meshasta";
 }

@@ -1,7 +1,10 @@
 package pos.presentation.Facturar;
 
 import pos.logic.*;
+
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.time.LocalDate;
 
 public class Controller {
     view view;
@@ -85,7 +88,10 @@ public class Controller {
 
     public Factura crearFactura(String nombreCli,String nombreCaje) {
         int numero = Service.instance().getData().getFacturas().size()+1;
-        String fecha = java.time.LocalDate.now().toString();
+        LocalDate localDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
+        String formattedDate = localDate.format(formatter);
+        String fecha = formattedDate;
         String numCodigo = Integer.toString(numero);
         String nombreFactura = "FC0"+ numCodigo;
         Factura factura = new Factura(nombreCli,fecha,nombreFactura, model.getLineas());
