@@ -1,6 +1,8 @@
 package pos.presentation.Estadistica;
 
 import javax.swing.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 public class View {
     private JPanel panel1;
@@ -14,4 +16,15 @@ public class View {
     private JButton button3;
     private JButton button4;
     private JTable table1;
+    public JPanel PanelGrafico;
+
+
+    public View() {
+        panel1.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentShown(ComponentEvent e) {
+                super.componentShown(e);
+            }
+        });
+    }
 }

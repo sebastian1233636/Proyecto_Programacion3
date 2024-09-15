@@ -24,6 +24,10 @@ public class Model extends AbstractModel {
 
     }
 
+    public void Init(List<Categoria> all,List<Categoria> cats){
+
+    }
+
     public int getRowCount(){
         return rows.length;
     }
