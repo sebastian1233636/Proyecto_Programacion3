@@ -96,6 +96,10 @@ public class Controller {
         return Service.instance().ListaProductos();
     }
 
+    public List<Linea> ListaPrincipalLineas(){
+        return Service.instance().getData().getLineas();
+    }
+
     public  List<Producto> buscarDescripcion(Producto e) throws Exception {
         return Service.instance().searchDescripcion(e);
     }
