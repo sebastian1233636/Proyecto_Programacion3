@@ -22,6 +22,7 @@ public class Rango {
     public int getAnnoHasta() {
         return annoHasta;
     }
+    public int getMesHasta(){return mesHasta;}
 
     public void setAnnoDesde(int annoDesde) {
         this.annoDesde = annoDesde;
@@ -31,5 +32,8 @@ public class Rango {
     }
     public void setAnnoHasta(int annoHasta) {
         this.annoHasta = annoHasta;
+    }
+    public void setMesHasta(int mesHasta){
+        this.mesHasta = mesHasta;
     }
 }

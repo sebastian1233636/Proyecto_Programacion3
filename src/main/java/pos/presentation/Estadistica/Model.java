@@ -3,6 +3,7 @@ package pos.presentation.Estadistica;
 import pos.Application;
 import pos.logic.Categoria;
 import pos.logic.Cliente;
+import pos.logic.Rango;
 import pos.presentation.AbstractModel;
 import pos.presentation.AbstractTableModel;
 import java.beans.PropertyChangeListener;
@@ -15,7 +16,7 @@ public class Model extends AbstractModel {
     List<String> annioHasta;
     List<String> mesDesde;
     List<String> mesHasta;
-    String rango;
+    Rango rango;
     String[] rows;
     String[] cols;
     float[][] data;
@@ -38,7 +39,6 @@ public class Model extends AbstractModel {
     public void Init(List<Categoria> all,List<Categoria> cats){
         this.categoriasAll=all;
         this.categorias=cats;
-        rango = "";
     }
 
     public int getRowCount(){
@@ -59,6 +59,9 @@ public class Model extends AbstractModel {
     public List<String> getMesHasta(){
         return mesHasta;
     }
+    public Rango getRango(){return rango;}
+    public List<Categoria> getCategorias(){return categorias;}
+
 
     public Object getValueAt(int rowIndex, int columnIndex){
         if(columnIndex == 0){

@@ -2,6 +2,7 @@ package pos.presentation.Estadistica;
 
 import pos.logic.Cajero;
 import pos.logic.Categoria;
+import pos.logic.Rango;
 import pos.logic.Service;
 import pos.presentation.Estadistica.Model;
 import pos.presentation.Estadistica.View;
@@ -40,5 +41,11 @@ public class Controller {
         model.setMesHasta(Service.instance().obtenerMesesDeFacturas());
     }
 
+    public void ActualizarData(){
+        Rango r = model.getRango();
+        int colCount =(r.getAnnoHasta()-r.getAnnoDesde())*12+r.getMesHasta()-r.getMesDesde()+1;
+        int rowCount = model.getCategorias().size();
+        String[] cols = new String[colCount];
+    }
 
 }
