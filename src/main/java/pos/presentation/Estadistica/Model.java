@@ -108,4 +108,5 @@ public class Model extends AbstractModel {
     public static final String ANNIOH = "AnnioHasta";
     public static final String MESDESDE = "mesdesde";
     public static final String MESHASTA = "meshasta";
+    public static final String DATA = "data";
 }

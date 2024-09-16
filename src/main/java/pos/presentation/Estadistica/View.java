@@ -1,7 +1,5 @@
 package pos.presentation.Estadistica;
 
-import pos.logic.Service;
-
 import javax.swing.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -16,11 +14,11 @@ public class View implements PropertyChangeListener{
     private JComboBox comboBoxMesDesde;
     private JComboBox comboBoxAnniosHasta;
     private JComboBox comboBoxMesHasta;
-    private JComboBox comboBox5;
-    private JButton button1;
-    private JButton button2;
-    private JButton button3;
-    private JButton button4;
+    private JComboBox categorias;
+    private JButton agregarCategoria;
+    private JButton agregarAll;
+    private JButton deleteCategoria;
+    private JButton deleteAll;
     private JTable table1;
     public JPanel PanelGrafico;
 
@@ -30,16 +28,16 @@ public class View implements PropertyChangeListener{
     }
 
     private void Categories() {
-        comboBox5.addItem("CAT-001-Frutas y Verduras");
-        comboBox5.addItem("CAT-002-Carnes y Pescados");
-        comboBox5.addItem("CAT-003-Lácteos y Huevos");
-        comboBox5.addItem("CAT-004-Panadería");
-        comboBox5.addItem("CAT-005-Bebidas");
-        comboBox5.addItem("CAT-006-Congelados");
-        comboBox5.addItem("CAT-007-Productos de Limpieza");
-        comboBox5.addItem("CAT-008-Cuidado Personal");
-        comboBox5.addItem("CAT-009-Alimentos en Conserva");
-        comboBox5.addItem("CAT-010-Cereales y Granos");
+        categorias.addItem("CAT-001-Frutas y Verduras");
+        categorias.addItem("CAT-002-Carnes y Pescados");
+        categorias.addItem("CAT-003-Lácteos y Huevos");
+        categorias.addItem("CAT-004-Panadería");
+        categorias.addItem("CAT-005-Bebidas");
+        categorias.addItem("CAT-006-Congelados");
+        categorias.addItem("CAT-007-Productos de Limpieza");
+        categorias.addItem("CAT-008-Cuidado Personal");
+        categorias.addItem("CAT-009-Alimentos en Conserva");
+        categorias.addItem("CAT-010-Cereales y Granos");
     }
 
     public View () {
@@ -50,11 +48,9 @@ public class View implements PropertyChangeListener{
                 super.componentShown(e);
             }
         });
-        button1.addActionListener(new ActionListener() {
+        agregarCategoria.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println(Service.instance().obtenerAniosDeFacturas());
-
             }
         });
         panel1.addComponentListener(new ComponentAdapter() {
@@ -83,23 +79,9 @@ public class View implements PropertyChangeListener{
                 for(String meses : model.getMesHasta()){
                     comboBoxMesHasta.addItem(meses);
                 }
-
-
-
             }
         });
     }
-
-
-
-
-
-
-
-
-
-
-
 
     Model model;
     Controller controller;
@@ -113,21 +95,13 @@ public class View implements PropertyChangeListener{
         this.controller = controller;
     }
 
-
     public void propertyChange(PropertyChangeEvent evt) {
         switch (evt.getPropertyName()) {
-            case pos.presentation.Cajero.Model.LIST:
+            case pos.presentation.Estadistica.Model.DATA:
 
                 break;
-            case pos.presentation.Cajero.Model.CURRENT:
-                break;
 
-            case pos.presentation.Cajero.Model.FILTER:
-
-                break;
         }
-       // this.panel.revalidate();
+        this.panel1.revalidate();
     }
-
-
 }
