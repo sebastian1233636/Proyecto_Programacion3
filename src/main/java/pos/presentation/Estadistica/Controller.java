@@ -3,8 +3,12 @@ package pos.presentation.Estadistica;
 import pos.logic.Categoria;
 import pos.logic.Rango;
 import pos.logic.Service;
+
+import javax.swing.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Controller {
     View view;
@@ -23,18 +27,17 @@ public class Controller {
     public void llenarComboBoxAnnioDesde() {
         model.setAnniodesde(Service.instance().obtenerAniosDeFacturas());
     }
-
     public void llenarComboBoxAnnioHasta() {
         model.setAnnioHasta(Service.instance().obtenerAniosDeFacturas());
     }
-
     public void llenarMesDesde() {
-        model.setMesDesde(Service.instance().obtenerMesesDeFacturas());
+        Set<String> mesesUnicos = new HashSet<>(Service.instance().obtenerMesesDeFacturas());
+        model.setMesDesde(new ArrayList<>(mesesUnicos));
     }
 
     public void llenarMesHasta() {
-        model.setMesHasta(Service.instance().obtenerMesesDeFacturas());
-    }
+        Set<String> mesesUnicos = new HashSet<>(Service.instance().obtenerMesesDeFacturas());
+        model.setMesHasta(new ArrayList<>(mesesUnicos));    }
 
     public void llenarCategoriasAll(){
         Categoria cat001 = new Categoria("CAT-001-Frutas y Verduras");
@@ -87,11 +90,10 @@ public class Controller {
     }
 
     private void agregarCategoriaSiNoExiste(Categoria categoria) {
-        // Verifica si la categoría ya está en la lista usando equals en el objeto Categoria
         if (!model.getCategorias().contains(categoria)) {
             model.getCategorias().add(categoria);
         } else {
-            System.out.println("La categoría " + categoria.getNombre() + " ya existe y no se agregará.");
+            JOptionPane.showMessageDialog(null, "La categoría ya se encuentra agregada en la tabla.", "Error de Categoria", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
@@ -119,13 +121,10 @@ public class Controller {
                 anno++;
             }
         }
-
         for (int i = 0; i < rowCount; i++) {
             rows[i] = categorias.get(i).getNombre();
         }
-
         float[][] data = new float[rowCount][colCount];
-
         for (int i = 0; i < rowCount; i++) {
             Categoria categoria = categorias.get(i);
             for (int j = 0; j < colCount; j++) {

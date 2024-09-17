@@ -55,17 +55,17 @@ public class Application {
         pos.presentation.Estadistica.Model Estadisticamodel= new pos.presentation.Estadistica.Model();
         pos.presentation.Estadistica.View EstadisticView = new pos.presentation.Estadistica.View();
         EstadisticaController = new pos.presentation.Estadistica.Controller(EstadisticView, Estadisticamodel);
-        //Icon estadisticaIcon = new ImageIcon(Application.class.getResource("/pos/presentation/icons/Estadistica.png"));
+        Icon estadisticaIcon = new ImageIcon(Application.class.getResource("/pos/presentation/icons/Estadistica.png"));
 
         tabbedPane.addTab("Facturar  ",facturarIcon, facturarView.getPanel());
         tabbedPane.addTab("Clientes  ",clientesIcon, clientesView.getPanel());
         tabbedPane.addTab("Cajeros  ",cajeroIcon, cajeroView.getPanel());
         tabbedPane.addTab("Productos  ",productoIcon, productoView.getPanel());
-        tabbedPane.addTab("Estadistica ",EstadisticView.getPanel1());
+        tabbedPane.addTab("Estadistica ",estadisticaIcon,EstadisticView.getPanel1());
         tabbedPane.addTab("Histórico ",historicoIcon, viewHistorico.getPanel());
 
-        window.setSize(750,550);
-        window.setResizable(true);
+        window.setSize(800,550);
+        window.setResizable(false);
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         window.setIconImage((new ImageIcon(Application.class.getResource("presentation/icons/icon.png"))).getImage());
         window.setTitle("POS: Point Of Sale");

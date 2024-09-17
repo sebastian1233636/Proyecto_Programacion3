@@ -18,7 +18,6 @@ public class view implements PropertyChangeListener {
     private JLabel cliente_lbl;
     private JTable TablaFacturas;
     private JTable TablaLineas;
-    private JButton eliminarButton;
 
     public JPanel getPanel() {
         return panelHistorico;
@@ -68,18 +67,6 @@ public class view implements PropertyChangeListener {
                     controller.buscarFactura(filter);
                 } catch (Exception ex) {
                     throw new RuntimeException(ex);
-                }
-            }
-        });
-
-        eliminarButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    controller.delete();
-                    JOptionPane.showMessageDialog(panelHistorico, "REGISTRO BORRADO", "", JOptionPane.INFORMATION_MESSAGE);
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(panelHistorico, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
