@@ -5,7 +5,10 @@ import pos.logic.Categoria;
 import pos.logic.Cliente;
 import pos.logic.Rango;
 import pos.presentation.AbstractModel;
-import pos.presentation.AbstractTableModel;
+
+import javax.swing.event.TableModelListener;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableModel;
 import java.beans.PropertyChangeListener;
 import java.util.List;
 
@@ -101,6 +104,38 @@ public class Model extends AbstractModel {
         firePropertyChange(MESHASTA);
     }
 
+    public TableModel getTableModel(){
+        return new AbstractTableModel() {
+            @Override
+            public int getRowCount() {
+                return rows.length;
+            }
+
+            @Override
+            public int getColumnCount() {
+                return cols.length;
+            }
+
+            @Override
+            public Object getValueAt(int rowIndex, int columnIndex) {
+                if(columnIndex == 0){
+                    return rows[rowIndex];
+                }else{
+                    return data[rowIndex][columnIndex-1];
+                }
+            }
+
+            @Override
+            public String getColumnName(int column){
+                if(column == 0){
+                    return "Categoria";
+                }else{
+                    return cols[column-1];
+                } 
+            }
+        };
+    }
+
     public static final String CATEGORASALL="CategoriasTodas";
     public static final String CATEGORIAS="Categorias";
     public static final String RANGO = "rango";
@@ -109,4 +144,10 @@ public class Model extends AbstractModel {
     public static final String MESDESDE = "mesdesde";
     public static final String MESHASTA = "meshasta";
     public static final String DATA = "data";
+
+
 }
+
+
+
+

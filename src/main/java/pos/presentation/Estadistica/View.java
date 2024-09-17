@@ -1,5 +1,8 @@
 package pos.presentation.Estadistica;
 
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.JFreeChart;
+
 import javax.swing.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -98,7 +101,8 @@ public class View implements PropertyChangeListener{
     public void propertyChange(PropertyChangeEvent evt) {
         switch (evt.getPropertyName()) {
             case pos.presentation.Estadistica.Model.DATA:
-
+                table1.setModel(model.getTableModel());
+               // JFreeChart chart = ChartFactory.createLineChart("Ventas por mes","Mes ","Ventas");
                 break;
 
         }
