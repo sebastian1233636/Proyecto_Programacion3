@@ -227,9 +227,7 @@ public class Service {
         }
     }
 
-    public void delete(Linea e) throws Exception{
-        data.getLineas().remove(e);
-    }
+    public void delete(Linea e) throws Exception{ data.getLineas().remove(e); }
 
     public List<Linea> search(Linea e){
         return data.getLineas().stream()
@@ -246,9 +244,8 @@ public class Service {
         return total;
     }
 
-
     public float obtenerVentasPorCategoriaYFecha(Categoria categoria, int annoDesde, int mesDesde, int annoHasta, int mesHasta) {
-        float totalVentas = 0;
+        float totalVentas = 0.0f;
 
         int fechaInicio = annoDesde * 100 + mesDesde;
         int fechaFin = annoHasta * 100 + mesHasta;
@@ -257,14 +254,12 @@ public class Service {
             String[] fechaParts = factura.getFecha().split("-");
             int annoFactura = Integer.parseInt(fechaParts[0]);
             int mesFactura = Integer.parseInt(fechaParts[1]);
-
             int fechaFactura = annoFactura * 100 + mesFactura;
 
             if (fechaFactura >= fechaInicio && fechaFactura <= fechaFin) {
-                System.out.println("Factura Fecha: " + factura.getFecha());
-                System.out.println("Dentro del rango: " + fechaInicio + " - " + fechaFin);
                 for (Linea linea : factura.getCarrito()) {
-                    if (linea.getProducto().getCategoria().equals(categoria)) {
+                    Categoria categoriaProducto = linea.getProducto().getCategoria();
+                    if (categoriaProducto.equals(categoria)) {
                         totalVentas += linea.getImporte();
                     }
                 }
