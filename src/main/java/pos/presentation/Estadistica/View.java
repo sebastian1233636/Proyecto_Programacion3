@@ -94,7 +94,7 @@ public class View implements PropertyChangeListener{
             }
         });
 
-        agregarCategoria.addActionListener(new ActionListener() {
+        agregarAll.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int annoDesde = Integer.parseInt((String) comboBoxAnniosDesde.getSelectedItem());

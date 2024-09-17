@@ -250,23 +250,17 @@ public class Service {
     public float obtenerVentasPorCategoriaYFecha(Categoria categoria, int annoDesde, int mesDesde, int annoHasta, int mesHasta) {
         float totalVentas = 0;
 
-        // Convertir las fechas de inicio y fin a formato entero para comparación más sencilla
         int fechaInicio = annoDesde * 100 + mesDesde;
         int fechaFin = annoHasta * 100 + mesHasta;
 
-        // Recorrer todas las facturas
         for (Factura factura : data.getFacturas()) {
-            // Extraer el año y el mes de la fecha de la factura
             String[] fechaParts = factura.getFecha().split("-");
             int annoFactura = Integer.parseInt(fechaParts[0]);
             int mesFactura = Integer.parseInt(fechaParts[1]);
 
-            // Convertir la fecha de la factura a formato entero
             int fechaFactura = annoFactura * 100 + mesFactura;
 
-            // Verificar si la fecha de la factura está dentro del rango
             if (fechaFactura >= fechaInicio && fechaFactura <= fechaFin) {
-                // Imprimir la fecha de la factura para depuración
                 System.out.println("Factura Fecha: " + factura.getFecha());
                 System.out.println("Dentro del rango: " + fechaInicio + " - " + fechaFin);
                 for (Linea linea : factura.getCarrito()) {
@@ -276,9 +270,6 @@ public class Service {
                 }
             }
         }
-
         return totalVentas;
     }
-
-
 }
