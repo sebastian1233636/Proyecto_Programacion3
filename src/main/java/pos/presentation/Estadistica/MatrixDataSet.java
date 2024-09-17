@@ -3,7 +3,6 @@ package pos.presentation.Estadistica;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.DatasetChangeListener;
 import org.jfree.data.general.DatasetGroup;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,12 +16,12 @@ public class MatrixDataSet implements CategoryDataset {
         columnKeys = Arrays.asList(column);
         this.data = data;
     }
+
     @Override
     public Comparable getRowKey(int rowIndex) {
         return rowKeys.get(rowIndex);
     }
 
-    // Retorna el índice de la clave de fila dada
     @Override
     public int getRowIndex(Comparable rowKey) {
         return rowKeys.indexOf(rowKey);
@@ -74,12 +73,10 @@ public class MatrixDataSet implements CategoryDataset {
     }
 
     @Override
-    public void addChangeListener(DatasetChangeListener listener) {
-    }
+    public void addChangeListener(DatasetChangeListener listener) {}
 
     @Override
-    public void removeChangeListener(DatasetChangeListener listener) {
-    }
+    public void removeChangeListener(DatasetChangeListener listener) {}
 
     @Override
     public DatasetGroup getGroup() {
@@ -87,6 +84,5 @@ public class MatrixDataSet implements CategoryDataset {
     }
 
     @Override
-    public void setGroup(DatasetGroup group) {
-    }
+    public void setGroup(DatasetGroup group) {}
 }

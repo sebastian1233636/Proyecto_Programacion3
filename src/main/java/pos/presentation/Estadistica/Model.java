@@ -8,8 +8,6 @@ import org.jfree.data.category.CategoryDataset;
 import pos.logic.Categoria;
 import pos.logic.Rango;
 import pos.presentation.AbstractModel;
-
-import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 import java.beans.PropertyChangeListener;
@@ -48,7 +46,6 @@ public class Model extends AbstractModel {
     public int getRowCount() {
         return rows.length;
     }
-
     public int getColumnCount() {
         return cols.length + 1;
     }
@@ -69,20 +66,18 @@ public class Model extends AbstractModel {
         }
     }
 
-
-
-
     public void eliminarTodasCategorias() {
         this.rows = new String[0];
         this.data = new float[0][0];
-
         firePropertyChange(DATA);
     }
 
     public void eliminarCategoria(int index) {
-        if (index < 0 || index >= rows.length) {
+        // Validar si el índice es válido
+        if (index < 0 || index >= getCategorias().size()) {
             return;
         }
+        getCategorias().remove(index);
 
         String[] newRows = new String[rows.length - 1];
         float[][] newData = new float[data.length - 1][data[0].length];
@@ -96,7 +91,6 @@ public class Model extends AbstractModel {
         }
         this.rows = newRows;
         this.data = newData;
-
         firePropertyChange(DATA);
     }
 
@@ -133,29 +127,22 @@ public class Model extends AbstractModel {
         };
     }
 
-
-    // Método para convertir los datos en un dataset para gráficos
     public CategoryDataset createDataset() {
         return new MatrixDataSet(rows, cols, data);
     }
 
-    // Método para generar el gráfico de líneas usando el dataset
     public ChartPanel createLineChart() {
-        // Crear el dataset
         CategoryDataset dataset = createDataset();
-
-        // Crear el gráfico de líneas
         JFreeChart lineChart = ChartFactory.createLineChart(
-                "Estadísticas de Categorías", // Título
-                "Fechas",                     // Etiqueta del eje X
-                "Valores",                    // Etiqueta del eje Y
-                dataset,                      // Dataset
-                PlotOrientation.VERTICAL,     // Orientación
-                true,                         // Incluir leyenda
-                true,                         // Herramientas
-                false                         // URLs
+                "Estadísticas de Categorías",
+                "Fechas",
+                "Valores",
+                dataset,
+                PlotOrientation.VERTICAL,
+                true,
+                true,
+                false
         );
-
         ChartPanel chartPanel = new ChartPanel(lineChart);
         chartPanel.setPreferredSize(new java.awt.Dimension(800, 600));
         return chartPanel;
@@ -179,9 +166,7 @@ public class Model extends AbstractModel {
     public Rango getRango() {
         return rango;
     }
-    public List<Categoria> getCategorias() {
-        return categorias;
-    }
+    public List<Categoria> getCategorias() { return categorias; }
 
     public void setCategorias(List<Categoria> categoria) {categorias = categoria;}
 
@@ -211,12 +196,9 @@ public class Model extends AbstractModel {
     }
 
     public void setData(String[] newRows, String[] newCols, float[][] newData) {
-        // Asignar los nuevos valores al modelo
         this.rows = newRows;
         this.cols = newCols;
         this.data = newData;
-
-        // Disparar evento de cambio de datos
         firePropertyChange(DATA);
     }
 

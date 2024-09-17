@@ -65,7 +65,7 @@ public class Application {
         tabbedPane.addTab("Histórico ",historicoIcon, viewHistorico.getPanel());
 
         window.setSize(800,550);
-        window.setResizable(false);
+        window.setResizable(true);
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         window.setIconImage((new ImageIcon(Application.class.getResource("presentation/icons/icon.png"))).getImage());
         window.setTitle("POS: Point Of Sale");

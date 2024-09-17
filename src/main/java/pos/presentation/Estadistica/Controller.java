@@ -3,7 +3,6 @@ package pos.presentation.Estadistica;
 import pos.logic.Categoria;
 import pos.logic.Rango;
 import pos.logic.Service;
-
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -39,29 +38,6 @@ public class Controller {
         Set<String> mesesUnicos = new HashSet<>(Service.instance().obtenerMesesDeFacturas());
         model.setMesHasta(new ArrayList<>(mesesUnicos));    }
 
-    public void llenarCategoriasAll(){
-        Categoria cat001 = new Categoria("CAT-001-Frutas y Verduras");
-        Categoria cat002 = new Categoria("CAT-002-Carnes y Pescados");
-        Categoria cat003 = new Categoria("CAT-003-Lácteos y Huevos");
-        Categoria cat004 = new Categoria("CAT-004-Panadería");
-        Categoria cat005 = new Categoria("CAT-005-Bebidas");
-        Categoria cat006 = new Categoria("CAT-006-Congelados");
-        Categoria cat007 = new Categoria("CAT-007-Productos de Limpieza");
-        Categoria cat008 = new Categoria("CAT-008-Cuidado Personal");
-        Categoria cat009 = new Categoria("CAT-009-Alimentos en Conserva");
-        Categoria cat010 = new Categoria("CAT-010-Cereales y Granos");
-        agregarCategoriaSiNoExiste(cat001);
-        agregarCategoriaSiNoExiste(cat002);
-        agregarCategoriaSiNoExiste(cat003);
-        agregarCategoriaSiNoExiste(cat004);
-        agregarCategoriaSiNoExiste(cat005);
-        agregarCategoriaSiNoExiste(cat006);
-        agregarCategoriaSiNoExiste(cat007);
-        agregarCategoriaSiNoExiste(cat008);
-        agregarCategoriaSiNoExiste(cat009);
-        agregarCategoriaSiNoExiste(cat010);
-    }
-
     public void llenarAll(){
         Categoria cat001 = new Categoria("CAT-001-Frutas y Verduras");
         Categoria cat002 = new Categoria("CAT-002-Carnes y Pescados");
@@ -92,7 +68,8 @@ public class Controller {
     private void agregarCategoriaSiNoExiste(Categoria categoria) {
         if (!model.getCategorias().contains(categoria)) {
             model.getCategorias().add(categoria);
-        } else {
+        }
+        else {
             JOptionPane.showMessageDialog(null, "La categoría ya se encuentra agregada en la tabla.", "Error de Categoria", JOptionPane.INFORMATION_MESSAGE);
         }
     }
@@ -101,6 +78,7 @@ public class Controller {
         Categoria cat = new Categoria(nom);
         agregarCategoriaSiNoExiste(cat);
     }
+
     public void ActualizarData() {
         Rango r = model.getRango();
         List<Categoria> categorias = model.getCategorias();
@@ -111,7 +89,7 @@ public class Controller {
         String[] cols = new String[colCount];
         String[] rows = new String[rowCount];
 
-        int mes = r.getMesDesde();
+        int mes = r.getMesDesde()-1;
         int anno = r.getAnnoDesde();
         for (int i = 0; i < colCount; i++) {
             cols[i] = "Mes " + mes + " - Año " + anno;

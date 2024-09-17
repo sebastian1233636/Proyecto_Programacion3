@@ -1,10 +1,7 @@
 package pos.presentation.Estadistica;
 
-import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
-import org.jfree.chart.JFreeChart;
 import pos.logic.Rango;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
@@ -31,7 +28,6 @@ public class View implements PropertyChangeListener{
     private JLabel categoriaLabel;
     private JButton agregarAll;
 
-
     public JPanel getPanel1() { return panel1; }
 
     private void Categories() {
@@ -49,14 +45,6 @@ public class View implements PropertyChangeListener{
 
     public View () {
         Categories();
-
-        panel1.addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentShown(ComponentEvent e) {
-                super.componentShown(e);
-            }
-        });
-
         panel1.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentShown(ComponentEvent e) {
@@ -69,7 +57,6 @@ public class View implements PropertyChangeListener{
                 controller.llenarComboBoxAnnioHasta();
                 controller.llenarMesDesde();
                 controller.llenarMesHasta();
-                controller.llenarCategoriasAll();
 
                 for(String annios: model.getAnniodesde()){ comboBoxAnniosDesde.addItem(annios); }
                 for(String annios: model.getAnnioHasta()){ comboBoxAnniosHasta.addItem(annios); }
@@ -90,7 +77,6 @@ public class View implements PropertyChangeListener{
                     JOptionPane.showMessageDialog(null, "La fecha de inicio no puede ser posterior a la fecha de fin.", "Error de Fechas", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
-
                 Rango fecha = new Rango(annoDesde, mesDesde, annoHasta, mesHasta);
                 model.setRango(fecha);
                 controller.agregarCategoria((String)categorias.getSelectedItem());
@@ -101,7 +87,6 @@ public class View implements PropertyChangeListener{
         agregarAll.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                     String annoDesdeStr = (String) comboBoxAnniosDesde.getSelectedItem();
                     String mesDesdeStr = (String) comboBoxMesDesde.getSelectedItem();
                     String annoHastaStr = (String) comboBoxAnniosHasta.getSelectedItem();
@@ -126,7 +111,6 @@ public class View implements PropertyChangeListener{
             }
         });
 
-
         deleteCategoria.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -134,6 +118,8 @@ public class View implements PropertyChangeListener{
                 if (selectedRow != -1) {
                     model.eliminarCategoria(selectedRow);
                     table1.setModel(model.getTableModel());
+                    table1.revalidate();
+                    table1.repaint();
                 } else {
                     JOptionPane.showMessageDialog(null, "Seleccione una categoría para eliminar.");
                 }
