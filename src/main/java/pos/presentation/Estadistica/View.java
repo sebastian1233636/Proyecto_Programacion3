@@ -94,20 +94,43 @@ public class View implements PropertyChangeListener{
             }
         });
 
+
+
         agregarAll.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int annoDesde = Integer.parseInt((String) comboBoxAnniosDesde.getSelectedItem());
                 int mesDesde = Integer.parseInt((String) comboBoxMesDesde.getSelectedItem());
-
-
                 int annoHasta = Integer.parseInt((String) comboBoxAnniosHasta.getSelectedItem());
-
                 int mesHasta = Integer.parseInt((String) comboBoxMesHasta.getSelectedItem());
-
                 Rango fecha = new Rango(annoDesde, mesDesde, annoHasta, mesHasta);
                 model.setRango(fecha);
                 controller.ActualizarData();
+            }
+        });
+
+        deleteCategoria.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectedRow = table1.getSelectedRow();
+
+                if (selectedRow != -1) {
+                    model.eliminarCategoria(selectedRow);
+                    table1.setModel(model.getTableModel());
+                } else {
+                    JOptionPane.showMessageDialog(null, "Seleccione una categoría para eliminar.");
+                }
+            }
+        });
+
+        deleteAll.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Llamar al método del modelo que elimina todas las categorías
+                model.eliminarTodasCategorias();
+
+                // Actualizar la tabla para reflejar los cambios
+                table1.setModel(model.getTableModel());
             }
         });
     }
@@ -124,11 +147,11 @@ public class View implements PropertyChangeListener{
         this.controller = controller;
     }
 
+
     public void propertyChange(PropertyChangeEvent evt) {
         switch (evt.getPropertyName()) {
             case pos.presentation.Estadistica.Model.DATA:
                 table1.setModel(model.getTableModel());
-
                 ChartPanel chartPanel = model.createLineChart();
                 PanelGrafico.removeAll();
                 PanelGrafico.setLayout(new BorderLayout());
@@ -136,7 +159,6 @@ public class View implements PropertyChangeListener{
                 PanelGrafico.revalidate();
                 PanelGrafico.repaint();
                 break;
-
         }
         this.panel1.revalidate();
     }

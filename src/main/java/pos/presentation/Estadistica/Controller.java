@@ -23,12 +23,15 @@ public class Controller {
     public void llenarComboBoxAnnioDesde() {
         model.setAnniodesde(Service.instance().obtenerAniosDeFacturas());
     }
+
     public void llenarComboBoxAnnioHasta() {
         model.setAnnioHasta(Service.instance().obtenerAniosDeFacturas());
     }
+
     public void llenarMesDesde() {
         model.setMesDesde(Service.instance().obtenerMesesDeFacturas());
     }
+
     public void llenarMesHasta() {
         model.setMesHasta(Service.instance().obtenerMesesDeFacturas());
     }
@@ -56,16 +59,20 @@ public class Controller {
         model.getCategoriasAll().add(cat010);
     }
 
+    // Método para actualizar los datos en el modelo basado en el rango de fechas y las categorías seleccionadas
     public void ActualizarData() {
         Rango r = model.getRango();
-        List<Categoria> categorias = model.getCategoriasAll();
+        List<Categoria> categorias = model.getCategoriasAll();  // Asegúrate de que este método esté devolviendo todas las categorías
 
+        // Calcular el número total de columnas (meses en el rango de fechas)
         int colCount = (r.getAnnoHasta() - r.getAnnoDesde()) * 12 + r.getMesHasta() - r.getMesDesde() + 1;
         int rowCount = categorias.size();
 
+        // Inicializar los arrays de columnas y filas
         String[] cols = new String[colCount];
         String[] rows = new String[rowCount];
 
+        // Rellenar los nombres de los meses y años en el array de columnas
         int mes = r.getMesDesde();
         int anno = r.getAnnoDesde();
         for (int i = 0; i < colCount; i++) {
@@ -77,12 +84,15 @@ public class Controller {
             }
         }
 
+        // Rellenar los nombres de las categorías en el array de filas
         for (int i = 0; i < rowCount; i++) {
-            rows[i] = categorias.get(i).getNombre();
+            rows[i] = categorias.get(i).getNombre();  // Asegúrate de que `getNombre()` devuelve el nombre correcto
         }
 
+        // Inicializar la matriz de datos
         float[][] data = new float[rowCount][colCount];
 
+        // Rellenar la matriz de datos con las ventas por categoría y fecha
         for (int i = 0; i < rowCount; i++) {
             Categoria categoria = categorias.get(i);
             for (int j = 0; j < colCount; j++) {
@@ -95,6 +105,10 @@ public class Controller {
                 data[i][j] = Service.instance().obtenerVentasPorCategoriaYFecha(categoria, annoActual, mesActual, r.getAnnoHasta(), r.getMesHasta());
             }
         }
-        model.setData(rows, cols, data);
+
+        // Actualizar el modelo con los nuevos datos
+        model.setData(rows, cols, data);  // Usa el setter para disparar el evento
     }
+
+
 }

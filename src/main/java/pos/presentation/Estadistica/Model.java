@@ -40,13 +40,11 @@ public class Model extends AbstractModel {
         firePropertyChange(MESHASTA);
     }
 
-    // Inicializa las listas de categorías
     public void Init(List<Categoria> all, List<Categoria> cats) {
         this.categoriasAll = all;
         this.categorias = cats;
     }
 
-    // Métodos del modelo de tabla
     public int getRowCount() {
         return rows.length;
     }
@@ -71,7 +69,38 @@ public class Model extends AbstractModel {
         }
     }
 
-    // Método para obtener un TableModel
+
+
+
+    public void eliminarTodasCategorias() {
+        this.rows = new String[0];
+        this.data = new float[0][0];
+
+        firePropertyChange(DATA);
+    }
+
+    public void eliminarCategoria(int index) {
+        if (index < 0 || index >= rows.length) {
+            return;
+        }
+
+        String[] newRows = new String[rows.length - 1];
+        float[][] newData = new float[data.length - 1][data[0].length];
+
+        for (int i = 0, j = 0; i < rows.length; i++) {
+            if (i != index) {
+                newRows[j] = rows[i];
+                newData[j] = data[i];
+                j++;
+            }
+        }
+        this.rows = newRows;
+        this.data = newData;
+
+        firePropertyChange(DATA);
+    }
+
+
     public TableModel getTableModel() {
         return new AbstractTableModel() {
             @Override
@@ -104,6 +133,7 @@ public class Model extends AbstractModel {
         };
     }
 
+
     // Método para convertir los datos en un dataset para gráficos
     public CategoryDataset createDataset() {
         return new MatrixDataSet(rows, cols, data);
@@ -126,39 +156,34 @@ public class Model extends AbstractModel {
                 false                         // URLs
         );
 
-        // Crear un panel de gráfico y devolverlo
         ChartPanel chartPanel = new ChartPanel(lineChart);
         chartPanel.setPreferredSize(new java.awt.Dimension(800, 600));
         return chartPanel;
     }
 
-    // Getters y Setters
     public List<Categoria> getCategoriasAll(){
         return categoriasAll;
     }
     public List<String> getAnniodesde() {
         return anniodesde;
     }
-
     public List<String> getAnnioHasta() {
         return annioHasta;
     }
-
     public List<String> getMesDesde() {
         return mesDesde;
     }
-
     public List<String> getMesHasta() {
         return mesHasta;
     }
-
     public Rango getRango() {
         return rango;
     }
-
     public List<Categoria> getCategorias() {
         return categorias;
     }
+
+    public void setCategorias(List<Categoria> categoria) {categorias = categoria;}
 
     public void setCategoriasAll(List<Categoria> categorias) {
         this.categoriasAll = categorias;
