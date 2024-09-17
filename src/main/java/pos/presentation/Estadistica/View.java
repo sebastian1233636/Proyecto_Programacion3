@@ -22,11 +22,14 @@ public class View implements PropertyChangeListener{
     private JComboBox comboBoxMesHasta;
     private JComboBox categorias;
     private JButton agregarCategoria;
-    private JButton agregarAll;
-    private JButton deleteCategoria;
-    private JButton deleteAll;
     private JTable table1;
     public JPanel PanelGrafico;
+    private JLabel desdeLabel;
+    private JLabel hastaLabel;
+    private JButton deleteAll;
+    private JButton deleteCategoria;
+    private JLabel categoriaLabel;
+    private JButton agregarAll;
 
 
     public JPanel getPanel1() {
