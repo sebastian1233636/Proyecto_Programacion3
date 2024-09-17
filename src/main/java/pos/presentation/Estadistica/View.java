@@ -89,6 +89,7 @@ public class View implements PropertyChangeListener{
                 for(String meses : model.getMesHasta()){
                     comboBoxMesHasta.addItem(meses);
                 }
+                controller.ClearCategoria();
 
 
             }
@@ -105,6 +106,8 @@ public class View implements PropertyChangeListener{
                 int mesHasta = Integer.parseInt((String) comboBoxMesHasta.getSelectedItem());
                 Rango fecha = new Rango(annoDesde, mesDesde, annoHasta, mesHasta);
                 model.setRango(fecha);
+                controller.ClearCategoria();
+                controller.llenarAll();
                 controller.ActualizarData();
             }
         });
@@ -127,11 +130,25 @@ public class View implements PropertyChangeListener{
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Llamar al método del modelo que elimina todas las categorías
+                controller.ClearCategoria();
                 model.eliminarTodasCategorias();
-
-                // Actualizar la tabla para reflejar los cambios
                 table1.setModel(model.getTableModel());
             }
+        });
+        agregarCategoria.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int annoDesde = Integer.parseInt((String) comboBoxAnniosDesde.getSelectedItem());
+                int mesDesde = Integer.parseInt((String) comboBoxMesDesde.getSelectedItem());
+                int annoHasta = Integer.parseInt((String) comboBoxAnniosHasta.getSelectedItem());
+                int mesHasta = Integer.parseInt((String) comboBoxMesHasta.getSelectedItem());
+                Rango fecha = new Rango(annoDesde, mesDesde, annoHasta, mesHasta);
+                model.setRango(fecha);
+                controller.agregarCategoria((String)categorias.getSelectedItem());
+                controller.ActualizarData();
+            }
+        });
+        panel1.addComponentListener(new ComponentAdapter() {
         });
     }
 

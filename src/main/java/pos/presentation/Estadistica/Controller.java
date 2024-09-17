@@ -47,21 +47,61 @@ public class Controller {
         Categoria cat008 = new Categoria("CAT-008-Cuidado Personal");
         Categoria cat009 = new Categoria("CAT-009-Alimentos en Conserva");
         Categoria cat010 = new Categoria("CAT-010-Cereales y Granos");
-        model.getCategoriasAll().add(cat001);
-        model.getCategoriasAll().add(cat002);
-        model.getCategoriasAll().add(cat003);
-        model.getCategoriasAll().add(cat004);
-        model.getCategoriasAll().add(cat005);
-        model.getCategoriasAll().add(cat006);
-        model.getCategoriasAll().add(cat007);
-        model.getCategoriasAll().add(cat008);
-        model.getCategoriasAll().add(cat009);
-        model.getCategoriasAll().add(cat010);
+        agregarCategoriaSiNoExiste(cat001);
+        agregarCategoriaSiNoExiste(cat002);
+        agregarCategoriaSiNoExiste(cat003);
+        agregarCategoriaSiNoExiste(cat004);
+        agregarCategoriaSiNoExiste(cat005);
+        agregarCategoriaSiNoExiste(cat006);
+        agregarCategoriaSiNoExiste(cat007);
+        agregarCategoriaSiNoExiste(cat008);
+        agregarCategoriaSiNoExiste(cat009);
+        agregarCategoriaSiNoExiste(cat010);
     }
 
+    public void llenarAll(){
+        Categoria cat001 = new Categoria("CAT-001-Frutas y Verduras");
+        Categoria cat002 = new Categoria("CAT-002-Carnes y Pescados");
+        Categoria cat003 = new Categoria("CAT-003-Lácteos y Huevos");
+        Categoria cat004 = new Categoria("CAT-004-Panadería");
+        Categoria cat005 = new Categoria("CAT-005-Bebidas");
+        Categoria cat006 = new Categoria("CAT-006-Congelados");
+        Categoria cat007 = new Categoria("CAT-007-Productos de Limpieza");
+        Categoria cat008 = new Categoria("CAT-008-Cuidado Personal");
+        Categoria cat009 = new Categoria("CAT-009-Alimentos en Conserva");
+        Categoria cat010 = new Categoria("CAT-010-Cereales y Granos");
+        agregarCategoriaSiNoExiste(cat001);
+        agregarCategoriaSiNoExiste(cat002);
+        agregarCategoriaSiNoExiste(cat003);
+        agregarCategoriaSiNoExiste(cat004);
+        agregarCategoriaSiNoExiste(cat005);
+        agregarCategoriaSiNoExiste(cat006);
+        agregarCategoriaSiNoExiste(cat007);
+        agregarCategoriaSiNoExiste(cat008);
+        agregarCategoriaSiNoExiste(cat009);
+        agregarCategoriaSiNoExiste(cat010);
+    }
+
+    public void ClearCategoria(){
+        model.getCategorias().clear();
+    }
+
+    private void agregarCategoriaSiNoExiste(Categoria categoria) {
+        // Verifica si la categoría ya está en la lista usando equals en el objeto Categoria
+        if (!model.getCategorias().contains(categoria)) {
+            model.getCategorias().add(categoria);
+        } else {
+            System.out.println("La categoría " + categoria.getNombre() + " ya existe y no se agregará.");
+        }
+    }
+
+    public void agregarCategoria(String nom){
+        Categoria cat = new Categoria(nom);
+        agregarCategoriaSiNoExiste(cat);
+    }
     public void ActualizarData() {
         Rango r = model.getRango();
-        List<Categoria> categorias = model.getCategoriasAll();
+        List<Categoria> categorias = model.getCategorias();
 
         int colCount = ((r.getAnnoHasta() - r.getAnnoDesde()) * 12 + r.getMesHasta() - r.getMesDesde()) + 2;
         int rowCount = categorias.size();
