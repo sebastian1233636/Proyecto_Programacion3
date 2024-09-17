@@ -1,9 +1,12 @@
 package pos.presentation.Estadistica;
 
 import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import pos.logic.Rango;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ActionEvent;
@@ -65,6 +68,7 @@ public class View implements PropertyChangeListener{
                 controller.llenarComboBoxAnnioHasta();
                 controller.llenarMesDesde();
                 controller.llenarMesHasta();
+                controller.llenarCategoriasAll();
                 comboBoxAnniosDesde.addItem("2022");
                 comboBoxAnniosDesde.addItem("2023");
                 comboBoxAnniosHasta.addItem("2022");
@@ -82,6 +86,25 @@ public class View implements PropertyChangeListener{
                 for(String meses : model.getMesHasta()){
                     comboBoxMesHasta.addItem(meses);
                 }
+
+
+            }
+        });
+
+        agregarCategoria.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int annoDesde = Integer.parseInt((String) comboBoxAnniosDesde.getSelectedItem());
+                int mesDesde = Integer.parseInt((String) comboBoxMesDesde.getSelectedItem());
+
+
+                int annoHasta = Integer.parseInt((String) comboBoxAnniosHasta.getSelectedItem());
+
+                int mesHasta = Integer.parseInt((String) comboBoxMesHasta.getSelectedItem());
+
+                Rango fecha = new Rango(annoDesde, mesDesde, annoHasta, mesHasta);
+                model.setRango(fecha);
+                controller.ActualizarData();
             }
         });
     }
@@ -102,7 +125,13 @@ public class View implements PropertyChangeListener{
         switch (evt.getPropertyName()) {
             case pos.presentation.Estadistica.Model.DATA:
                 table1.setModel(model.getTableModel());
-               // JFreeChart chart = ChartFactory.createLineChart("Ventas por mes","Mes ","Ventas");
+
+                ChartPanel chartPanel = model.createLineChart();
+                PanelGrafico.removeAll();
+                PanelGrafico.setLayout(new BorderLayout());
+                PanelGrafico.add(chartPanel, BorderLayout.CENTER);
+                PanelGrafico.revalidate();
+                PanelGrafico.repaint();
                 break;
 
         }

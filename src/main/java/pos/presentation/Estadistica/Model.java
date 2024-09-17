@@ -1,8 +1,11 @@
 package pos.presentation.Estadistica;
 
-import pos.Application;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.CategoryDataset;
 import pos.logic.Categoria;
-import pos.logic.Cliente;
 import pos.logic.Rango;
 import pos.presentation.AbstractModel;
 
@@ -24,7 +27,6 @@ public class Model extends AbstractModel {
     String[] cols;
     float[][] data;
 
-
     public Model(){}
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -36,75 +38,41 @@ public class Model extends AbstractModel {
         firePropertyChange(RANGO);
         firePropertyChange(MESDESDE);
         firePropertyChange(MESHASTA);
-
     }
 
-    public void Init(List<Categoria> all,List<Categoria> cats){
-        this.categoriasAll=all;
-        this.categorias=cats;
+    // Inicializa las listas de categorías
+    public void Init(List<Categoria> all, List<Categoria> cats) {
+        this.categoriasAll = all;
+        this.categorias = cats;
     }
 
-    public int getRowCount(){
+    // Métodos del modelo de tabla
+    public int getRowCount() {
         return rows.length;
     }
-    public int getColumnCount(){
-        return cols.length+1;
-    }
-    public List<String> getAnniodesde(){
-        return anniodesde;
-    }
-    public List<String> getAnnioHasta(){
-        return annioHasta;
-    }
-    public List<String> getMesDesde(){
-        return mesDesde;
-    }
-    public List<String> getMesHasta(){
-        return mesHasta;
-    }
-    public Rango getRango(){return rango;}
-    public List<Categoria> getCategorias(){return categorias;}
 
+    public int getColumnCount() {
+        return cols.length + 1;
+    }
 
-    public Object getValueAt(int rowIndex, int columnIndex){
-        if(columnIndex == 0){
+    public Object getValueAt(int rowIndex, int columnIndex) {
+        if (columnIndex == 0) {
             return rows[rowIndex];
-        }else{
-            return data[rowIndex][columnIndex-1];
+        } else {
+            return data[rowIndex][columnIndex - 1];
         }
     }
 
-    public String columnName(int column){
-        if(column==0){
+    public String columnName(int column) {
+        if (column == 0) {
             return "Categoria";
-        }else{
-            return cols[column-1];
+        } else {
+            return cols[column - 1];
         }
     }
 
-    public void setCategoriasAll(List<Categoria> categorias){
-        this.categoriasAll = categorias;
-        firePropertyChange(CATEGORASALL);
-    }
-
-    public void setAnniodesde(List<String> nuevo){
-        anniodesde = nuevo;
-        firePropertyChange(ANNIOD);
-    }
-    public void setAnnioHasta(List<String> nuevo){
-        annioHasta = nuevo;
-        firePropertyChange(ANNIOH);
-    }
-    public void setMesDesde(List<String> nuevo){
-        mesDesde = nuevo;
-        firePropertyChange(MESDESDE);
-    }
-    public void setMesHasta(List<String> nuevo){
-        mesHasta = nuevo;
-        firePropertyChange(MESHASTA);
-    }
-
-    public TableModel getTableModel(){
+    // Método para obtener un TableModel
+    public TableModel getTableModel() {
         return new AbstractTableModel() {
             @Override
             public int getRowCount() {
@@ -118,36 +86,126 @@ public class Model extends AbstractModel {
 
             @Override
             public Object getValueAt(int rowIndex, int columnIndex) {
-                if(columnIndex == 0){
+                if (columnIndex == 0) {
                     return rows[rowIndex];
-                }else{
-                    return data[rowIndex][columnIndex-1];
+                } else {
+                    return data[rowIndex][columnIndex - 1];
                 }
             }
 
             @Override
-            public String getColumnName(int column){
-                if(column == 0){
+            public String getColumnName(int column) {
+                if (column == 0) {
                     return "Categoria";
-                }else{
-                    return cols[column-1];
-                } 
+                } else {
+                    return cols[column - 1];
+                }
             }
         };
     }
 
-    public static final String CATEGORASALL="CategoriasTodas";
-    public static final String CATEGORIAS="Categorias";
+    // Método para convertir los datos en un dataset para gráficos
+    public CategoryDataset createDataset() {
+        return new MatrixDataSet(rows, cols, data);
+    }
+
+    // Método para generar el gráfico de líneas usando el dataset
+    public ChartPanel createLineChart() {
+        // Crear el dataset
+        CategoryDataset dataset = createDataset();
+
+        // Crear el gráfico de líneas
+        JFreeChart lineChart = ChartFactory.createLineChart(
+                "Estadísticas de Categorías", // Título
+                "Fechas",                     // Etiqueta del eje X
+                "Valores",                    // Etiqueta del eje Y
+                dataset,                      // Dataset
+                PlotOrientation.VERTICAL,     // Orientación
+                true,                         // Incluir leyenda
+                true,                         // Herramientas
+                false                         // URLs
+        );
+
+        // Crear un panel de gráfico y devolverlo
+        ChartPanel chartPanel = new ChartPanel(lineChart);
+        chartPanel.setPreferredSize(new java.awt.Dimension(800, 600));
+        return chartPanel;
+    }
+
+    // Getters y Setters
+    public List<Categoria> getCategoriasAll(){
+        return categoriasAll;
+    }
+    public List<String> getAnniodesde() {
+        return anniodesde;
+    }
+
+    public List<String> getAnnioHasta() {
+        return annioHasta;
+    }
+
+    public List<String> getMesDesde() {
+        return mesDesde;
+    }
+
+    public List<String> getMesHasta() {
+        return mesHasta;
+    }
+
+    public Rango getRango() {
+        return rango;
+    }
+
+    public List<Categoria> getCategorias() {
+        return categorias;
+    }
+
+    public void setCategoriasAll(List<Categoria> categorias) {
+        this.categoriasAll = categorias;
+        firePropertyChange(CATEGORASALL);
+    }
+
+    public void setAnniodesde(List<String> nuevo) {
+        anniodesde = nuevo;
+        firePropertyChange(ANNIOD);
+    }
+
+    public void setAnnioHasta(List<String> nuevo) {
+        annioHasta = nuevo;
+        firePropertyChange(ANNIOH);
+    }
+
+    public void setMesDesde(List<String> nuevo) {
+        mesDesde = nuevo;
+        firePropertyChange(MESDESDE);
+    }
+
+    public void setMesHasta(List<String> nuevo) {
+        mesHasta = nuevo;
+        firePropertyChange(MESHASTA);
+    }
+
+    public void setData(String[] newRows, String[] newCols, float[][] newData) {
+        // Asignar los nuevos valores al modelo
+        this.rows = newRows;
+        this.cols = newCols;
+        this.data = newData;
+
+        // Disparar evento de cambio de datos
+        firePropertyChange(DATA);
+    }
+
+    public void setRango(Rango rango) {
+        this.rango = rango;
+        firePropertyChange(RANGO);
+    }
+
+    public static final String CATEGORASALL = "CategoriasTodas";
+    public static final String CATEGORIAS = "Categorias";
     public static final String RANGO = "rango";
     public static final String ANNIOD = "AnnioDesde";
     public static final String ANNIOH = "AnnioHasta";
     public static final String MESDESDE = "mesdesde";
     public static final String MESHASTA = "meshasta";
     public static final String DATA = "data";
-
-
 }
-
-
-
-
